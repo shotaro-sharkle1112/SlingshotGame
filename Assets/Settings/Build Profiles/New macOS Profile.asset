@@ -20,8 +20,6 @@ MonoBehaviour:
     rid: 3238090611561332737
   m_OverrideGlobalSceneList: 0
   m_Scenes:
-  - m_enabled: 0
-    m_path: Assets/Scenes/Maze.unity
   - m_enabled: 1
     m_path: Assets/Scenes/TutorialSlingshotGame.unity
   - m_enabled: 1
