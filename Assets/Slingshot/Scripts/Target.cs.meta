@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 08f3d53ef92bd8942a8e3f5d8b52fa61
+timeCreated: 1579636311
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162230
+  packageName: Slingshot
+  packageVersion: 1.1
+  assetPath: Assets/Slingshot/Scripts/Target.cs
+  uploadId: 417502

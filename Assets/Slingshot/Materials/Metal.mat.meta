@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: aa95437fbd73f5d4e9af5128ddcb7070
+timeCreated: 1578498657
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162230
+  packageName: Slingshot
+  packageVersion: 1.1
+  assetPath: Assets/Slingshot/Materials/Metal.mat
+  uploadId: 417502

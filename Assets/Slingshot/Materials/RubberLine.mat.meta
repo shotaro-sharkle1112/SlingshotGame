@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: ba3e05ccfddcd0f4490e3ba1b98730a5
+timeCreated: 1578591887
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162230
+  packageName: Slingshot
+  packageVersion: 1.1
+  assetPath: Assets/Slingshot/Materials/RubberLine.mat
+  uploadId: 417502

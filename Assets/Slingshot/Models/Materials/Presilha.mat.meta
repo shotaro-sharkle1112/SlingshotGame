@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ad0906d50935acf43b7d3d75aca1c501
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 162230
+  packageName: Slingshot
+  packageVersion: 1.1
+  assetPath: Assets/Slingshot/Models/Materials/Presilha.mat
+  uploadId: 417502
