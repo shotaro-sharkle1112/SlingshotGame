@@ -27,11 +27,11 @@ public class ScoreDisplay : MonoBehaviour
 
     void Start()
     {
-        UpdateScoreText(GameManager.Instance.CurrentScore);
-        UpdateHighScoreText(GameManager.Instance.HighScore);
+        UpdateScoreText(ScoreManager.Instance.CurrentScore);
+        UpdateHighScoreText(ScoreManager.Instance.HighScore);
 
-        GameManager.Instance.OnScoreChanged += UpdateScoreText;
-        GameManager.Instance.OnHighScoreChanged += UpdateHighScoreText;
+        ScoreManager.Instance.OnScoreChanged += UpdateScoreText;
+        ScoreManager.Instance.OnHighScoreChanged += UpdateHighScoreText;
 
         remainingTime = timeLimit;
         timerRunning = true;
@@ -60,10 +60,10 @@ public class ScoreDisplay : MonoBehaviour
 
    private void OnDestroy()
    {
-      if (GameManager.Instance == null) return;
+      if (ScoreManager.Instance == null) return;
 
-      GameManager.Instance.OnScoreChanged -= UpdateScoreText;
-      GameManager.Instance.OnHighScoreChanged -= UpdateHighScoreText;
+      ScoreManager.Instance.OnScoreChanged -= UpdateScoreText;
+      ScoreManager.Instance.OnHighScoreChanged -= UpdateHighScoreText;
    }
 
    private void UpdateScoreText(int score)
@@ -111,7 +111,7 @@ public class ScoreDisplay : MonoBehaviour
         if (resetButton != null) resetButton.SetActive(true);
         if (resultText == null) return;
 
-        var gm = GameManager.Instance;
+        var gm = ScoreManager.Instance;
         int c300 = gm.GetHitCount(300);
         int c500 = gm.GetHitCount(500);
         int c1000 = gm.GetHitCount(1000);
@@ -132,7 +132,7 @@ public class ScoreDisplay : MonoBehaviour
     public void OnResetButtonClicked()
     {
         Time.timeScale = 1f;
-        GameManager.Instance.ResetScore();
+        ScoreManager.Instance.ResetScore();
         SceneManager.LoadScene("TutorialSlingshotGame");
     }
 }

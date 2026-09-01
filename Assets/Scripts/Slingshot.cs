@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class SlingshotForBend : MonoBehaviour {
+public class Slingshot : MonoBehaviour {
 
     public float metalSphereVelocity;
 

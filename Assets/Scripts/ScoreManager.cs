@@ -2,9 +2,9 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class GameManager : MonoBehaviour
+public class ScoreManager : MonoBehaviour
 {
-    public static GameManager Instance {get; private set;}
+    public static ScoreManager Instance {get; private set;}
 
     public int CurrentScore { get; private set;}
     public int HighScore { get; private set;}
