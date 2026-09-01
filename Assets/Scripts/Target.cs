@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class TargetForBending : MonoBehaviour
+public class Target : MonoBehaviour
 {
     [SerializeField] private int scoreAmount = 300;
     [SerializeField] private AudioSource audioSource;
