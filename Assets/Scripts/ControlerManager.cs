@@ -93,7 +93,8 @@ public class ControlerManager : MonoBehaviour
         OpenSerial();
     }
 
-    void Update()
+
+    void FixedUpdate()
     {
         while (true)
         {
