@@ -68,7 +68,10 @@ public class ScoreDisplay : MonoBehaviour
 
    private void UpdateScoreText(int score)
     {
-        scoreText.text = $"SCORE: {score}";
+        if (scoreText != null)
+        {
+            scoreText.text = $"SCORE: {score}";
+        }
     }
 
     private void UpdateHighScoreText(int highScore)
