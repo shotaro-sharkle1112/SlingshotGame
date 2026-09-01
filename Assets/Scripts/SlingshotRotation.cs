@@ -3,7 +3,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class ImuOrientation : MonoBehaviour
+public class SlingshotRotation : MonoBehaviour
 {
     [Header("Source (PicoSerialReceiver)")]
     public ControlerManager Source;      // Accel, Gyro を読む

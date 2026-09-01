@@ -538,11 +538,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e32fd8fbae146ac9af28cf1c814f99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PicoIp: 192.168.11.2
-  PollInterval: 0.05
-  Accel: {x: 0, y: 0, z: 0}
-  Gyro: {x: 0, y: 0, z: 0}
-  LastRequestOk: 0
 --- !u!4 &325166020
 Transform:
   m_ObjectHideFlags: 0
@@ -2968,7 +2963,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1989995091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78b0c4142973a4668937ecb69fc0c24f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3038dee801e544a09ac300c5c96da568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1990006207
@@ -3140,8 +3135,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 120f4b123701b4567b95908b935c6432, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  serverIP: 192.168.11.2
-  pollInterval: 0.1
 --- !u!4 &2040680447
 Transform:
   m_ObjectHideFlags: 0

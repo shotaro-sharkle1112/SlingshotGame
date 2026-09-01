@@ -4,12 +4,17 @@ using System.Collections.Generic;
 
 public class ScoreManager : MonoBehaviour
 {
+    // 自身をシングルトン化して、外部に公開
     public static ScoreManager Instance {get; private set;}
 
+    // 現在プレイしているステージのスコア
     public int CurrentScore { get; private set;}
+    // そのステージのスコア
     public int HighScore { get; private set;}
 
+    // 外部に公開する用に読み込み専用の的ヒット回数の変数
     public IReadOnlyDictionary<int, int> HitCounts => hitCounts;
+    // ScoreManager内で利用する変数
     private readonly Dictionary<int, int> hitCounts = new Dictionary<int, int>();
 
     public event Action<int> OnScoreChanged;
@@ -18,7 +23,7 @@ public class ScoreManager : MonoBehaviour
     private const string HighScoreKey = "HighScore";
 
     /// <summary>
-    /// Awake is called when the script instance is being loaded.
+    /// 自身をシングルトン化
     /// </summary>
     private void Awake()
     {
@@ -34,6 +39,9 @@ public class ScoreManager : MonoBehaviour
         HighScore = PlayerPrefs.GetInt(HighScoreKey, 0);
     }
     
+    // Target側が実行する
+    // Targetに球が当たった時に実行し、自身のスコアを引数として代入する
+    // そのターゲットの点数だけスコアが上がり、その点数のターゲットのヒット回数を記録する
     public void RegisterTargetHit(int scoreAmount)
     {
         if (hitCounts.ContainsKey(scoreAmount)) hitCounts[scoreAmount]++;
@@ -41,11 +49,13 @@ public class ScoreManager : MonoBehaviour
         AddScore(scoreAmount);
     }
 
+    // 点数ごとにヒットした回数を取得する
     public int GetHitCount(int scoreAmount)
     {
         return hitCounts.TryGetValue(scoreAmount, out int c) ? c : 0;
     }
 
+    // 現在の点数に足す
     public void AddScore(int amount)
     {
         CurrentScore += amount;
@@ -63,6 +73,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
+    // スコアのリセットを行う
     public void ResetScore()
     {
         CurrentScore = 0;
