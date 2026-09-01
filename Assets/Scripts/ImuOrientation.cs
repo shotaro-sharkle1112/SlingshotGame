@@ -6,7 +6,7 @@ using UnityEngine;
 public class ImuOrientation : MonoBehaviour
 {
     [Header("Source (PicoSerialReceiver)")]
-    public PicoSerialReceiver Source;      // Accel, Gyro を読む
+    public ControlerManager Source;      // Accel, Gyro を読む
     public Transform Target;               // 回す対象（未指定なら自分）
 
     [Header("Filter")]

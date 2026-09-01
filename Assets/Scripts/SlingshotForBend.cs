@@ -42,7 +42,7 @@ public class SlingshotForBend : MonoBehaviour {
     private float cooldownRemaining = 0f;
 
 
-    [SerializeField] private PicoSerialReceiver picoSerialReceiver;
+    [SerializeField] private ControlerManager picoSerialReceiver;
 
     void Start ()
     {      
