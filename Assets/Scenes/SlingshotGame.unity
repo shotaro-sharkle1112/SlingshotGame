@@ -1163,19 +1163,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 541185304}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 423af999765024784bc261fc4a288c5b, type: 3}
+  m_Script: {fileID: 11500000, guid: 42925965a426b45ddab5847e4c143d0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   scoreText: {fileID: 783025167}
   highScoreText: {fileID: 2063230410}
   timeText: {fileID: 1731946342}
-  timeLimit: 60
   resultText: {fileID: 520193502}
   resultBackground: {fileID: 261858153}
-  resultAudioSource: {fileID: 384391804}
-  resultJingle: {fileID: 8300000, guid: fc7b1283a8e094529ac20fd802acdc7d, type: 3}
   resetButton: {fileID: 570517283}
-  bgmAudioSource: {fileID: 1228669052}
+  gameManager: {fileID: 744545393}
 --- !u!1 &570517283
 GameObject:
   m_ObjectHideFlags: 0
@@ -1445,6 +1442,54 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642831550}
   m_CullTransparentMesh: 1
+--- !u!1 &744545392
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 744545394}
+  - component: {fileID: 744545393}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &744545393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744545392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 000dc15ed799f42289ea16587345ca99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeLimit: 60
+  resultAudioSource: {fileID: 384391804}
+  resultJingle: {fileID: 8300000, guid: fc7b1283a8e094529ac20fd802acdc7d, type: 3}
+  bgmAudioSource: {fileID: 1228669052}
+--- !u!4 &744545394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 744545392}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &783025165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2043,7 +2088,7 @@ GameObject:
   - component: {fileID: 1308764375}
   - component: {fileID: 1308764374}
   m_Layer: 5
-  m_Name: Time (1)
+  m_Name: left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2196,7 +2241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: febef1b9c2507429096b9e9e721c7f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portName: /dev/cu.usbmodem11401
+  portName: /dev/cu.usbmodem1101
   baudRate: 115200
   isConnected: 0
   receivedCount: 0
@@ -3477,3 +3522,4 @@ SceneRoots:
   - {fileID: 304320333}
   - {fileID: 394242010}
   - {fileID: 1356149927}
+  - {fileID: 744545394}

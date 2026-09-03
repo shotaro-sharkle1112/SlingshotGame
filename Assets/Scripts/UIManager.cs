@@ -9,20 +9,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI highScoreText;
     [SerializeField] private TextMeshProUGUI timeText;
 
-    [Header("Time Limit")]
-    [SerializeField] private float timeLimit = 60f;
-
     [Header("Result")]
     [SerializeField] private TextMeshProUGUI resultText;
     [SerializeField] private GameObject resultBackground;
-    [SerializeField] private AudioSource resultAudioSource;
-    [SerializeField] private AudioClip resultJingle;
     [SerializeField] private GameObject resetButton;
 
-    [Header("BGM")]
-    [SerializeField] private AudioSource bgmAudioSource;
-
-    private float remainingTime;
+    [Header("GameManager")]
+    [SerializeField] private GameManager gameManager;
     private bool timerRunning;
 
     void Start()
@@ -33,29 +26,24 @@ public class UIManager : MonoBehaviour
         ScoreManager.Instance.OnScoreChanged += UpdateScoreText;
         ScoreManager.Instance.OnHighScoreChanged += UpdateHighScoreText;
 
-        remainingTime = timeLimit;
+        UpdateTimeText(gameManager.remainingTime);
+
         timerRunning = true;
-        UpdateTimeText(remainingTime);
 
         if (resultText != null) resultText.gameObject.SetActive(false);
         if (resultBackground != null) resultBackground.SetActive(false);
         if (resetButton != null) resetButton.SetActive(false);
-
-        if (bgmAudioSource != null && !bgmAudioSource.isPlaying) bgmAudioSource.Play();
     }
 
     void Update()
     {
         if (!timerRunning) return;
-
-        remainingTime -= Time.deltaTime;
-        if (remainingTime <= 0f)
+        if (gameManager.remainingTime <= 0f)
         {
-            remainingTime = 0f;
+            ShowResult();
             timerRunning = false;
-            OnTimeUp();
         }
-        UpdateTimeText(remainingTime);
+        UpdateTimeText(gameManager.remainingTime);
     }
 
    private void OnDestroy()
@@ -86,26 +74,6 @@ public class UIManager : MonoBehaviour
         int mm = total / 60;
         int ss = total % 60;
         timeText.text = $"{mm:00}:{ss:00}";
-    }
-
-    private void OnTimeUp()
-    {
-        Debug.Log("Time up!");
-        StopBgm();
-        PlayJingle();
-        ShowResult();
-        Time.timeScale = 0f; // ゲーム停止：Time.deltaTimeが0になり、的の動き等が止まる
-    }
-
-    private void StopBgm()
-    {
-        if (bgmAudioSource != null) bgmAudioSource.Stop();
-    }
-
-    private void PlayJingle()
-    {
-        if (resultAudioSource == null || resultJingle == null) return;
-        resultAudioSource.PlayOneShot(resultJingle);
     }
 
     private void ShowResult()
