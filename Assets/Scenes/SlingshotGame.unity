@@ -1471,7 +1471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000dc15ed799f42289ea16587345ca99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 60
+  timeLimit: 3
   resultAudioSource: {fileID: 384391804}
   resultJingle: {fileID: 8300000, guid: fc7b1283a8e094529ac20fd802acdc7d, type: 3}
   bgmAudioSource: {fileID: 1228669052}
