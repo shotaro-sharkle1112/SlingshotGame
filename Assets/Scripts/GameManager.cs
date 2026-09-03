@@ -1,72 +1,56 @@
 using UnityEngine;
-using System;
-using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance {get; private set;}
+    [Header("Time Limit")]
+    [SerializeField] private float timeLimit = 60f;
+    [Header("BGM")]
+    [SerializeField] private AudioSource resultAudioSource;
+    [SerializeField] private AudioClip finishJingle;
+    [SerializeField] private AudioSource bgmAudioSource;
 
-    public int CurrentScore { get; private set;}
-    public int HighScore { get; private set;}
-
-    public IReadOnlyDictionary<int, int> HitCounts => hitCounts;
-    private readonly Dictionary<int, int> hitCounts = new Dictionary<int, int>();
-
-    public event Action<int> OnScoreChanged;
-    public event Action<int> OnHighScoreChanged;
-
-    private const string HighScoreKey = "HighScore";
-
-    /// <summary>
-    /// Awake is called when the script instance is being loaded.
-    /// </summary>
-    private void Awake()
+    public float remainingTime {get; private set;}
+    public bool timerRunning {get; private set;}
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
     {
-        if (Instance != null && Instance != this)
+        //タイムをセットして、タイマー開始
+        remainingTime = timeLimit;
+        timerRunning = true;
+
+        if (bgmAudioSource != null && !bgmAudioSource.isPlaying) bgmAudioSource.Play();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        if (!timerRunning) return;
+
+        remainingTime -= Time.deltaTime;
+        if (remainingTime <= 0f)
         {
-            Destroy(gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
-
-        HighScore = PlayerPrefs.GetInt(HighScoreKey, 0);
-    }
-    
-    public void RegisterTargetHit(int scoreAmount)
-    {
-        if (hitCounts.ContainsKey(scoreAmount)) hitCounts[scoreAmount]++;
-        else hitCounts[scoreAmount] = 1;
-        AddScore(scoreAmount);
-    }
-
-    public int GetHitCount(int scoreAmount)
-    {
-        return hitCounts.TryGetValue(scoreAmount, out int c) ? c : 0;
-    }
-
-    public void AddScore(int amount)
-    {
-        CurrentScore += amount;
-        OnScoreChanged?.Invoke(CurrentScore);
-
-        if (CurrentScore > HighScore)
-        {
-            HighScore = CurrentScore;
-            PlayerPrefs.SetInt(HighScoreKey, HighScore);
-            PlayerPrefs.Save();
-
-            OnHighScoreChanged?.Invoke(HighScore);
-
-            Debug.Log($"high score! {HighScore}");
+            remainingTime = 0f;
+            timerRunning = false;
+            OnTimeUp();
         }
     }
 
-    public void ResetScore()
+    private void OnTimeUp()
     {
-        CurrentScore = 0;
-        hitCounts.Clear();
-        OnScoreChanged?.Invoke(CurrentScore);
+        Debug.Log("Time up!");
+        StopBgm();
+        PlayJingle();
+        Time.timeScale = 0f; // ゲーム停止：Time.deltaTimeが0になり、的の動き等が止まる
+    }
+
+    private void StopBgm()
+    {
+        if (bgmAudioSource != null) bgmAudioSource.Stop();
+    }
+
+    private void PlayJingle()
+    {
+        if (resultAudioSource == null || finishJingle == null) return;
+        resultAudioSource.PlayOneShot(finishJingle);
     }
 }

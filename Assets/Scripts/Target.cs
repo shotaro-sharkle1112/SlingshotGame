@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class TargetForBending : MonoBehaviour
+public class Target : MonoBehaviour
 {
     [SerializeField] private int scoreAmount = 300;
     [SerializeField] private AudioSource audioSource;
@@ -22,7 +22,7 @@ public class TargetForBending : MonoBehaviour
         if (other.gameObject.tag == "Sphere")
         {
             hit = true;
-            GameManager.Instance.RegisterTargetHit(scoreAmount);
+            ScoreManager.Instance.RegisterTargetHit(scoreAmount);
             if (audioSource != null && hitSound != null) audioSource.PlayOneShot(hitSound);
             StartCoroutine(HitPointCenter());
         }

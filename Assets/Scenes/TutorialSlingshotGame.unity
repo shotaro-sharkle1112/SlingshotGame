@@ -509,55 +509,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 277344588}
   m_CullTransparentMesh: 1
---- !u!1 &325166018
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 325166020}
-  - component: {fileID: 325166019}
-  m_Layer: 0
-  m_Name: PIco Mpu Client
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &325166019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325166018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 40e32fd8fbae146ac9af28cf1c814f99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PicoIp: 192.168.11.2
-  PollInterval: 0.05
-  Accel: {x: 0, y: 0, z: 0}
-  Gyro: {x: 0, y: 0, z: 0}
-  LastRequestOk: 0
---- !u!4 &325166020
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 325166018}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.391769, y: 4.972351, z: 22.253448}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &373361231
 GameObject:
   m_ObjectHideFlags: 0
@@ -2938,7 +2889,7 @@ GameObject:
   - component: {fileID: 1989995092}
   - component: {fileID: 1989995093}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: ScoreManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2968,7 +2919,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1989995091}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78b0c4142973a4668937ecb69fc0c24f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3038dee801e544a09ac300c5c96da568, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1990006207
@@ -3111,52 +3062,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1411209720}
   m_SourcePrefab: {fileID: 100100000, guid: a270d2754ec52fb4894dd91ea677fe22, type: 3}
---- !u!1 &2040680445
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2040680447}
-  - component: {fileID: 2040680446}
-  m_Layer: 0
-  m_Name: PIco Bend Client
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2040680446
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2040680445}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 120f4b123701b4567b95908b935c6432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  serverIP: 192.168.11.2
-  pollInterval: 0.1
---- !u!4 &2040680447
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2040680445}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.509453, y: 10.427383, z: 3.6030192}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2063230408
 GameObject:
   m_ObjectHideFlags: 0
@@ -3298,8 +3203,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 128893885}
-  - {fileID: 2040680447}
-  - {fileID: 325166020}
   - {fileID: 1527647526}
   - {fileID: 1989995092}
   - {fileID: 1823215085}

@@ -3,10 +3,10 @@
 using System.Collections;
 using UnityEngine;
 
-public class ImuOrientation : MonoBehaviour
+public class SlingshotRotation : MonoBehaviour
 {
     [Header("Source (PicoSerialReceiver)")]
-    public PicoSerialReceiver Source;      // Accel, Gyro を読む
+    public ControlerManager Source;      // Accel, Gyro を読む
     public Transform Target;               // 回す対象（未指定なら自分）
 
     [Header("Filter")]
@@ -102,6 +102,9 @@ public class ImuOrientation : MonoBehaviour
     void Update()
     {
         if (Source == null) return;
+        
+        // 時間を止める処理があり、このUpdate関数の中ではdeltaTimeで割る処理があるので無しにしないといけない
+        if (Time.deltaTime <= 0) return;
 
         if (Input.GetKeyDown(keyGyroBias)) StartCoroutine(CalibGyroBias());
         if (Input.GetKeyDown(keyResetYaw)) ResetYaw();

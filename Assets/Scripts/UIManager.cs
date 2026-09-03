@@ -3,72 +3,63 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ScoreDisplay : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI highScoreText;
     [SerializeField] private TextMeshProUGUI timeText;
 
-    [Header("Time Limit")]
-    [SerializeField] private float timeLimit = 60f;
-
     [Header("Result")]
     [SerializeField] private TextMeshProUGUI resultText;
     [SerializeField] private GameObject resultBackground;
-    [SerializeField] private AudioSource resultAudioSource;
-    [SerializeField] private AudioClip resultJingle;
     [SerializeField] private GameObject resetButton;
 
-    [Header("BGM")]
-    [SerializeField] private AudioSource bgmAudioSource;
-
-    private float remainingTime;
+    [Header("GameManager")]
+    [SerializeField] private GameManager gameManager;
     private bool timerRunning;
 
     void Start()
     {
-        UpdateScoreText(GameManager.Instance.CurrentScore);
-        UpdateHighScoreText(GameManager.Instance.HighScore);
+        UpdateScoreText(ScoreManager.Instance.CurrentScore);
+        UpdateHighScoreText(ScoreManager.Instance.HighScore);
 
-        GameManager.Instance.OnScoreChanged += UpdateScoreText;
-        GameManager.Instance.OnHighScoreChanged += UpdateHighScoreText;
+        ScoreManager.Instance.OnScoreChanged += UpdateScoreText;
+        ScoreManager.Instance.OnHighScoreChanged += UpdateHighScoreText;
 
-        remainingTime = timeLimit;
+        UpdateTimeText(gameManager.remainingTime);
+
         timerRunning = true;
-        UpdateTimeText(remainingTime);
 
         if (resultText != null) resultText.gameObject.SetActive(false);
         if (resultBackground != null) resultBackground.SetActive(false);
         if (resetButton != null) resetButton.SetActive(false);
-
-        if (bgmAudioSource != null && !bgmAudioSource.isPlaying) bgmAudioSource.Play();
     }
 
     void Update()
     {
         if (!timerRunning) return;
-
-        remainingTime -= Time.deltaTime;
-        if (remainingTime <= 0f)
+        if (gameManager.remainingTime <= 0f)
         {
-            remainingTime = 0f;
+            ShowResult();
             timerRunning = false;
-            OnTimeUp();
         }
-        UpdateTimeText(remainingTime);
+        UpdateTimeText(gameManager.remainingTime);
     }
 
    private void OnDestroy()
    {
-      if (GameManager.Instance == null) return;
+      if (ScoreManager.Instance == null) return;
 
-      GameManager.Instance.OnScoreChanged -= UpdateScoreText;
-      GameManager.Instance.OnHighScoreChanged -= UpdateHighScoreText;
+      ScoreManager.Instance.OnScoreChanged -= UpdateScoreText;
+      ScoreManager.Instance.OnHighScoreChanged -= UpdateHighScoreText;
    }
 
    private void UpdateScoreText(int score)
     {
-        scoreText.text = $"SCORE: {score}";
+        if (scoreText != null)
+        {
+            scoreText.text = $"SCORE: {score}";
+        }
     }
 
     private void UpdateHighScoreText(int highScore)
@@ -85,33 +76,13 @@ public class ScoreDisplay : MonoBehaviour
         timeText.text = $"{mm:00}:{ss:00}";
     }
 
-    private void OnTimeUp()
-    {
-        Debug.Log("Time up!");
-        StopBgm();
-        PlayJingle();
-        ShowResult();
-        Time.timeScale = 0f; // ゲーム停止：Time.deltaTimeが0になり、的の動き等が止まる
-    }
-
-    private void StopBgm()
-    {
-        if (bgmAudioSource != null) bgmAudioSource.Stop();
-    }
-
-    private void PlayJingle()
-    {
-        if (resultAudioSource == null || resultJingle == null) return;
-        resultAudioSource.PlayOneShot(resultJingle);
-    }
-
     private void ShowResult()
     {
         if (resultBackground != null) resultBackground.SetActive(true);
         if (resetButton != null) resetButton.SetActive(true);
         if (resultText == null) return;
 
-        var gm = GameManager.Instance;
+        var gm = ScoreManager.Instance;
         int c300 = gm.GetHitCount(300);
         int c500 = gm.GetHitCount(500);
         int c1000 = gm.GetHitCount(1000);
@@ -132,7 +103,7 @@ public class ScoreDisplay : MonoBehaviour
     public void OnResetButtonClicked()
     {
         Time.timeScale = 1f;
-        GameManager.Instance.ResetScore();
+        ScoreManager.Instance.ResetScore();
         SceneManager.LoadScene("TutorialSlingshotGame");
     }
 }

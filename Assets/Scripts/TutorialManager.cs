@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class TutorialController : MonoBehaviour
+public class TutorialManager : MonoBehaviour
 {
     [SerializeField] private Button startButton;
     [SerializeField] private TargetSpawner spawner;

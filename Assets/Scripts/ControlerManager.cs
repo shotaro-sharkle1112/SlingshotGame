@@ -32,7 +32,7 @@ public class ReadOnlyDrawer : PropertyDrawer
 }
 #endif
 
-public class PicoSerialReceiver : MonoBehaviour
+public class ControlerManager : MonoBehaviour
 {
     [Header("Serial Settings")]
     public string portName = "/dev/cu.usbmodem11401";
@@ -93,7 +93,8 @@ public class PicoSerialReceiver : MonoBehaviour
         OpenSerial();
     }
 
-    void Update()
+
+    void FixedUpdate()
     {
         while (true)
         {

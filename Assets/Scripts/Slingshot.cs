@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class SlingshotForBend : MonoBehaviour {
+public class Slingshot : MonoBehaviour {
 
     public float metalSphereVelocity;
 
@@ -42,7 +42,7 @@ public class SlingshotForBend : MonoBehaviour {
     private float cooldownRemaining = 0f;
 
 
-    [SerializeField] private PicoSerialReceiver picoSerialReceiver;
+    [SerializeField] private ControlerManager picoSerialReceiver;
 
     void Start ()
     {      
