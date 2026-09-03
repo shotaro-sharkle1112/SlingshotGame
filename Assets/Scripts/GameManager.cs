@@ -4,10 +4,9 @@ public class GameManager : MonoBehaviour
 {
     [Header("Time Limit")]
     [SerializeField] private float timeLimit = 60f;
+    [Header("BGM")]
     [SerializeField] private AudioSource resultAudioSource;
     [SerializeField] private AudioClip resultJingle;
-
-    [Header("BGM")]
     [SerializeField] private AudioSource bgmAudioSource;
 
     public float remainingTime {get; private set;}
