@@ -102,6 +102,9 @@ public class SlingshotRotation : MonoBehaviour
     void Update()
     {
         if (Source == null) return;
+        
+        // 時間を止める処理があり、このUpdate関数の中ではdeltaTimeで割る処理があるので無しにしないといけない
+        if (Time.deltaTime <= 0) return;
 
         if (Input.GetKeyDown(keyGyroBias)) StartCoroutine(CalibGyroBias());
         if (Input.GetKeyDown(keyResetYaw)) ResetYaw();
