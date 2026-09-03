@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float timeLimit = 60f;
     [Header("BGM")]
     [SerializeField] private AudioSource resultAudioSource;
-    [SerializeField] private AudioClip resultJingle;
+    [SerializeField] private AudioClip finishJingle;
     [SerializeField] private AudioSource bgmAudioSource;
 
     public float remainingTime {get; private set;}
@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
 
     private void PlayJingle()
     {
-        if (resultAudioSource == null || resultJingle == null) return;
-        resultAudioSource.PlayOneShot(resultJingle);
+        if (resultAudioSource == null || finishJingle == null) return;
+        resultAudioSource.PlayOneShot(finishJingle);
     }
 }

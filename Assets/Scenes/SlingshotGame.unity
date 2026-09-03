@@ -755,7 +755,7 @@ GameObject:
   - component: {fileID: 384391805}
   - component: {fileID: 384391804}
   m_Layer: 0
-  m_Name: Audio Source
+  m_Name: Jingle Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -866,12 +866,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 384391803}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.6273003, y: 33.015278, z: 5.2771263}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 744545394}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &394242006
 GameObject:
@@ -1471,7 +1471,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 000dc15ed799f42289ea16587345ca99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 3
+  timeLimit: 8.54
   resultAudioSource: {fileID: 384391804}
   resultJingle: {fileID: 8300000, guid: fc7b1283a8e094529ac20fd802acdc7d, type: 3}
   bgmAudioSource: {fileID: 1228669052}
@@ -1487,7 +1487,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1228669053}
+  - {fileID: 384391805}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &783025165
@@ -2108,12 +2110,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1228669051}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1059.4495, y: 502.51068, z: 3.7423854}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 744545394}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1308764372
 GameObject:
@@ -3548,10 +3550,8 @@ SceneRoots:
   - {fileID: 1989995092}
   - {fileID: 1823215085}
   - {fileID: 1525699355}
-  - {fileID: 384391805}
   - {fileID: 1990006208}
   - {fileID: 1870525269}
-  - {fileID: 1228669053}
   - {fileID: 1356149927}
   - {fileID: 744545394}
   - {fileID: 966936105}
