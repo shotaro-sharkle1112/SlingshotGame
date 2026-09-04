@@ -31,12 +31,10 @@ public class Target : MonoBehaviour
 
     IEnumerator HitPointCenter()
     {
-        foreach (var r in GetComponents<Renderer>()) r.enabled = false;
         foreach (var c in GetComponents<Collider>()) c.enabled = false;
         var mover = GetComponent<TargetMover>();
         if (mover != null) mover.enabled = false;
-
-        score.SetActive(true);
+        if (score != null) score.SetActive(true);
         yield return new WaitForSeconds(2);
         Destroy(gameObject);
     }
