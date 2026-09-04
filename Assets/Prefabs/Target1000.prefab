@@ -127,7 +127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreAmount: 1000
-  audioSource: {fileID: 0}
   hitSound: {fileID: 8300000, guid: 62640f99bf9854d59ae2bada03517d2b, type: 3}
   score: {fileID: 3067138865546524574}
 --- !u!82 &7266023208874170943
@@ -140,8 +139,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 62640f99bf9854d59ae2bada03517d2b, type: 3}
-  m_Resource: {fileID: 8300000, guid: 62640f99bf9854d59ae2bada03517d2b, type: 3}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
