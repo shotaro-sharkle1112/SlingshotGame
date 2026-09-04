@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 54159265005807030}
   - component: {fileID: 2642267646157629445}
   - component: {fileID: 3048357349326584201}
+  - component: {fileID: 9151127144319227766}
   m_Layer: 0
   m_Name: MetalSphere
   m_TagString: Sphere
@@ -4960,3 +4961,16 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &9151127144319227766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853232240325812}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b134d7484355643d2b68f7c9094904f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isShot: 0
