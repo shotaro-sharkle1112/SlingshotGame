@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(ParticleSystem))]
 public class Target : MonoBehaviour
 {
     [SerializeField] private int scoreAmount = 300;
@@ -12,6 +13,9 @@ public class Target : MonoBehaviour
     // スコアを表示するためのプレハブ
     [SerializeField] private GameObject scoreTextPrefab;
 
+    // 衝突時のエフェクト
+    private ParticleSystem ps;
+
     private bool hit;
     private GameObject score;
     private TextMeshPro scoreTMPro;
@@ -19,6 +23,7 @@ public class Target : MonoBehaviour
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
+        ps = GetComponent<ParticleSystem>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -38,15 +43,23 @@ public class Target : MonoBehaviour
         foreach (var c in GetComponents<Collider>()) c.enabled = false;
         var mover = GetComponent<TargetMover>();
         if (mover != null) mover.enabled = false;
-        // スコアを生成
+        // スコアを表示
         if (scoreTextPrefab != null)
         {
             score = Instantiate(scoreTextPrefab,transform.position,Quaternion.identity);
             scoreTMPro = score.GetComponent<TextMeshPro>();
             scoreTMPro.text = $"{scoreAmount}";
         }
+
+        // エフェクトを再生
+        if (ps != null)
+        {
+            ps.Play();
+        }
+
+        // 2秒で消えるようにする
         yield return new WaitForSeconds(2);
-        //
+        
         Destroy(score);
         Destroy(gameObject);
     }
