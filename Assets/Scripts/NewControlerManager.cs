@@ -29,19 +29,33 @@ public class NewControlerManager : MonoBehaviour
     [ReadOnly, SerializeField] private int tMs = 0;
     [ReadOnly, SerializeField] private int bend = 0;
 
-    [Header("MPU6050 Accel")]
+    [Header("Acceleration")]
     [ReadOnly, SerializeField] private float accelX = 0f;
     [ReadOnly, SerializeField] private float accelY = 0f;
     [ReadOnly, SerializeField] private float accelZ = 0f;
 
-    [Header("MPU6050 Gyro")]
+    [Header("Gyro")]
     [ReadOnly, SerializeField] private float gyroX = 0f;
     [ReadOnly, SerializeField] private float gyroY = 0f;
     [ReadOnly, SerializeField] private float gyroZ = 0f;
 
-    // ImuOrientation 等から読み取る公開API（PicoMpuClient互換）
-    public Vector3 Accel => new Vector3(accelX, accelY, accelZ); // g
-    public Vector3 Gyro  => new Vector3(gyroX,  gyroY,  gyroZ);  // °/s
+    [Header("Magnetic")]
+    [ReadOnly, SerializeField] private float magX = 0f;
+    [ReadOnly, SerializeField] private float magY = 0f;
+    [ReadOnly, SerializeField] private float magZ = 0f;
+
+    // コントローラ側で姿勢推定した結果のクォータ二オン
+    [Header("Quaternion")]
+    [ReadOnly, SerializeField] private float quatX = 0f;
+    [ReadOnly, SerializeField] private float quatY = 0f;
+    [ReadOnly, SerializeField] private float quatZ = 0f;
+    [ReadOnly, SerializeField] private float quatW = 0f;
+
+    // SlingshotRotation.cs 等から読み取る公開API
+    public Vector3 Accel => new Vector3(accelX, accelY, accelZ);
+    public Vector3 Gyro  => new Vector3(gyroX, gyroY, gyroZ);
+    public Vector3 Mag => new Vector3(magX, magY, magZ);
+    public Quaternion Quat => new Quaternion(quatX, quatY, quatZ, quatW);
     public int Bend => bend;                                     // 曲げセンサ raw値
 
     private SerialPort serialPort;
@@ -58,6 +72,8 @@ public class NewControlerManager : MonoBehaviour
         public int bend;
         public Vector3Data accel;
         public Vector3Data gyro;
+        public Vector3Data mag;
+        public QuaternionData quat;
         public string error;
     }
 
@@ -67,6 +83,15 @@ public class NewControlerManager : MonoBehaviour
         public float x;
         public float y;
         public float z;
+    }
+
+    [Serializable]
+    public class QuaternionData
+    {
+        public float x;
+        public float y;
+        public float z;
+        public float w;
     }
 
     void Start()

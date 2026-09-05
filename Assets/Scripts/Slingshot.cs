@@ -42,7 +42,7 @@ public class Slingshot : MonoBehaviour {
     private float cooldownRemaining = 0f;
 
 
-    [SerializeField] private ControlerManager picoSerialReceiver;
+    [SerializeField] private NewControlerManager newControlerManager;
 
     void Start ()
     {      
@@ -72,7 +72,7 @@ public class Slingshot : MonoBehaviour {
         }
 
         //曲げセンサの値を取得
-        sensorValue = picoSerialReceiver.Bend;
+        sensorValue = newControlerManager.Bend;
         //曲げセンサの値が一定の範囲外に出たらパチンコの伸び開始
         if (sensorValue <= sensorMinThres)
         {
