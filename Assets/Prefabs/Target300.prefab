@@ -304,7 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scoreAmount: 300
   hitSound: {fileID: 8300000, guid: 62640f99bf9854d59ae2bada03517d2b, type: 3}
-  score: {fileID: 327439839470708888}
+  score: {fileID: 4308901340352259434}
 --- !u!82 &1854118874703198642
 AudioSource:
   m_ObjectHideFlags: 0

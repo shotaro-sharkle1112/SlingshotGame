@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
@@ -8,9 +9,12 @@ public class Target : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField] private AudioClip hitSound;
 
-    public GameObject score;
+    // スコアを表示するためのプレハブ
+    [SerializeField] private GameObject scoreTextPrefab;
 
     private bool hit;
+    private GameObject score;
+    private TextMeshPro scoreTMPro;
 
     void Awake()
     {
@@ -34,8 +38,16 @@ public class Target : MonoBehaviour
         foreach (var c in GetComponents<Collider>()) c.enabled = false;
         var mover = GetComponent<TargetMover>();
         if (mover != null) mover.enabled = false;
-        if (score != null) score.SetActive(true);
+        // スコアを生成
+        if (scoreTextPrefab != null)
+        {
+            score = Instantiate(scoreTextPrefab,transform.position,Quaternion.identity);
+            scoreTMPro = score.GetComponent<TextMeshPro>();
+            scoreTMPro.text = $"{scoreAmount}";
+        }
         yield return new WaitForSeconds(2);
+        //
+        Destroy(score);
         Destroy(gameObject);
     }
 }
