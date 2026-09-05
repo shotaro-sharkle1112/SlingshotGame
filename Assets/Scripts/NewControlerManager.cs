@@ -126,9 +126,18 @@ public class NewControlerManager : MonoBehaviour
         try
         {
             serialPort = new SerialPort(portName, baudRate);
-            serialPort.ReadTimeout = 100;
+            serialPort.ReadTimeout = 500;
+            // コントローラ側の受信を受け取りたいよという意思 dtr = Data Terminal Ready
+            serialPort.DtrEnable = true;
+
+            // コントローラに贈りたいよという意思 rts = Request To Send
+            serialPort.RtsEnable = true;
             serialPort.NewLine = "\n";
             serialPort.Open();
+
+            // ポートを開けると最初に無駄なデータ(ヘッダ)が送信されるので捨てる
+            // ほんとはヘッダを別ポートに吐き捨てる方法があるらしいけど、一旦めんどくさいので捨てるだけにする
+            serialPort.ReadLine();
 
             isRunning = true;
             isConnected = true;
@@ -155,7 +164,6 @@ public class NewControlerManager : MonoBehaviour
             try
             {
                 string line = serialPort.ReadLine();
-
                 if (string.IsNullOrWhiteSpace(line))
                     continue;
 
@@ -185,7 +193,6 @@ public class NewControlerManager : MonoBehaviour
         try
         {
             SensorPacket packet = JsonUtility.FromJson<SensorPacket>(line);
-
             receivedCount++;
 
             if (!string.IsNullOrEmpty(packet.error))
@@ -211,6 +218,21 @@ public class NewControlerManager : MonoBehaviour
                 gyroX = packet.gyro.x;
                 gyroY = packet.gyro.y;
                 gyroZ = packet.gyro.z;
+            }
+
+            if (packet.mag != null)
+            {
+                magX = packet.mag.x;
+                magY = packet.mag.y;
+                magZ = packet.mag.z;
+            }
+
+            if (packet.quat != null)
+            {
+                quatX = packet.quat.x;
+                quatY = packet.quat.y;
+                quatZ = packet.quat.z;
+                quatW = packet.quat.w;
             }
         }
         catch (Exception e)
