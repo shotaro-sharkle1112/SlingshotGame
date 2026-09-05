@@ -111,7 +111,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5000001
+  m_Radius: 0.52
   m_Height: 2.52
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -254,6 +254,7 @@ MonoBehaviour:
   scoreAmount: 300
   hitSound: {fileID: 8300000, guid: b031dc42dfd59425aa668445b14ede30, type: 3}
   scoreTextPrefab: {fileID: 2522344554574297611, guid: 29b1d28d69d3d4941b56e4a5d1aedc8f, type: 3}
+  offset: {x: 0, y: 0, z: -1}
 --- !u!198 &7431121789242812105
 ParticleSystem:
   m_ObjectHideFlags: 0

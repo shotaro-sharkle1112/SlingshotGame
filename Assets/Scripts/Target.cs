@@ -13,6 +13,9 @@ public class Target : MonoBehaviour
     // スコアを表示するためのプレハブ
     [SerializeField] private GameObject scoreTextPrefab;
 
+    // 的から見た表示するスコアの位置
+    [SerializeField] private Vector3 offset;
+
     // 衝突時のエフェクト
     private ParticleSystem ps;
 
@@ -43,10 +46,12 @@ public class Target : MonoBehaviour
         foreach (var c in GetComponents<Collider>()) c.enabled = false;
         var mover = GetComponent<TargetMover>();
         if (mover != null) mover.enabled = false;
+        
         // スコアを表示
         if (scoreTextPrefab != null)
         {
-            score = Instantiate(scoreTextPrefab,transform.position,Quaternion.identity);
+            score = Instantiate(scoreTextPrefab, transform.position + offset ,Quaternion.identity);
+            Debug.Log($"{transform.position + offset}");
             scoreTMPro = score.GetComponent<TextMeshPro>();
             scoreTMPro.text = $"{scoreAmount}";
         }
@@ -59,7 +64,7 @@ public class Target : MonoBehaviour
 
         // 2秒で消えるようにする
         yield return new WaitForSeconds(2);
-        
+
         Destroy(score);
         Destroy(gameObject);
     }
