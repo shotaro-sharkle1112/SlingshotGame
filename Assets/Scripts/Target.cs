@@ -50,7 +50,6 @@ public class Target : MonoBehaviour
 
         // 衝突後ならだんだん的を透明にしていく
         var smoothedColor = Color.Lerp(mat.color, finishColor, transparentSmoothness * Time.deltaTime);
-        Debug.Log($"{smoothedColor}");
         mat.SetColor("_BaseColor", smoothedColor);
     }
 
