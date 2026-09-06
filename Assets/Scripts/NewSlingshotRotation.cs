@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class NewSlingshotRotation : MonoBehaviour
 {
-    [Header("Source (PicoSerialReceiver)")]
-    public ControlerManager Source;      // Accel, Gyro を読む
+    [Header("Source (NewControlerManager)")]
+    public NewControlerManager Source;      // Accel, Gyro を読む
     public Transform Target;               // 回す対象（未指定なら自分）
 
     [Header("Filter")]
@@ -67,16 +67,7 @@ public class NewSlingshotRotation : MonoBehaviour
 
     void OnEnable()
     {
-        if (autoGyroBiasCalibOnStart) StartCoroutine(CalibGyroBias());
-        // 加速度で初期傾きだけ合わせる（yawは未確定→0°）
-        if (Source != null)
-        {
-            var a = MapAxes(Source.Accel, accelSign);
-            if (a.sqrMagnitude > 1e-6f) {
-                var g = (-a).normalized;           // 重力方向
-                q = Quaternion.FromToRotation(Vector3.up, g); // 傾き合わせ（yaw=0）
-            }
-        }
+        
     }
 
     IEnumerator CalibGyroBias()
@@ -103,92 +94,8 @@ public class NewSlingshotRotation : MonoBehaviour
     {
         if (Source == null) return;
         
-        // 時間を止める処理があり、このUpdate関数の中ではdeltaTimeで割る処理があるので無しにしないといけない
-        if (Time.deltaTime <= 0) return;
-
-        if (Input.GetKeyDown(keyGyroBias)) StartCoroutine(CalibGyroBias());
-        if (Input.GetKeyDown(keyResetYaw)) ResetYaw();
-        if (Input.GetKeyDown(KeyCode.Z)) {
-            q = Quaternion.identity;
-            currentEuler = Vector3.zero;
-            dampVel = Vector3.zero;
-            Target.rotation = Quaternion.identity;
-        }
-        float dt = Mathf.Max(Time.deltaTime, 1e-4f);
-
-        // --- 1) ジャイロで積分（高速応答）
-        Vector3 gyro = MapAxes(Source.Gyro, gyroSign) - gyroBias; // deg/s
-        float ang = gyro.magnitude * dt;                           // deg
-        if (ang > 0f)
-        {
-            Quaternion dq = Quaternion.AngleAxis(ang, gyro.normalized);
-            // ボディ座標の回転として右積
-            q = q * dq;
-        }
-
-        // --- 2) 加速度で傾き補正（遅いがドリフトしない、yawは補正できない）
-        Vector3 a = MapAxes(Source.Accel, accelSign);
-        if (a.sqrMagnitude > 1e-6f)
-        {
-            Vector3 upPred = q * Vector3.up;   // 予測された世界“上”
-            Vector3 upMeas = (-a).normalized;  // 測定した重力方向（=世界“上”）
-
-            Vector3 axis = Vector3.Cross(upPred, upMeas);
-            float s = axis.magnitude;
-            if (s > 1e-6f)
-            {
-                float errDeg = Mathf.Asin(Mathf.Clamp(s, -1f, 1f)) * Mathf.Rad2Deg;
-                Quaternion corr = Quaternion.AngleAxis(errDeg * accelBlend, axis / s);
-                q = corr * q; // 前から補正を掛ける（世界座標の微小修正）
-            }
-
-            // 下向き継続でyawリセット（upMeas.z > しきい値 = device-forwardが下向き）
-            if (upMeas.z > lookDownThreshold)
-            {
-                lookDownTimer += dt;
-                if (lookDownTimer >= lookDownDuration)
-                {
-                    ResetYaw();
-                    lookDownTimer = 0f;
-                }
-            }
-            else
-            {
-                lookDownTimer = 0f;
-            }
-        }
-        else
-        {
-            lookDownTimer = 0f;
-        }
-
-        // --- 3) 角度制限（ピッチ・ヨーをclamp、qにも反映してドリフト蓄積を防ぐ）
-        Vector3 e = q.eulerAngles;
-        float pitch = e.x > 180f ? e.x - 360f : e.x;
-        float yaw   = e.y > 180f ? e.y - 360f : e.y;
-        pitch = Mathf.Clamp(pitch, -pitchLimit, pitchLimit);
-        yaw   = Mathf.Clamp(yaw,   -yawLimit,   yawLimit);
-        e.x = pitch;
-        e.y = yaw;
-        q = Quaternion.Euler(e);
-
-        // --- 4) 滑らかに適用（SmoothDampAngle）
-        Vector3 targetEuler = q.eulerAngles;
-
-        // デッドバンド: 微小な揺れを無視
-        if (Mathf.Abs(Mathf.DeltaAngle(currentEuler.x, targetEuler.x)) < deadband)
-            targetEuler.x = currentEuler.x;
-        if (Mathf.Abs(Mathf.DeltaAngle(currentEuler.y, targetEuler.y)) < deadband)
-            targetEuler.y = currentEuler.y;
-        if (Mathf.Abs(Mathf.DeltaAngle(currentEuler.z, targetEuler.z)) < deadband)
-            targetEuler.z = currentEuler.z;
-
-        // SmoothDampAngle で滑らかに追従
-        currentEuler.x = Mathf.SmoothDampAngle(currentEuler.x, targetEuler.x, ref dampVel.x, smoothTime, maxDegPerSec);
-        currentEuler.y = Mathf.SmoothDampAngle(currentEuler.y, targetEuler.y, ref dampVel.y, smoothTime, maxDegPerSec);
-        currentEuler.z = Mathf.SmoothDampAngle(currentEuler.z, targetEuler.z, ref dampVel.z, smoothTime, maxDegPerSec);
-
-        Target.rotation = Quaternion.Euler(currentEuler);
+        // 取得したセンサ値から取得
+        Target.rotation = Source.Quat;
     }
 
     void ResetYaw()

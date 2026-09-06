@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
+using System.Numerics;
 using System.Threading;
 using UnityEngine;
-
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -18,6 +20,13 @@ public class NewControlerManager : MonoBehaviour
     [Header("Serial Settings")]
     public string portName = "/dev/cu.usbmodem1101";
     public int baudRate = 115200;
+
+    [Header("Axis Mapping")]
+    [SerializeField] private Vector3 axisSign = new Vector3(1f,1f,1f);
+    public enum Axis { X, Y, Z }
+    [SerializeField] private Axis upAxis = Axis.X;
+    [SerializeField] private Axis fowardAxis = Axis.Y;
+    [SerializeField] private Axis rightAxis = Axis.Z;
 
     [Header("Status")]
     [ReadOnly, SerializeField] private bool isConnected = false;
@@ -234,6 +243,9 @@ public class NewControlerManager : MonoBehaviour
                 quatZ = packet.quat.z;
                 quatW = packet.quat.w;
             }
+
+            // 軸の入れ替えを行う
+
         }
         catch (Exception e)
         {
