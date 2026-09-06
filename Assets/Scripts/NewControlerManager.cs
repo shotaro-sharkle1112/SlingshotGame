@@ -6,6 +6,8 @@ using System.Threading;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
+using UnityEditor.AnimatedValues;
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -74,6 +76,11 @@ public class NewControlerManager : MonoBehaviour
     private readonly object queueLock = new object();
     private readonly Queue<string> lineQueue = new Queue<string>();
 
+    // 最初にセンサの初期姿勢を取得したかどうか
+    private bool initialized;
+    // 最初のセンサの初期姿勢
+    private Quaternion initialQuat;
+
     [Serializable]
     public class SensorPacket
     {
@@ -106,6 +113,7 @@ public class NewControlerManager : MonoBehaviour
     void Start()
     {
         OpenSerial();
+        initialized = false;
     }
 
 
@@ -243,8 +251,6 @@ public class NewControlerManager : MonoBehaviour
                 quatZ = packet.quat.z;
                 quatW = packet.quat.w;
             }
-
-            // 軸の入れ替えを行う
 
         }
         catch (Exception e)

@@ -663,6 +663,7 @@ MonoBehaviour:
   lookDownDuration: 0.5
   keyResetYaw: 114
   keyGyroBias: 99
+  smoothness: 64.6
 --- !u!1 &1990969697
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,6 +675,7 @@ GameObject:
   - component: {fileID: 1990969698}
   - component: {fileID: 1990969700}
   - component: {fileID: 1990969699}
+  - component: {fileID: 1990969701}
   m_Layer: 5
   m_Name: Debug Text
   m_TagString: Untagged
@@ -697,8 +699,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -561, y: -362}
-  m_SizeDelta: {x: 715.6547, y: 228}
+  m_AnchoredPosition: {x: -299.38104, y: -358.20844}
+  m_SizeDelta: {x: 1238.8926, y: 220.4168}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1990969699
 MonoBehaviour:
@@ -799,6 +801,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1990969697}
   m_CullTransparentMesh: 1
+--- !u!114 &1990969701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1990969697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96b0fa0fb4b01457e90234c9db12c319, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slingshot: {fileID: 1733875852}
 --- !u!1001 &4348402895192506124
 PrefabInstance:
   m_ObjectHideFlags: 0
