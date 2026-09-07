@@ -470,8 +470,9 @@ MonoBehaviour:
   chargingTimeThreshold: 5
   bendThreshold: 16685
   jingleAudioSource: {fileID: 384391804}
-  startJingle: {fileID: 8300000, guid: c37d826806d8c4316a1dc87d116b200d, type: 3}
-  chargeJingle: {fileID: 0}
+  startJingle: {fileID: 8300000, guid: 7cd68c1f70f5a49ffaed2d4975783ba7, type: 3}
+  chargeAudioSource: {fileID: 1434294884}
+  chargeJingle: {fileID: 8300000, guid: 23183632c58fd4bb9a88e7548fe83730, type: 3}
   bgmAudioSource: {fileID: 1228669052}
 --- !u!1 &1096629437
 GameObject:
