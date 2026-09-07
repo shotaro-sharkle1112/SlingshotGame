@@ -1,4 +1,7 @@
 using UnityEngine;
+using System.Collections;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
 
 public class StartSceneGameManager : MonoBehaviour
 {
@@ -40,6 +43,13 @@ public class StartSceneGameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // シーン切り替えのトリガーが入ったら音量を小さくして、早期リターン
+        if (isStart)
+        {
+            bgmAudioSource.volume = Mathf.Lerp(bgmAudioSource.volume, 0f, Time.deltaTime);
+            return;
+        }
+
         // もし曲げているのであればチャージ時間を計測
         if (bendThreshold > Source.Bend)
         {
@@ -73,21 +83,18 @@ public class StartSceneGameManager : MonoBehaviour
             PlayJingle(startJingle);
             // チャージが完了したのでストップ
             if (chargeAudioSource.isPlaying) chargeAudioSource.Stop();
+
+            // シーン切り替えコルーチンを実施
+            StartCoroutine(NextScene());
         } 
 
     }
 
-    private void StopBgm()
+    IEnumerator NextScene()
     {
-        if (bgmAudioSource != null)
-        {
-            bgmAudioSource.Stop();
-        }else
-        {
-            Debug.Log("null : cannot play bgm");
-        }
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("TutorialSlingshotGame");
     }
-
 
     private void PlayJingle(AudioClip clip)
     {
