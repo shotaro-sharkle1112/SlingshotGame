@@ -122,6 +122,7 @@ public class ControlerManager : MonoBehaviour
             serialPort = new SerialPort(portName, baudRate);
             serialPort.ReadTimeout = 100;
             serialPort.NewLine = "\n";
+            serialPort.DtrEnable = true;
             serialPort.Open();
 
             isRunning = true;
