@@ -555,6 +555,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 744545395}
   chargeSlider: {fileID: 2131493646}
+  bendToStartText: {fileID: 1123204798}
+  keepBendingText: {fileID: 520128901}
+  startText: {fileID: 1187512707}
 --- !u!1 &744545392
 GameObject:
   m_ObjectHideFlags: 0
