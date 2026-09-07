@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: febef1b9c2507429096b9e9e721c7f5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portName: /dev/cu.usbmodem11401
+  portName: /dev/cu.usbmodem1101
   baudRate: 115200
   isConnected: 0
   receivedCount: 0
