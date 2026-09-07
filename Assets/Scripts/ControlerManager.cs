@@ -46,7 +46,7 @@ public class ControlerManager : MonoBehaviour
 
     [Header("Bend Sensor")]
     [ReadOnly, SerializeField] private int tMs = 0;
-    [ReadOnly, SerializeField] private int bend = 0;
+    [ReadOnly, SerializeField] private int bend = 2000;
 
     [Header("MPU6050 Accel")]
     [ReadOnly, SerializeField] private float accelX = 0f;
