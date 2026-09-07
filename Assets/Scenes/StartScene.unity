@@ -466,9 +466,9 @@ MonoBehaviour:
   Source: {fileID: 1356149926}
   chargingTimeThreshold: 5
   bendThreshold: 16685
-  audioSource: {fileID: 0}
-  startJingle: {fileID: 0}
-  bgmAudioSource: {fileID: 0}
+  jingleAudioSource: {fileID: 384391804}
+  startJingle: {fileID: 8300000, guid: c37d826806d8c4316a1dc87d116b200d, type: 3}
+  bgmAudioSource: {fileID: 1228669052}
 --- !u!1 &1096629437
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,7 +617,7 @@ GameObject:
   - component: {fileID: 1228669053}
   - component: {fileID: 1228669052}
   m_Layer: 0
-  m_Name: BGM
+  m_Name: BGM Audio Source
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

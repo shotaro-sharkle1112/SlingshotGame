@@ -14,8 +14,8 @@ public class StartSceneGameManager : MonoBehaviour
     // 曲げセンサ値がどれくらいで曲げ判定にするか
     [SerializeField] private int bendThreshold = 19000;
 
-    [Header("BGM")]
-    [SerializeField] private AudioSource audioSource;
+    [Header("Sound")]
+    [SerializeField] private AudioSource jingleAudioSource;
     [SerializeField] private AudioClip startJingle;
     [SerializeField] private AudioSource bgmAudioSource;
 
@@ -25,6 +25,8 @@ public class StartSceneGameManager : MonoBehaviour
     private float chargingRatio = 0f;
 
     public float ChargingRatio => chargingRatio;
+    // スタート演出はしたかどうか
+    private bool isStart = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -57,6 +59,14 @@ public class StartSceneGameManager : MonoBehaviour
             // 閾値が0以下なので警告
             Debug.Log($"chargingTimeThreshold is less than 0! : {chargingTimeThreshold}");
         }
+        
+        // チャージが貯まったらスタート演出
+        if (chargingRatio >= 0.999f && !isStart)
+        {
+            isStart = true;
+            PlayJingle(startJingle);
+        } 
+
     }
 
     private void StopBgm()
@@ -71,11 +81,11 @@ public class StartSceneGameManager : MonoBehaviour
     }
 
 
-    private void PlayJingle()
+    private void PlayJingle(AudioClip clip)
     {
-        if (audioSource != null && startJingle != null)
+        if (jingleAudioSource != null && clip != null)
         {
-            audioSource.PlayOneShot(startJingle);
+            jingleAudioSource.PlayOneShot(clip);
         }else
         {
             Debug.Log("null : cannot play jingle");
