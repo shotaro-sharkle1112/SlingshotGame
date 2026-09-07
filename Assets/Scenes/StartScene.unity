@@ -463,9 +463,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a90b565f24344de6b20c91f68e7868d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 60
-  resultAudioSource: {fileID: 0}
-  finishJingle: {fileID: 0}
+  Source: {fileID: 1356149926}
+  chargingTimeThreshold: 5
+  bendThreshold: 16685
+  audioSource: {fileID: 0}
+  startJingle: {fileID: 0}
   bgmAudioSource: {fileID: 0}
 --- !u!1 &1096629437
 GameObject:
