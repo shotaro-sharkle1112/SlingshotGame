@@ -17,6 +17,8 @@ public class StartSceneGameManager : MonoBehaviour
     [Header("Sound")]
     [SerializeField] private AudioSource jingleAudioSource;
     [SerializeField] private AudioClip startJingle;
+    [SerializeField] private AudioSource chargeAudioSource;
+    [SerializeField] private AudioClip chargeJingle;
     [SerializeField] private AudioSource bgmAudioSource;
 
     // チャージしている時間
@@ -41,12 +43,15 @@ public class StartSceneGameManager : MonoBehaviour
         if (bendThreshold > Source.Bend)
         {
             chargingTime = Mathf.Min(chargingTimeThreshold, chargingTime + Time.deltaTime);
-            
+            // 一回もチャージ中に再生していなければチャージ音を鳴らす
+            if (!chargeAudioSource.isPlaying && !isStart) chargeAudioSource.PlayOneShot(chargeJingle);
         }
         else
         {
             // 曲げていないのでチャージ時間を削る
             chargingTime = Mathf.Max(0f, chargingTime - Time.deltaTime);
+            // 曲げていないのでチャージオンを止める
+            if (chargeAudioSource.isPlaying) chargeAudioSource.Stop();
         }
    
 
@@ -65,6 +70,8 @@ public class StartSceneGameManager : MonoBehaviour
         {
             isStart = true;
             PlayJingle(startJingle);
+            // チャージが完了したのでストップ
+            if (chargeAudioSource.isPlaying) chargeAudioSource.Stop();
         } 
 
     }
