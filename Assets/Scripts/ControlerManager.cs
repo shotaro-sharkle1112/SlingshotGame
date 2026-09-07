@@ -46,7 +46,7 @@ public class ControlerManager : MonoBehaviour
 
     [Header("Bend Sensor")]
     [ReadOnly, SerializeField] private int tMs = 0;
-    [ReadOnly, SerializeField] private int bend = 0;
+    [ReadOnly, SerializeField] private int bend = 20000;
 
     [Header("MPU6050 Accel")]
     [ReadOnly, SerializeField] private float accelX = 0f;
@@ -122,6 +122,7 @@ public class ControlerManager : MonoBehaviour
             serialPort = new SerialPort(portName, baudRate);
             serialPort.ReadTimeout = 100;
             serialPort.NewLine = "\n";
+            serialPort.DtrEnable = true;
             serialPort.Open();
 
             isRunning = true;
