@@ -6,7 +6,6 @@ using System.Threading;
 using UnityEngine;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
-using UnityEditor.AnimatedValues;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -66,8 +65,50 @@ public class NewControlerManager : MonoBehaviour
     public Vector3 Accel => new Vector3(accelX, accelY, accelZ);
     public Vector3 Gyro  => new Vector3(gyroX, gyroY, gyroZ);
     public Vector3 Mag => new Vector3(magX, magY, magZ);
-    public Quaternion Quat => new Quaternion(quatX, quatY, quatZ, quatW);
+    
+    // 有効なquatを受信済みか
+    private bool hasQuat;
+    public bool HasQuat => hasQuat;
     public int Bend => bend;                                     // 曲げセンサ raw値
+
+    public Quaternion Quat
+    {
+        get
+        {
+            if (!hasQuat) return Quaternion.identity;
+
+            // ベクトル部分を軸マッピングに従って並べ替えと符号を反転する
+            Vector3 v = MapAxes(new Vector3(quatX, quatY, quatZ));
+
+            // 鏡映を含むマッピングなら回転方向を反転
+            if (MappingDeterminant() < 0f) v = -v;
+
+            return new Quaternion(v.x, v.y, v.z, quatW);
+        }
+    }
+
+    private Vector3 MapAxes(Vector3 v)
+    {
+        return new Vector3(
+            GetAxis(v, rightAxis) * axisSign.x,
+            GetAxis(v, upAxis) * axisSign.y,
+            GetAxis(v, fowardAxis) * axisSign.z
+        );
+    }
+
+    private static float GetAxis(Vector3 v, Axis a) =>
+        a == Axis.X ? v.x : a == Axis.Y ? v.y : v.z;
+
+    private float MappingDeterminant()
+    {
+        return PermSign(rightAxis, upAxis, fowardAxis) * axisSign.x * axisSign.y * axisSign.z;
+    }
+
+    private static float PermSign(Axis a, Axis b, Axis c)
+    {
+        if (a == b || b == c || c == a) return 0f;
+        return (((int)b - (int)a + 3) % 3 == 1) ? 1f : -1f;
+    }
 
     private SerialPort serialPort;
     private Thread readThread;
@@ -75,11 +116,6 @@ public class NewControlerManager : MonoBehaviour
 
     private readonly object queueLock = new object();
     private readonly Queue<string> lineQueue = new Queue<string>();
-
-    // 最初にセンサの初期姿勢を取得したかどうか
-    private bool initialized;
-    // 最初のセンサの初期姿勢
-    private Quaternion initialQuat;
 
     [Serializable]
     public class SensorPacket
@@ -113,7 +149,6 @@ public class NewControlerManager : MonoBehaviour
     void Start()
     {
         OpenSerial();
-        initialized = false;
     }
 
 
@@ -250,6 +285,8 @@ public class NewControlerManager : MonoBehaviour
                 quatY = packet.quat.y;
                 quatZ = packet.quat.z;
                 quatW = packet.quat.w;
+                // 有効なクォータニオンの値が入ったのでtrueに切り替える
+                hasQuat = true;
             }
 
         }

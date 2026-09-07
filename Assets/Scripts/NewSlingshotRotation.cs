@@ -45,7 +45,7 @@ public class NewSlingshotRotation : MonoBehaviour
         desireQuat = Quaternion.Inverse(initialQuat) * Source.Quat;
         // 取得したセンサ値に向かって回転
         Target.rotation = Quaternion.RotateTowards(Target.rotation, desireQuat, smoothness * Time.deltaTime);
-    
+        
         if (Input.GetKeyUp(keyResetInitialPosture))
         {
             // 初期姿勢をリセット

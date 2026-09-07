@@ -525,10 +525,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portName: /dev/cu.usbmodem1101
   baudRate: 115200
-  axisSign: {x: 0, y: 0, z: 0}
+  axisSign: {x: 1, y: -1, z: 1}
   upAxis: 0
-  fowardAxis: 0
-  rightAxis: 0
+  fowardAxis: 1
+  rightAxis: 2
   isConnected: 0
   receivedCount: 0
   lastJsonLine: 
@@ -646,23 +646,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Source: {fileID: 1356149928}
   Target: {fileID: 0}
-  accelBlend: 0.05
-  autoGyroBiasCalibOnStart: 1
-  biasCalibSeconds: 1
-  accelSign: {x: 1, y: 1, z: 1}
-  gyroSign: {x: 1, y: 1, z: 1}
-  imuUpAxis: 2
-  imuForwardAxis: 1
-  imuRightAxis: 0
-  smoothTime: 0.12
-  maxDegPerSec: 120
-  deadband: 0.3
-  pitchLimit: 45
-  yawLimit: 60
-  lookDownThreshold: 0.7
-  lookDownDuration: 0.5
-  keyResetYaw: 114
-  keyGyroBias: 99
+  keyResetInitialPosture: 114
   smoothness: 64.6
 --- !u!1 &1990969697
 GameObject:
