@@ -12,6 +12,12 @@ public class StartSceneUIManager : MonoBehaviour
     // チャージ中のスライダー
     [SerializeField] private Slider chargeSlider;
     
+    // "Bend to Start"
+
+    // "Keep Bending"
+    
+    // スタートの文字
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
