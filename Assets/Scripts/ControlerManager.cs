@@ -124,7 +124,9 @@ public class ControlerManager : MonoBehaviour
             serialPort.NewLine = "\n";
             serialPort.DtrEnable = true;
             serialPort.Open();
-
+            // コントローラ側のセンサの初期値はゲーム側で使用するとまずい値が入っていたりするので一旦読み捨てる
+            serialPort.ReadLine();
+            
             isRunning = true;
             isConnected = true;
             lastError = "";

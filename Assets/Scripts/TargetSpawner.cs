@@ -71,7 +71,7 @@ public class TargetSpawner : MonoBehaviour
     {
         if (entry.prefab == null) return;
 
-        GameObject go = Instantiate(entry.prefab, entry.position, Quaternion.identity);
+        GameObject go = Instantiate(entry.prefab, entry.position, entry.prefab.transform.rotation);
         go.transform.localScale = entry.prefab.transform.localScale * entry.scale;
 
         TargetMover mover = go.GetComponent<TargetMover>();

@@ -8,7 +8,9 @@ public class Slingshot : MonoBehaviour {
 
     public float metalSphereVelocity;
 
+    // 生成するmetalsphere用のrigidbodyとmetalsphere(CSスクリプト)
     private Rigidbody rb;
+    private MetalSphere ms;
 
     public GameObject metalSphere;
     public GameObject rightElastic;
@@ -27,7 +29,7 @@ public class Slingshot : MonoBehaviour {
     //普段は大体22000から23000の間にある
     //もしパチンコを引っ張った場合はマイナスの方向に行くのでsensorMinValueの方向にいく
     // 小(15000くらい) < sensorValue < 大(22000~23000) ===>> 大(-7) > z > 小(-2)　のマッピングになる
-    private int sensorValue = 0;
+    private int sensorValue = 20000;
     // センサの値が小さくなるほどパチンコが伸びるように設定しているので、パチンコの伸びてから戻るまでの最小値を記録し続ける値。伸びが戻ったらゼロに戻す
     private int sensorStretchMinValue = 25000;
     [SerializeField] private int sensorMaxValue = 23000;
@@ -92,6 +94,7 @@ public class Slingshot : MonoBehaviour {
                 //if the i(increment) is equal to one, it means that there is no metal sphere in the slingshot, then the sphere is created to be thrown next.
                 metalSphere = Instantiate(metalSphere, new Vector3(metalSphere.transform.position.x, metalSphere.transform.position.y, -3), Quaternion.identity);
                 rb = metalSphere.GetComponent<Rigidbody>();
+                ms = metalSphere.GetComponent<MetalSphere>();
                 //The metal sphere is parented to the slingshot, so that it can move with the slingshot.
                 metalSphere.transform.parent = this.transform;
                 i = 0;                           
@@ -167,9 +170,13 @@ public class Slingshot : MonoBehaviour {
                     //For the elastic to stretch the value of the z axis is increased to - 7, maximum of the stretch.
                     //The force that the metallic sphere will be thrown, will be multiplied by the amount of stretch of the elastic.
                     rb.AddForce(transform.forward * metalSphereVelocity * -stretch, ForceMode.Impulse);
+                    // エフェクトを再生
+                    ms.EnableParticleEffect();
                 }else
                 {
                     rb.AddForce(transform.forward * metalSphereVelocity * 15, ForceMode.Impulse);
+                    // エフェクトを再生
+                    ms.EnableParticleEffect();
                 }
                 //The metal sphere is taken (parent = null) in the slingshot, so that the sphere stops moving with the slingshot and the camera.
                 metalSphere.transform.parent = null;
