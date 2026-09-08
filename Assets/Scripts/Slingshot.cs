@@ -29,7 +29,7 @@ public class Slingshot : MonoBehaviour {
     //普段は大体22000から23000の間にある
     //もしパチンコを引っ張った場合はマイナスの方向に行くのでsensorMinValueの方向にいく
     // 小(15000くらい) < sensorValue < 大(22000~23000) ===>> 大(-7) > z > 小(-2)　のマッピングになる
-    private int sensorValue = 0;
+    private int sensorValue = 20000;
     // センサの値が小さくなるほどパチンコが伸びるように設定しているので、パチンコの伸びてから戻るまでの最小値を記録し続ける値。伸びが戻ったらゼロに戻す
     private int sensorStretchMinValue = 25000;
     [SerializeField] private int sensorMaxValue = 23000;
