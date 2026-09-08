@@ -38,8 +38,19 @@ public class StageSelectSceneGameManager : MonoBehaviour
     // ゲームステージのロード
     public void OnEasyButtonClicked()
     {
-        // SceneManager.LoadScene("Easy");
-        Debug.Log("easy button clicked");
+        // ボタンを複数回クリックしても動かないようにする
+        if (!isStart)
+        {
+            // ステージのロード開始済みにする
+            isStart = true;
+            StartCoroutine(NextScene("SlingshotGame"));
+        }
+    }
+
+    IEnumerator NextScene(string sceneName)
+    {
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(sceneName);
     }
 
     private void PlayJingle(AudioClip clip)
