@@ -9,6 +9,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Maze.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Scenes/StartScene.unity
+    guid: c0585b7d5977c4d58b29b63d814a0ca5
+  - enabled: 1
+    path: Assets/Scenes/StageSelectScene.unity
+    guid: f474f66d655314fcbb763d8fe0bb5c5b
+  - enabled: 1
     path: Assets/Scenes/TutorialSlingshotGame.unity
     guid: a852714fed30644cfb1721585ed883b9
   - enabled: 1
