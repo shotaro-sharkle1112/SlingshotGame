@@ -603,7 +603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Source: {fileID: 1356149928}
   jingleAudioSource: {fileID: 384391804}
-  startJingle: {fileID: 8300000, guid: 7cd68c1f70f5a49ffaed2d4975783ba7, type: 3}
+  selectJingle: {fileID: 8300000, guid: c37d826806d8c4316a1dc87d116b200d, type: 3}
   bgmAudioSource: {fileID: 1228669052}
 --- !u!1 &1096629437
 GameObject:

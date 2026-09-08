@@ -11,7 +11,7 @@ public class StageSelectSceneGameManager : MonoBehaviour
 
     [Header("Sound")]
     [SerializeField] private AudioSource jingleAudioSource;
-    [SerializeField] private AudioClip startJingle;
+    [SerializeField] private AudioClip selectJingle;
     [SerializeField] private AudioSource bgmAudioSource;
 
     // スタート演出はしたかどうか
@@ -44,6 +44,7 @@ public class StageSelectSceneGameManager : MonoBehaviour
             // ステージのロード開始済みにする
             isStart = true;
             StartCoroutine(NextScene("SlingshotGame"));
+            PlayJingle(selectJingle);
         }
     }
 
