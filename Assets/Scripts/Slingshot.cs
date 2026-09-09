@@ -103,6 +103,7 @@ public class Slingshot : MonoBehaviour {
             // 0~1にマッピングされたセンサ値をローカルのz座標にマッピングする
             z = Mathf.Lerp(-2f, pulled, norm);
 
+            // metalsphereが生成されていなければ生成する
             if (!isMetalSphereGenerated)
             {
                 //if the isMetalSphereGenerated(increment) is equal to one, it means that there is no metal sphere in the slingshot, then the sphere is created to be thrown next.
@@ -127,28 +128,17 @@ public class Slingshot : MonoBehaviour {
             rightElasticLine = rightLine.transform.GetComponent<LineRenderer>();
             leftElasticLine = leftLine.transform.GetComponent<LineRenderer>();
 
-            // ゴムの伸びやmetalsphereの生成のz座標を表すzが最大伸びしろpulledよりも大きくなった場合はzに従う
-            if (z >= pulled)
-            {
-                //For the elastic to stretch the value of the z axis is increased to - 7 or pulled value, maximum of the stretch.
-                rightElasticLine.SetPosition(1, new Vector3(0, 0, z));
-                //The lines are growing and the value of the z axis is increased.
-                leftElasticLine.SetPosition(1, new Vector3(0, 0, z));
-                //Leather and metallic sphere follow the movement of the line.
-                metalSphereObject.transform.localPosition = new Vector3(-1.42f, 2.286f, z + 1.7f);
-                leather.transform.localPosition = new Vector3(-1.42f, 2.286f, z + 1.2f);
-                leatherLine.transform.localPosition = new Vector3(-1.42f, 2.286f, z + 1.2f);
-            }
-            else
-            {
-                //If the z axis value reaches the maximum -7 or pulled value, that value will remain and the slingshot elastic will be completely stretched.
-                rightElasticLine.SetPosition(1, new Vector3(0, 0, pulled));
-                leftElasticLine.SetPosition(1, new Vector3(0, 0, pulled));
-                metalSphereObject.transform.localPosition = new Vector3(-1.42f, 2.286f, pulled + 1.7f); 
-                leather.transform.localPosition = new Vector3(-1.42f, 2.286f, pulled + 1.2f); 
-                leatherLine.transform.localPosition = new Vector3(-1.42f, 2.286f, pulled + 1.2f); 
-            }
 
+            // ゴムの伸びやmetalsphereの生成のz座標を表すzが最大伸びしろpulledよりも大きくなった場合はzに従う(z座標がマイナスなので、不等号の向きは逆)
+            float zOffset = z >= pulled ? z : pulled;
+
+            rightElasticLine.SetPosition(1, new Vector3(0, 0, zOffset));
+            //The lines are growing and the value of the z axis is increased.
+            leftElasticLine.SetPosition(1, new Vector3(0, 0, zOffset));
+            //Leather and metallic sphere follow the movement of the line.
+            metalSphereObject.transform.localPosition = new Vector3(-1.42f, 2.286f, zOffset + 1.7f);
+            leather.transform.localPosition = new Vector3(-1.42f, 2.286f, zOffset + 1.2f);
+            leatherLine.transform.localPosition = new Vector3(-1.42f, 2.286f, zOffset + 1.2f);
         }
 
         //もしパチンコが伸ばされたらこのif文内が実行される。
