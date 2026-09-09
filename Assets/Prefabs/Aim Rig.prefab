@@ -72,6 +72,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 7809264129793004550}
     m_Modifications:
+    - target: {fileID: 623047584966747518, guid: 4100495d2e2854c0fa9cb3b48b1042e6, type: 3}
+      propertyPath: metalSphereObject
+      value: 
+      objectReference: {fileID: 1853232240325812, guid: 2fd01713a2c54aa48a5b9404b8652553, type: 3}
     - target: {fileID: 6812890639734525788, guid: 4100495d2e2854c0fa9cb3b48b1042e6, type: 3}
       propertyPath: m_Name
       value: MasterSlingshot
