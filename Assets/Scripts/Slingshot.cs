@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class Slingshot : MonoBehaviour {
 
     // 弾の発射速度
@@ -67,6 +68,23 @@ public class Slingshot : MonoBehaviour {
     // チャージをした時間
     private float chargeTime;
 
+    [Header("Sounds")]
+    
+    // チャージ中のサウンド
+    [SerializeField] private AudioClip chargingSound;
+    // チャージ完了をユーザーに示すためのサウンド
+    [SerializeField] private AudioClip chargeCompletedSound;
+    // チャージ完了後の発射のサウンド
+    [SerializeField] private AudioClip chargeShotSound;
+    // 通常時の引き絞るサウンド
+    [SerializeField] private AudioClip elasticStretchSound;
+    // チャージしていない時の発射のサウンド
+    [SerializeField] private AudioClip normalShotSound;
+
+    // パチンコで鳴らす効果音用のAudioSource
+    private AudioSource audioSource;
+    
+
     [Header("コントローラーマネージャー")]
 
     // コントローラのセンサ値を受け取るためのマネージャー
@@ -91,6 +109,8 @@ public class Slingshot : MonoBehaviour {
         {
             pulled = -7;
         }
+
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -173,9 +193,6 @@ public class Slingshot : MonoBehaviour {
 
             // このブロックでは弾の発射処理を行う
 
-            // 弾を発射するので、次パチンコが伸びた時に弾が再生成できる状態にする
-            isMetalSphereGenerated = false;
-
             //Activates the elastic mesh renderer.
             rightElastic.GetComponent<SkinnedMeshRenderer>().enabled = true;
             leftElastic.GetComponent<SkinnedMeshRenderer>().enabled = true;
@@ -229,9 +246,19 @@ public class Slingshot : MonoBehaviour {
             // クールダウンタイムを設ける
             cooldownRemaining = fireCooldown;
 
+            // 弾を発射したので、次パチンコが伸びた時に弾が再生成できる状態にする
+            isMetalSphereGenerated = false;
+
             // チャージタイムのリセット
             chargeTime = 0f;
         }
+    }
+
+    // ジングルを鳴らすための関数
+    private void PlayJingle(AudioClip audioClip)
+    {
+        if (audioSource == null || audioClip == null) return;
+        audioSource.PlayOneShot(audioClip);
     }
 
    void OnValidate()
