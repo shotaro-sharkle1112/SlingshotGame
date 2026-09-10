@@ -68,6 +68,11 @@ public class Slingshot : MonoBehaviour {
     // チャージをした時間
     private float chargeTime;
 
+    // チャージ完了したかをチェック
+    private bool isChargeCompleted => chargeTime > chargeTimeThres;
+    // チャージ完了サウンドを行なったかをチェック
+    private bool isChargeCompletedSoundPlayed;
+
     [Header("Sounds")]
     
     // チャージ中のサウンド
@@ -80,9 +85,11 @@ public class Slingshot : MonoBehaviour {
     [SerializeField] private AudioClip elasticStretchSound;
     // チャージしていない時の発射のサウンド
     [SerializeField] private AudioClip normalShotSound;
+    // ジングル用のAudioSource
+    [SerializeField] private AudioSource jingleAudioSource;
+    // ゴムが伸びている音のAudioSource
+    [SerializeField] private AudioSource elasticStretchAudioSource;
 
-    // パチンコで鳴らす効果音用のAudioSource
-    private AudioSource audioSource;
     
 
     [Header("コントローラーマネージャー")]
@@ -96,6 +103,8 @@ public class Slingshot : MonoBehaviour {
         chargeTime = 0f;
 
         isMetalSphereGenerated = false;
+
+        isChargeCompletedSoundPlayed = false;
         //Starts with z = -2 so that the elastic line starts at the size of the elastic.
         z = -2;
 
@@ -109,8 +118,6 @@ public class Slingshot : MonoBehaviour {
         {
             pulled = -7;
         }
-
-        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -131,6 +138,9 @@ public class Slingshot : MonoBehaviour {
             //伸び始めたことをbool値で記録
             //これによって弾発射部分のコードのif文内が実行される
             isStretched = true;
+
+            // パチンコが伸びている間、ゴムの伸びているサウンドを鳴らす
+            if (!elasticStretchAudioSource.isPlaying) elasticStretchAudioSource.Play();
 
             // 伸び始めたら、一番伸びている状態(sensorValueが最小)の状態を記録、更新しておく
             if (sensorStretchMinValue > sensorValue) sensorStretchMinValue = sensorValue;
@@ -182,8 +192,14 @@ public class Slingshot : MonoBehaviour {
         // チャージの判定
         if (sensorValue < sensorChargeThres)
         {
-            chargeTime += Time.deltaTime;
+            chargeTime = Mathf.Min(chargeTimeThres + 0.1f, chargeTime + Time.deltaTime);
         }
+
+        if (isChargeCompleted && !isChargeCompletedSoundPlayed)
+        {
+            isChargeCompletedSoundPlayed = true;
+            PlayJingle(chargeCompletedSound);
+        } 
 
         // パチンコが伸びた状態から通常状態に戻った時に実行される
         // 一度曲げ状態が戻ったらこのif文内は実行されなくなる。
@@ -217,6 +233,7 @@ public class Slingshot : MonoBehaviour {
             metalSphereRigidbody.angularVelocity = Vector3.zero;
 
             // 弾の打ち出す力を向きを計算
+            // チャージでの変更点：威力を強く
             Vector3 metalSphereShotForce = transform.forward * metalSphereVelocity;
 
             if (stretch >= pulled)
@@ -230,13 +247,29 @@ public class Slingshot : MonoBehaviour {
             }
 
             // metalsphereを発射
+            // チャージでの変更点：当たり判定を大きく
             metalSphereRigidbody.AddForce(metalSphereShotForce, ForceMode.Impulse);
 
             // エフェクトを再生
+            // チャージでの変更点：何かしら特別なエフェクトを再生
             metalSphereScript.EnableParticleEffect();
 
             //The metal sphere is taken (parent = null) in the slingshot, so that the sphere stops moving with the slingshot and the camera.
             metalSphereObject.transform.parent = null;
+
+            // 発射音の再生
+            // チャージでの変更点：チャージ完了での発射のサウンドにかえる
+            if (isChargeCompleted)
+            {
+                PlayJingle(chargeShotSound);
+            }
+            else
+            {
+                PlayJingle(normalShotSound);
+            }
+
+            // ゴムの伸びる音はもういらないので止める
+            if (elasticStretchAudioSource.isPlaying) elasticStretchAudioSource.Stop();
 
             // 各種値をリセット
             z = -2;
@@ -251,14 +284,17 @@ public class Slingshot : MonoBehaviour {
 
             // チャージタイムのリセット
             chargeTime = 0f;
+
+            // チャージ完了通知サウンドのboolをリセット
+            isChargeCompletedSoundPlayed = false;
         }
     }
 
     // ジングルを鳴らすための関数
     private void PlayJingle(AudioClip audioClip)
     {
-        if (audioSource == null || audioClip == null) return;
-        audioSource.PlayOneShot(audioClip);
+        if (jingleAudioSource == null || audioClip == null) return;
+        jingleAudioSource.PlayOneShot(audioClip);
     }
 
    void OnValidate()
