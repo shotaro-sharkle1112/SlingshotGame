@@ -3604,6 +3604,10 @@ PrefabInstance:
       value: Aim Rig
       objectReference: {fileID: 0}
     - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: sensorMinValue
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: controlerManager
       value: 
       objectReference: {fileID: 1356149926}
@@ -3611,6 +3615,10 @@ PrefabInstance:
       propertyPath: picoSerialReceiver
       value: 
       objectReference: {fileID: 1356149926}
+    - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: sensorStretchThres
+      value: 15113
+      objectReference: {fileID: 0}
     - target: {fileID: 6901287834782519593, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: Source
       value: 

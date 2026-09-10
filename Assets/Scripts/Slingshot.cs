@@ -14,8 +14,10 @@ public class Slingshot : MonoBehaviour {
     // metalSphereにはオブジェクトの方とスクリプトのクラスを指す方の二者がいるので注意
     private MetalSphere metalSphereScript;
 
+    [Header("パチンコが飛ばす弾 Prefab")]
     public GameObject metalSphereObject;
 
+    [Header("パチンコのゴムの部分")]
     // パチンコの稼働部位
     public GameObject rightElastic;
     public GameObject leftElastic;
@@ -41,24 +43,40 @@ public class Slingshot : MonoBehaviour {
     private int sensorValue = 20000;
     // センサの値が小さくなるほどパチンコが伸びるように設定しているので、パチンコの伸びてから戻るまでの最小値を記録し続ける値。伸びが戻ったら大きな値に戻す
     private int sensorStretchMinValue = 25000;
-    [SerializeField] private int sensorMaxValue = 23000;
+    
+    [Header("曲げセンサの設定項目")]
+    // センサーの取りうる最小の値
     [SerializeField] private int sensorMinValue = 17000;
-    [SerializeField] private int sensorMinThres = 20300;
-    [SerializeField] private int sensorMaxThres = 23000;
+    // チャージを開始するか判定を行う曲げセンサの値、この値より小さいとパチンコのチャージ状態に移行する
+    [SerializeField] private int sensorChargeThres = 13000;
+    // パチンコが伸びるべきか判定を行う曲げセンサの値, この値より小さいとパチンコの伸びが開始する
+    [SerializeField] private int sensorStretchThres = 20300;
 
     //縮んだ状態でボールを発射する仕組みにすると、通常の状態でボールを無限に発射され続けてしまうので、曲げセンサの状態変化を記録するboolを用意する
     private bool isStretched = false;
 
+    [Header("発射後のクールタイム")]
     // 発射後のクールタイムの設定
     [SerializeField] private float fireCooldown = 0.5f;
     // 発射後何秒経ったかを記録
     private float cooldownRemaining = 0f;
+
+    [Header("チャージショットの設定項目")]
+    // 何秒チャージしたらチャージショットが打てるか
+    [SerializeField] private float chargeTimeThres = 3f;
+    // チャージをした時間
+    private float chargeTime;
+
+    [Header("コントローラーマネージャー")]
 
     // コントローラのセンサ値を受け取るためのマネージャー
     [SerializeField] private ControlerManager controlerManager;
 
     void Start ()
     {      
+        // チャージをした時間の初期化
+        chargeTime = 0f;
+
         isMetalSphereGenerated = false;
         //Starts with z = -2 so that the elastic line starts at the size of the elastic.
         z = -2;
@@ -88,7 +106,7 @@ public class Slingshot : MonoBehaviour {
         sensorValue = controlerManager.Bend;
 
         //曲げセンサの値が一定の範囲外に出たらパチンコの伸び開始
-        if (sensorValue <= sensorMinThres)
+        if (sensorValue <= sensorStretchThres)
         {
             //伸び始めたことをbool値で記録
             //これによって弾発射部分のコードのif文内が実行される
@@ -98,7 +116,7 @@ public class Slingshot : MonoBehaviour {
             if (sensorStretchMinValue > sensorValue) sensorStretchMinValue = sensorValue;
 
             // センサ値の曲げしろを0~1にマッピング
-            float norm = Mathf.InverseLerp(sensorMinThres, sensorMinValue, sensorStretchMinValue);
+            float norm = Mathf.InverseLerp(sensorStretchThres, sensorMinValue, sensorStretchMinValue);
             
             // 0~1にマッピングされたセンサ値をローカルのz座標にマッピングする
             z = Mathf.Lerp(-2f, pulled, norm);
@@ -141,15 +159,15 @@ public class Slingshot : MonoBehaviour {
             leatherLine.transform.localPosition = new Vector3(-1.42f, 2.286f, zOffset + 1.2f);
         }
 
-        //もしパチンコが伸ばされたらこのif文内が実行される。
-        //一度曲げ状態が戻ったらこのif文内は実行されなくなる。
-        if (isStretched && sensorValue >= sensorMinThres)
+        // パチンコが伸びた状態から通常状態に戻った時に実行される
+        // 一度曲げ状態が戻ったらこのif文内は実行されなくなる。
+        if (isStretched && sensorValue >= sensorStretchThres)
         {
-            // "sensorValue >= sensorMinThres"となる状態は曲げていない状態
+            // "sensorValue >= sensorStretchThres"となる状態は曲げていない状態
 
             // このブロックでは弾の発射処理を行う
 
-            // 弾を発射するので、弾が再生成できる状態にする
+            // 弾を発射するので、次パチンコが伸びた時に弾が再生成できる状態にする
             isMetalSphereGenerated = false;
 
             //Activates the elastic mesh renderer.
@@ -167,7 +185,7 @@ public class Slingshot : MonoBehaviour {
 
             
             // センサ値の曲げしろを0~1にマッピング
-            float norm = Mathf.InverseLerp(sensorMinThres, sensorMinValue, sensorStretchMinValue);
+            float norm = Mathf.InverseLerp(sensorStretchThres, sensorMinValue, sensorStretchMinValue);
 
             // 0~1にマッピングされたセンサ値をローカルのz座標にマッピングする
             float stretch = Mathf.Lerp(-2f, pulled, norm);
@@ -206,4 +224,20 @@ public class Slingshot : MonoBehaviour {
             cooldownRemaining = fireCooldown;
         }
     }
+
+   void OnValidate()
+   {
+        // 普通だったら sensorMinValue < sensorChargeThres < sensorStretchThresと設定しなければいけない
+        // これをインスペクタ上で守っていない場合は自動で値を変更する
+        // sensorMinValueは固定して、他の違反している値を変化させる
+        if (sensorMinValue > sensorChargeThres)
+        {
+            sensorChargeThres = sensorMinValue + 1;
+        }
+
+        if (sensorChargeThres > sensorStretchThres)
+        {
+            sensorStretchThres = sensorChargeThres + 1;
+        }
+   }
 }
