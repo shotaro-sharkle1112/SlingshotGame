@@ -16,7 +16,8 @@ public class Slingshot : MonoBehaviour {
     private MetalSphere metalSphereScript;
 
     [Header("パチンコが飛ばす弾 Prefab")]
-    public GameObject metalSphereObject;
+    public GameObject metalSpherePrefab;
+    private GameObject metalSphereObject;
 
     [Header("パチンコのゴムの部分")]
     // パチンコの稼働部位
@@ -155,7 +156,7 @@ public class Slingshot : MonoBehaviour {
             if (!isMetalSphereGenerated)
             {
                 //if the isMetalSphereGenerated(increment) is equal to one, it means that there is no metal sphere in the slingshot, then the sphere is created to be thrown next.
-                metalSphereObject = Instantiate(metalSphereObject, new Vector3(metalSphereObject.transform.position.x, metalSphereObject.transform.position.y, -3), Quaternion.identity);
+                metalSphereObject = Instantiate(metalSpherePrefab, new Vector3(metalSpherePrefab.transform.position.x, metalSpherePrefab.transform.position.y, -3), Quaternion.identity);
                 metalSphereRigidbody = metalSphereObject.GetComponent<Rigidbody>();
                 metalSphereScript = metalSphereObject.GetComponent<MetalSphere>();
                 //The metal sphere is parented to the slingshot, so that it can move with the slingshot.
@@ -234,7 +235,8 @@ public class Slingshot : MonoBehaviour {
 
             // 弾の打ち出す力を向きを計算
             // チャージでの変更点：威力を強く
-            Vector3 metalSphereShotForce = transform.forward * metalSphereVelocity;
+            float power = isChargeCompleted ? 1.5f : 1f;
+            Vector3 metalSphereShotForce = transform.forward * metalSphereVelocity * power;
 
             if (stretch >= pulled)
             {
@@ -248,6 +250,8 @@ public class Slingshot : MonoBehaviour {
 
             // metalsphereを発射
             // チャージでの変更点：当たり判定を大きく
+            float metalSphereScale = isChargeCompleted ? 2f : 1f;
+            metalSphereObject.transform.localScale *= metalSphereScale;
             metalSphereRigidbody.AddForce(metalSphereShotForce, ForceMode.Impulse);
 
             // エフェクトを再生

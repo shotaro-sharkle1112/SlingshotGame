@@ -3739,6 +3739,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 243278751}
     - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: metalSpherePrefab
+      value: 
+      objectReference: {fileID: 1853232240325812, guid: 2fd01713a2c54aa48a5b9404b8652553, type: 3}
+    - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: sensorChargeThres
       value: 10916
       objectReference: {fileID: 0}
