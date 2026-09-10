@@ -159,6 +159,12 @@ public class Slingshot : MonoBehaviour {
             leatherLine.transform.localPosition = new Vector3(-1.42f, 2.286f, zOffset + 1.2f);
         }
 
+        // チャージの判定
+        if (sensorValue < sensorChargeThres)
+        {
+            chargeTime += Time.deltaTime;
+        }
+
         // パチンコが伸びた状態から通常状態に戻った時に実行される
         // 一度曲げ状態が戻ったらこのif文内は実行されなくなる。
         if (isStretched && sensorValue >= sensorStretchThres)
@@ -222,6 +228,9 @@ public class Slingshot : MonoBehaviour {
 
             // クールダウンタイムを設ける
             cooldownRemaining = fireCooldown;
+
+            // チャージタイムのリセット
+            chargeTime = 0f;
         }
     }
 
