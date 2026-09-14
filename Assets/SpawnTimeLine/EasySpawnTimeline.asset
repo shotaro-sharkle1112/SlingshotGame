@@ -1,0 +1,1365 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 147ad1addfcc14212a9c1f01931cd23d, type: 3}
+  m_Name: EasySpawnTimeline
+  m_EditorClassIdentifier: 
+  entries:
+  - time: 0
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 30, y: 15, z: 70}
+    scale: 1.5
+    lifetime: 7
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 0
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 0, y: 15, z: 70}
+    scale: 1.5
+    lifetime: 7
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 0
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: -30, y: 15, z: 70}
+    scale: 1.5
+    lifetime: 7
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 0
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: -30, y: 0, z: 70}
+    scale: 1.5
+    lifetime: 7
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 0
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 0, y: 0, z: 70}
+    scale: 1.5
+    lifetime: 7
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 0
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 30, y: 0, z: 70}
+    scale: 1.5
+    lifetime: 7
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 8
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: -80, y: 0, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 8
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 9
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 10
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 10
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 11
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 12
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 13
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 9
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: -80, y: 0, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 10
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: -80, y: 0, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 11
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: -80, y: 0, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 12
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: -80, y: 0, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 13
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: -80, y: 0, z: 90}
+    scale: 1.5
+    lifetime: 7
+    moveType: 1
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 16
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: -30, y: -5, z: 60}
+    scale: 1.5
+    lifetime: 3
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 17
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 30, y: -5, z: 60}
+    scale: 1.5
+    lifetime: 3
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 18
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: 30, y: 17, z: 60}
+    scale: 1.5
+    lifetime: 3
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 19
+    prefab: {fileID: 3276087739709109128, guid: 9e12f8729e08947508f807544f26733c, type: 3}
+    position: {x: -30, y: 17, z: 60}
+    scale: 1.5
+    lifetime: 3
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 17
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -10, y: 10, z: 100}
+    scale: 1.5
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 17
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -10, y: 10, z: 100}
+    scale: 1.5
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: -90
+    startAngle: 0
+  - time: 17
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 10, y: 10, z: 100}
+    scale: 1.5
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: -90
+    startAngle: 0
+  - time: 17
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 10, y: 10, z: 100}
+    scale: 1.5
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 22
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 22
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 22
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 23
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 27
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 24
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 28
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 25
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 29
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 26
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 30
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 23
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 27
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 24
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 28
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 25
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 29
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 26
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 30
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 23
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 27
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 24
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 28
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 25
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 29
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 26
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 30
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 31
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 31
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 31
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 32
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 32
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 32
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 33
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 33
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 33
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 34
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 34
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 34
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 35
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 35
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 35
+    prefab: {fileID: 5705637758612028098, guid: 455c0ef1aa6bb409dbd1f8774a68594a, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.5
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 25
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -20, y: 20, z: 100}
+    scale: 1.5
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 25
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -20, y: 0, z: 100}
+    scale: 1.5
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 25
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -20, y: -20, z: 100}
+    scale: 1.5
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 25
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 20, y: 20, z: 100}
+    scale: 1.5
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 25
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 20, y: 0, z: 100}
+    scale: 1.5
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 25
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 20, y: -20, z: 100}
+    scale: 1.5
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 38
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 30, y: 15, z: 70}
+    scale: 1.2
+    lifetime: 7
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 38
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 0, y: 15, z: 70}
+    scale: 1.2
+    lifetime: 7
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 38
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -30, y: 15, z: 70}
+    scale: 1.2
+    lifetime: 7
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 38
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -30, y: 0, z: 70}
+    scale: 1.2
+    lifetime: 7
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 38
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 0, y: 0, z: 70}
+    scale: 1.2
+    lifetime: 7
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 38
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 30, y: 0, z: 70}
+    scale: 1.2
+    lifetime: 7
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 46
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -80, y: 0, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 46
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 47
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 48
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 48
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 49
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 50
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 51
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 80, y: 15, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: -30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 47
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -80, y: 0, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 48
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -80, y: 0, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 49
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -80, y: 0, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 50
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -80, y: 0, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 51
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -80, y: 0, z: 90}
+    scale: 1.2
+    lifetime: 7
+    moveType: 1
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 54
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -30, y: -5, z: 60}
+    scale: 1.2
+    lifetime: 3
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 55
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 30, y: -5, z: 60}
+    scale: 1.2
+    lifetime: 3
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 56
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 30, y: 17, z: 60}
+    scale: 1.2
+    lifetime: 3
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 57
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -30, y: 17, z: 60}
+    scale: 1.2
+    lifetime: 3
+    moveType: 0
+    speed: 30
+    radius: 10
+    angularSpeed: 60
+    startAngle: 0
+  - time: 55
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -10, y: 10, z: 100}
+    scale: 1.2
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 55
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -10, y: 10, z: 100}
+    scale: 1.2
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: -90
+    startAngle: 0
+  - time: 55
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 10, y: 10, z: 100}
+    scale: 1.2
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: -90
+    startAngle: 0
+  - time: 55
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 10, y: 10, z: 100}
+    scale: 1.2
+    lifetime: 5
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 60
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 60
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 60
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 61
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 65
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 62
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 66
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 63
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 67
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 64
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 68
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 61
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 65
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 62
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 66
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 63
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 67
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 64
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 68
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -40, y: 35, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: -30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 61
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 65
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 62
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 66
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 63
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 67
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 64
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 68
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 0, y: -20, z: 80}
+    scale: 1.2
+    lifetime: 10
+    moveType: 2
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 68
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -20, y: 20, z: 100}
+    scale: 1.2
+    lifetime: 10
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 68
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -20, y: 0, z: 100}
+    scale: 1.2
+    lifetime: 10
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 68
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: -20, y: -20, z: 100}
+    scale: 1.2
+    lifetime: 10
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 68
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 20, y: 20, z: 100}
+    scale: 1.2
+    lifetime: 10
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 68
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 20, y: 0, z: 100}
+    scale: 1.2
+    lifetime: 10
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
+  - time: 68
+    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    position: {x: 20, y: -20, z: 100}
+    scale: 1.2
+    lifetime: 10
+    moveType: 3
+    speed: 30
+    radius: 10
+    angularSpeed: 90
+    startAngle: 0
