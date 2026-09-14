@@ -43,6 +43,9 @@ public class Slingshot : MonoBehaviour {
     //もしパチンコを引っ張った場合はマイナスの方向に行くのでsensorMinValueの方向にいく
     // 小(15000くらい) < sensorValue < 大(22000~23000) ===>> 大(-7) > z > 小(-2)　のマッピングになる
     private int sensorValue = 20000;
+    // 平滑化されたセンサの値
+    private int smoothedSensorValue = 20000;
+
     // センサの値が小さくなるほどパチンコが伸びるように設定しているので、パチンコの伸びてから戻るまでの最小値を記録し続ける値。伸びが戻ったら大きな値に戻す
     private int sensorStretchMinValue = 25000;
     
@@ -53,6 +56,9 @@ public class Slingshot : MonoBehaviour {
     [SerializeField] private int sensorChargeThres = 13000;
     // パチンコが伸びるべきか判定を行う曲げセンサの値, この値より小さいとパチンコの伸びが開始する
     [SerializeField] private int sensorStretchThres = 20300;
+    // 平滑化を行うためのEMA(指数移動平均)のsmoothness、0~1の値を取る
+    // smoothed = emaSmoothness * raw + (1.0 - emaSmoothness) * smoothed
+    [SerializeField] private float emaSmoothness = 0.3f;
 
     //縮んだ状態でボールを発射する仕組みにすると、通常の状態でボールを無限に発射され続けてしまうので、曲げセンサの状態変化を記録するboolを用意する
     private bool isStretched = false;
@@ -132,9 +138,11 @@ public class Slingshot : MonoBehaviour {
 
         //曲げセンサの値を取得
         sensorValue = controlerManager.Bend;
+        // 平滑化を行う
+        smoothedSensorValue = (int) (emaSmoothness * sensorValue + (1f - emaSmoothness) * smoothedSensorValue);
 
         //曲げセンサの値が一定の範囲外に出たらパチンコの伸び開始
-        if (sensorValue <= sensorStretchThres)
+        if (smoothedSensorValue <= sensorStretchThres)
         {
             //伸び始めたことをbool値で記録
             //これによって弾発射部分のコードのif文内が実行される
@@ -144,7 +152,7 @@ public class Slingshot : MonoBehaviour {
             if (!elasticStretchAudioSource.isPlaying) elasticStretchAudioSource.Play();
 
             // 伸び始めたら、一番伸びている状態(sensorValueが最小)の状態を記録、更新しておく
-            if (sensorStretchMinValue > sensorValue) sensorStretchMinValue = sensorValue;
+            if (sensorStretchMinValue > smoothedSensorValue) sensorStretchMinValue = smoothedSensorValue;
 
             // センサ値の曲げしろを0~1にマッピング
             float norm = Mathf.InverseLerp(sensorStretchThres, sensorMinValue, sensorStretchMinValue);
@@ -191,7 +199,7 @@ public class Slingshot : MonoBehaviour {
         }
 
         // チャージの判定
-        if (sensorValue < sensorChargeThres)
+        if (smoothedSensorValue < sensorChargeThres)
         {
             chargeTime = Mathf.Min(chargeTimeThres + 0.1f, chargeTime + Time.deltaTime);
         }
@@ -291,6 +299,9 @@ public class Slingshot : MonoBehaviour {
 
             // チャージ完了通知サウンドのboolをリセット
             isChargeCompletedSoundPlayed = false;
+
+            // 発射直後は平滑化されたセンサの値がセンサの生値に追従しきれていないため、一旦生値に戻す
+            smoothedSensorValue = sensorValue;
         }
     }
 
