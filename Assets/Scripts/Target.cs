@@ -71,7 +71,7 @@ public class Target : MonoBehaviour
         if (other.gameObject.tag == "Sphere")
         {
             hit = true;
-            ScoreManager.Instance.RegisterTargetHit(scoreAmount);
+            if (ScoreManager.Instance != null)ScoreManager.Instance.RegisterTargetHit(scoreAmount);
             if (audioSource != null && hitSound != null) audioSource.PlayOneShot(hitSound);
             
             // 衝突時に重力をオンにして少し吹っ飛ばすことで爽快感を増やす
