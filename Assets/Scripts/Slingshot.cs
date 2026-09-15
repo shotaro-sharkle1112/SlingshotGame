@@ -322,7 +322,7 @@ public class Slingshot : MonoBehaviour {
         }
 
         // ゲームの終了の処理
-        if (gameManager.gameState == GameManager.GameState.AfterPlaying)
+        if (gameManager != null && gameManager.gameState == GameManager.GameState.AfterPlaying)
         {
             elasticStretchAudioSource.Stop();
         }

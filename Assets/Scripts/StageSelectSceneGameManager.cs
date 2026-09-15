@@ -43,7 +43,7 @@ public class StageSelectSceneGameManager : MonoBehaviour
         {
             // ステージのロード開始済みにする
             isStart = true;
-            StartCoroutine(NextScene("SlingshotGame"));
+            StartCoroutine(NextScene("EasyStageScene"));
             PlayJingle(selectJingle);
         }
     }

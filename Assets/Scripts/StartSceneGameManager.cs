@@ -92,7 +92,7 @@ public class StartSceneGameManager : MonoBehaviour
     IEnumerator NextScene()
     {
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene("StageSelectScene");
+        SceneManager.LoadScene("TutorialSlingshotGame");
     }
 
     private void PlayJingle(AudioClip clip)
