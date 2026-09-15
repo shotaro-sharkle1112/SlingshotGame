@@ -79,7 +79,7 @@ public class SlingshotRotation : MonoBehaviour
         }
     }
 
-    IEnumerator CalibGyroBias()
+    public IEnumerator CalibGyroBias()
     {
         gyroBias = Vector3.zero;
         float t = 0f;
