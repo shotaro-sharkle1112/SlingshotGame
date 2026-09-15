@@ -255,6 +255,8 @@ MonoBehaviour:
   hitSound: {fileID: 8300000, guid: b031dc42dfd59425aa668445b14ede30, type: 3}
   scoreTextPrefab: {fileID: 2522344554574297611, guid: 29b1d28d69d3d4941b56e4a5d1aedc8f, type: 3}
   offset: {x: 0, y: 0, z: -1}
+  hitPower: 10
+  vanishTime: 4
 --- !u!198 &7431121789242812105
 ParticleSystem:
   m_ObjectHideFlags: 0

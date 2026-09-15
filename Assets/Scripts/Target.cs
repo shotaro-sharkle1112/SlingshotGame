@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 [RequireComponent(typeof(ParticleSystem))]
 [RequireComponent(typeof(MeshRenderer))]
+[RequireComponent(typeof(Rigidbody))]
 public class Target : MonoBehaviour
 {
     [SerializeField] private int scoreAmount = 300;
@@ -16,6 +17,8 @@ public class Target : MonoBehaviour
 
     // 的から見た表示するスコアの位置
     [SerializeField] private Vector3 offset;
+    [SerializeField] private float hitPower = 5f;
+    [SerializeField] private float vanishTime = 4f;
 
     // 衝突時のエフェクト
     private ParticleSystem ps;
@@ -25,6 +28,9 @@ public class Target : MonoBehaviour
 
     // Mesh Rendererが持つMaterial
     private Material mat;
+
+    // 当たった時に重力をオンにしたり、吹っ飛ばすためのrigidbody
+    private Rigidbody rigidbody;
 
     private bool hit;
     private GameObject score;
@@ -41,10 +47,11 @@ public class Target : MonoBehaviour
         ps = GetComponent<ParticleSystem>();
         mr = GetComponent<MeshRenderer>();
         mat = mr.material;
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Update() {
-        // 衝突前ならば実行しない
+        // 衝突前ならば早期リターン
         if (!hit) return;
 
         // 衝突後ならだんだん的を透明にしていく
@@ -66,10 +73,14 @@ public class Target : MonoBehaviour
             hit = true;
             ScoreManager.Instance.RegisterTargetHit(scoreAmount);
             if (audioSource != null && hitSound != null) audioSource.PlayOneShot(hitSound);
+            
+            // 衝突時に重力をオンにして少し吹っ飛ばすことで爽快感を増やす
+            rigidbody.useGravity = true;
+            rigidbody.AddForce(rigidbody.mass * hitPower * Vector3.forward,ForceMode.Impulse);
+
             StartCoroutine(HitPointCenter());
         }
     }
-
     IEnumerator HitPointCenter()
     {
         foreach (var c in GetComponents<Collider>()) c.enabled = false;
@@ -91,7 +102,7 @@ public class Target : MonoBehaviour
         }
 
         // 2秒で消えるようにする
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(vanishTime);
 
         Destroy(score);
         Destroy(gameObject);

@@ -14,6 +14,9 @@ public class Slingshot : MonoBehaviour {
     private Rigidbody metalSphereRigidbody;
     // metalSphereにはオブジェクトの方とスクリプトのクラスを指す方の二者がいるので注意
     private MetalSphere metalSphereScript;
+    // metalsphereの当たり判定(チャージ中は大きくする)
+    // 的に当たったかの判定と、実際のrigidbodyの計算に使う当たり判定は違うことに注意
+    private SphereCollider triggerSphereCollider;
 
     [Header("パチンコが飛ばす弾 Prefab")]
     public GameObject metalSpherePrefab;
@@ -168,8 +171,11 @@ public class Slingshot : MonoBehaviour {
             {
                 //if the isMetalSphereGenerated(increment) is equal to one, it means that there is no metal sphere in the slingshot, then the sphere is created to be thrown next.
                 metalSphereObject = Instantiate(metalSpherePrefab, new Vector3(metalSpherePrefab.transform.position.x, metalSpherePrefab.transform.position.y, -3), Quaternion.identity);
+                // 各種コンポーネントの取得
                 metalSphereRigidbody = metalSphereObject.GetComponent<Rigidbody>();
                 metalSphereScript = metalSphereObject.GetComponent<MetalSphere>();
+                SphereCollider[] cols = metalSphereObject.GetComponents<SphereCollider>();
+                triggerSphereCollider = System.Array.Find<SphereCollider>(cols, c => c.isTrigger);
                 //The metal sphere is parented to the slingshot, so that it can move with the slingshot.
                 metalSphereObject.transform.parent = this.transform;
                 isMetalSphereGenerated = true;                           
@@ -260,9 +266,10 @@ public class Slingshot : MonoBehaviour {
             }
 
             // metalsphereを発射
-            // チャージでの変更点：当たり判定を大きく
+            // チャージでの変更点：球も大きくするし、当たり判定を大きくする
             float metalSphereScale = isChargeCompleted ? 2f : 1f;
             metalSphereObject.transform.localScale *= metalSphereScale;
+            triggerSphereCollider.radius *= 3f;
             metalSphereRigidbody.AddForce(metalSphereShotForce, ForceMode.Impulse);
 
             // エフェクトを再生

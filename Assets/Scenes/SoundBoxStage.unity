@@ -3604,8 +3604,12 @@ PrefabInstance:
       value: Aim Rig
       objectReference: {fileID: 0}
     - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 744545393}
+    - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: fireCooldown
-      value: 1.54
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: emaSmoothness
@@ -3621,11 +3625,11 @@ PrefabInstance:
       objectReference: {fileID: 1356149926}
     - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: sensorChargeThres
-      value: 11154
+      value: 14313
       objectReference: {fileID: 0}
     - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: sensorStretchThres
-      value: 14008
+      value: 16032
       objectReference: {fileID: 0}
     - target: {fileID: 6901287834782519593, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: Source
