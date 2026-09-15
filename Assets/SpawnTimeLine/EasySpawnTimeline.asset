@@ -1324,7 +1324,7 @@ MonoBehaviour:
     angularSpeed: 90
     startAngle: 0
   - time: 68
-    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    prefab: {fileID: 157787523976273185, guid: 114d256c19a894c318c44dab1e084ad9, type: 3}
     position: {x: -20, y: -20, z: 100}
     scale: 1.2
     lifetime: 10
@@ -1334,7 +1334,7 @@ MonoBehaviour:
     angularSpeed: 90
     startAngle: 0
   - time: 68
-    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    prefab: {fileID: 157787523976273185, guid: 114d256c19a894c318c44dab1e084ad9, type: 3}
     position: {x: 20, y: 20, z: 100}
     scale: 1.2
     lifetime: 10
@@ -1344,7 +1344,7 @@ MonoBehaviour:
     angularSpeed: 90
     startAngle: 0
   - time: 68
-    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    prefab: {fileID: 157787523976273185, guid: 114d256c19a894c318c44dab1e084ad9, type: 3}
     position: {x: 20, y: 0, z: 100}
     scale: 1.2
     lifetime: 10
@@ -1354,7 +1354,7 @@ MonoBehaviour:
     angularSpeed: 90
     startAngle: 0
   - time: 68
-    prefab: {fileID: 6771374083599789880, guid: 15faca429375c414bbacd2480ddd8463, type: 3}
+    prefab: {fileID: 157787523976273185, guid: 114d256c19a894c318c44dab1e084ad9, type: 3}
     position: {x: 20, y: -20, z: 100}
     scale: 1.2
     lifetime: 10
