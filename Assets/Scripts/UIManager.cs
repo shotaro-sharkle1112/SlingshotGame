@@ -83,6 +83,7 @@ public class UIManager : MonoBehaviour
         if (resultText == null) return;
 
         var gm = ScoreManager.Instance;
+        int c100 = gm.GetHitCount(100);
         int c300 = gm.GetHitCount(300);
         int c500 = gm.GetHitCount(500);
         int c1000 = gm.GetHitCount(1000);
@@ -90,6 +91,7 @@ public class UIManager : MonoBehaviour
 
         resultText.text =
             "=== RESULT ===\n" +
+            $"100pt  x {c100} = {100 * c100}\n" +
             $"300pt  x {c300} = {300 * c300}\n" +
             $"500pt  x {c500} = {500 * c500}\n" +
             $"1000pt x {c1000} = {1000 * c1000}\n" +
