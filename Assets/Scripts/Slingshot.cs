@@ -225,6 +225,11 @@ public class Slingshot : MonoBehaviour {
             leather.transform.localPosition = new Vector3(-1.42f, 2.286f, zOffset + 1.2f);
             leatherLine.transform.localPosition = new Vector3(-1.42f, 2.286f, zOffset + 1.2f);
         }
+        else
+        {
+            // 曲げ状態ではないので曲げ中の効果音の停止
+            elasticStretchAudioSource.Stop();
+        }
 
         // チャージの判定
         if (smoothedSensorValue < sensorChargeThres)
