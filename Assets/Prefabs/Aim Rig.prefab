@@ -86,7 +86,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 3747cda696590470faefdcb3583f34af, type: 3}
     - target: {fileID: 623047584966747518, guid: 4100495d2e2854c0fa9cb3b48b1042e6, type: 3}
       propertyPath: chargeTimeThres
-      value: 1.63
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 623047584966747518, guid: 4100495d2e2854c0fa9cb3b48b1042e6, type: 3}
       propertyPath: normalShotSound
@@ -106,11 +106,11 @@ PrefabInstance:
       objectReference: {fileID: 1853232240325812, guid: 2fd01713a2c54aa48a5b9404b8652553, type: 3}
     - target: {fileID: 623047584966747518, guid: 4100495d2e2854c0fa9cb3b48b1042e6, type: 3}
       propertyPath: sensorChargeThres
-      value: 10916
+      value: 14300
       objectReference: {fileID: 0}
     - target: {fileID: 623047584966747518, guid: 4100495d2e2854c0fa9cb3b48b1042e6, type: 3}
       propertyPath: sensorStretchThres
-      value: 13806
+      value: 16000
       objectReference: {fileID: 0}
     - target: {fileID: 623047584966747518, guid: 4100495d2e2854c0fa9cb3b48b1042e6, type: 3}
       propertyPath: elasticStretchSound
