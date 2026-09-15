@@ -8,6 +8,9 @@ public class StartSceneGameManager : MonoBehaviour
     [Header("Controler Manager")]
     [SerializeField] private ControlerManager Source;
 
+    [Header("Master Slingshot")]
+    [SerializeField] private Slingshot slingshot;
+
     [Header("Start Threshold")]
     // 曲げ続けて、何秒でシーンスタートするか
     [SerializeField] private float chargingTimeThreshold = 5f;
@@ -33,10 +36,14 @@ public class StartSceneGameManager : MonoBehaviour
     private bool isStart = false;
     public bool IsStart => isStart;
 
+    // チャージ完了したかどうか
+    private bool isCharged;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (bgmAudioSource != null && !bgmAudioSource.isPlaying) bgmAudioSource.Play();
+        isCharged = false;
     }
 
     // Update is called once per frame
@@ -50,19 +57,20 @@ public class StartSceneGameManager : MonoBehaviour
         }
 
         // もし曲げているのであればチャージ時間を計測
-        if (bendThreshold > Source.Bend)
+        if (!isCharged)
         {
-            chargingTime = Mathf.Min(chargingTimeThreshold, chargingTime + Time.deltaTime);
-            // 一回もチャージ中に再生していなければチャージ音を鳴らす
-            if (!chargeAudioSource.isPlaying && !isStart) chargeAudioSource.PlayOneShot(chargeJingle);
+            if (slingshot.slingshotState == Slingshot.SlingshotState.Bending 
+            || slingshot.slingshotState == Slingshot.SlingshotState.Charging )
+            {
+                chargingTime = Mathf.Min(chargingTimeThreshold, chargingTime + Time.deltaTime);
+            }
+            else
+            {
+                // 曲げていないのでチャージ時間を削る
+                chargingTime = Mathf.Max(0f, chargingTime - Time.deltaTime);
+            }
         }
-        else
-        {
-            // 曲げていないのでチャージ時間を削る
-            chargingTime = Mathf.Max(0f, chargingTime - Time.deltaTime);
-            // 曲げていないのでチャージオンを止める
-            if (chargeAudioSource.isPlaying) chargeAudioSource.Stop();
-        }
+        
    
 
         if (chargingTimeThreshold > 0f)
@@ -76,12 +84,11 @@ public class StartSceneGameManager : MonoBehaviour
         }
         
         // チャージが貯まったらスタート演出
-        if (chargingRatio >= 0.999f && !isStart)
+        if (chargingRatio >= 0.999f) isCharged = true;
+
+        if ( !isStart && isCharged && slingshot.slingshotState == Slingshot.SlingshotState.Idle)
         {
             isStart = true;
-            PlayJingle(startJingle);
-            // チャージが完了したのでストップ
-            if (chargeAudioSource.isPlaying) chargeAudioSource.Stop();
 
             // シーン切り替えコルーチンを実施
             StartCoroutine(NextScene());

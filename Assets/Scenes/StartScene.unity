@@ -350,6 +350,17 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 193295455}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &271872989 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+  m_PrefabInstance: {fileID: 800049775}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c344eebdc17134210accad3a42b1608c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &384391803
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,7 +727,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 1356149928}
-  chargingTimeThreshold: 5
+  slingshot: {fileID: 271872989}
+  chargingTimeThreshold: 2.5
   bendThreshold: 15763
   jingleAudioSource: {fileID: 384391804}
   startJingle: {fileID: 8300000, guid: 7cd68c1f70f5a49ffaed2d4975783ba7, type: 3}
@@ -1106,7 +1118,7 @@ GameObject:
   - component: {fileID: 1187512710}
   - component: {fileID: 1187512709}
   m_Layer: 5
-  m_Name: Start
+  m_Name: Release
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1151,7 +1163,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: START!
+  m_text: "Release!\n\u653E\u3066\uFF01"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4e0025e641b84466fa58189640802eac, type: 2}
   m_sharedMaterial: {fileID: -9030389140983277964, guid: 4e0025e641b84466fa58189640802eac, type: 2}

@@ -7,6 +7,19 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Slingshot : MonoBehaviour {
 
+    // Slingshotの状態
+    public enum SlingshotState
+    {
+        // 何もしていない状態
+        Idle,
+        // 曲げている状態
+        Bending,
+        // チャージ中の状態
+        Charging
+    }
+
+    public SlingshotState slingshotState {get; private set;}
+
     // 弾の発射速度
     [SerializeField] public float metalSphereVelocity;
 
@@ -131,6 +144,9 @@ public class Slingshot : MonoBehaviour {
         {
             pulled = -7;
         }
+
+        // 状態の初期化
+        slingshotState = SlingshotState.Idle;
     }
 
     void Update()
@@ -150,6 +166,9 @@ public class Slingshot : MonoBehaviour {
         //曲げセンサの値が一定の範囲外に出たらパチンコの伸び開始
         if (smoothedSensorValue <= sensorStretchThres)
         {
+            // 状態を変更
+            slingshotState = SlingshotState.Bending;
+
             //伸び始めたことをbool値で記録
             //これによって弾発射部分のコードのif文内が実行される
             isStretched = true;
@@ -210,6 +229,8 @@ public class Slingshot : MonoBehaviour {
         // チャージの判定
         if (smoothedSensorValue < sensorChargeThres)
         {
+            // 状態を変更
+            slingshotState = SlingshotState.Charging;
             chargeTime = Mathf.Min(chargeTimeThres + 0.1f, chargeTime + Time.deltaTime);
         }
 
@@ -319,6 +340,9 @@ public class Slingshot : MonoBehaviour {
 
             // 発射直後は平滑化されたセンサの値がセンサの生値に追従しきれていないため、一旦生値に戻す
             smoothedSensorValue = sensorValue;
+
+            // 状態を変更
+            slingshotState = SlingshotState.Idle;
         }
 
         // ゲームの終了の処理
