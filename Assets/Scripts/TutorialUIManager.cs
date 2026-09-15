@@ -5,108 +5,65 @@ using UnityEngine.UI;
 
 public class TutorialUIManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI scoreText;
-    [SerializeField] private TextMeshProUGUI highScoreText;
-    [SerializeField] private TextMeshProUGUI timeText;
+    [Header("チュートリアルテキストを表示するパネル")]
+    [SerializeField] private GameObject panel;
+    // テキストを変更するためのクラス
+    private TextPanel textPanel;
 
-    [Header("Result")]
-    [SerializeField] private TextMeshProUGUI resultText;
-    [SerializeField] private GameObject resultBackground;
-    [SerializeField] private GameObject resetButton;
-
-    [Header("GameManager")]
-    [SerializeField] private GameManager gameManager;
-    private bool timerRunning;
+    [Header("Tutorial Manager")]
+    [SerializeField] private TutorialManager tutorialManager;
 
     void Start()
     {
-        UpdateScoreText(ScoreManager.Instance.CurrentScore);
-        UpdateHighScoreText(ScoreManager.Instance.HighScore);
-
-        ScoreManager.Instance.OnScoreChanged += UpdateScoreText;
-        ScoreManager.Instance.OnHighScoreChanged += UpdateHighScoreText;
-
-        UpdateTimeText(gameManager.remainingTime);
-
-        timerRunning = true;
-
-        if (resultText != null) resultText.gameObject.SetActive(false);
-        if (resultBackground != null) resultBackground.SetActive(false);
-        if (resetButton != null) resetButton.SetActive(false);
+        // テキスト編集APIがあるコンポーネントを取得
+        textPanel = panel.GetComponent<TextPanel>();
     }
 
     void Update()
     {
-        if (!timerRunning) return;
-        if (gameManager.remainingTime <= 0f)
+        // チュートリアルの進行状況をTutorialManagerから取得してUIの処理を走らせる
+        switch (tutorialManager.tutorialState)
         {
-            ShowResult();
-            timerRunning = false;
+            // チュートリアル開始前
+            case TutorialManager.TutorialState.BeforeTutorial:
+                textPanel.SetText("チュートリアルへようこそ！\nまずはパチンコの操作を教えますね");
+                break;
+            case TutorialManager.TutorialState.LookForward:
+                textPanel.SetText("まずはコントローラーを握り、\nじっと動かさずに真正面に向けましょう");
+                break;
+            case TutorialManager.TutorialState.Calibration:
+                textPanel.SetText("キャリブレーション中です\nじっと動かさずに真正面に向けましょう");
+                break;
+            case TutorialManager.TutorialState.RotateToLeft:
+                textPanel.SetText("コントローラーをゆっくり左に回転させて、\nパチンコで左を狙ってみましょう");
+                break;
+            case TutorialManager.TutorialState.RotateToRight:
+                textPanel.SetText("コントローラーをゆっくり右に回転させて、\nパチンコで右を狙ってみましょう");
+                break;
+            case TutorialManager.TutorialState.RotateToUp:
+                textPanel.SetText("コントローラーをゆっくり上に向けて、\nパチンコで上を狙ってみましょう");
+                break;
+            case TutorialManager.TutorialState.RotateToDown:
+                textPanel.SetText("コントローラーをゆっくり下に向けて、\nパチンコで下を狙ってみましょう");
+                break;
+            case TutorialManager.TutorialState.Shot:
+                textPanel.SetText("青色のゴムを引っ張って曲げて、離してみましょう\n弾を打てます");
+                break;
+            case TutorialManager.TutorialState.Charge:
+                textPanel.SetText("今度はもっと引っ張って曲げて、\nチャージ音が鳴ってから離してみましょう\n非常に強力なショットになります");
+                break;
+            case TutorialManager.TutorialState.ResetDirection:
+                textPanel.SetText("パチンコとコントローラーの左右の向きがズレてきたら、\nコントローラーを45度下に向けることでリセットできます");
+                break;
+            case TutorialManager.TutorialState.Targets:
+                textPanel.SetText("4種類的があります\n青が100点、オレンジが300点、赤が500点、金が1000点です\n全て打ち倒してみましょう");
+                break;
+            case TutorialManager.TutorialState.AfterTutorial:
+                textPanel.SetText("では本番にいきましょう！");
+                break;
+            default:
+                break;
         }
-        UpdateTimeText(gameManager.remainingTime);
-    }
-
-   private void OnDestroy()
-   {
-      if (ScoreManager.Instance == null) return;
-
-      ScoreManager.Instance.OnScoreChanged -= UpdateScoreText;
-      ScoreManager.Instance.OnHighScoreChanged -= UpdateHighScoreText;
-   }
-
-   private void UpdateScoreText(int score)
-    {
-        if (scoreText != null)
-        {
-            scoreText.text = $"SCORE: {score}";
-        }
-    }
-
-    private void UpdateHighScoreText(int highScore)
-    {
-        highScoreText.text = $"HIGH SCORE: {highScore}";
-    }
-
-    private void UpdateTimeText(float seconds)
-    {
-        if (timeText == null) return;
-        int total = Mathf.CeilToInt(seconds);
-        int mm = total / 60;
-        int ss = total % 60;
-        timeText.text = $"{mm:00}:{ss:00}";
-    }
-
-    private void ShowResult()
-    {
-        if (resultBackground != null) resultBackground.SetActive(true);
-        if (resetButton != null) resetButton.SetActive(true);
-        if (resultText == null) return;
-
-        var gm = ScoreManager.Instance;
-        int c100 = gm.GetHitCount(100);
-        int c300 = gm.GetHitCount(300);
-        int c500 = gm.GetHitCount(500);
-        int c1000 = gm.GetHitCount(1000);
-        int total = gm.CurrentScore;
-
-        resultText.text =
-            "=== RESULT ===\n" +
-            $"100pt  x {c100} = {100 * c100}\n" +
-            $"300pt  x {c300} = {300 * c300}\n" +
-            $"500pt  x {c500} = {500 * c500}\n" +
-            $"1000pt x {c1000} = {1000 * c1000}\n" +
-            "──────────────\n" +
-            $"TOTAL: {total}";
-
-        resultText.gameObject.SetActive(true);
-    }
-
-    // リセットボタンの onClick から呼ぶ。timeScaleを戻してスコアもクリアしてチュートリアルへ。
-    public void OnResetButtonClicked()
-    {
-        Time.timeScale = 1f;
-        ScoreManager.Instance.ResetScore();
-        SceneManager.LoadScene("StartScene");
     }
 }
 
