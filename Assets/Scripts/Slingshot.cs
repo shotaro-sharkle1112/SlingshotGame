@@ -104,6 +104,9 @@ public class Slingshot : MonoBehaviour {
     // コントローラのセンサ値を受け取るためのマネージャー
     [SerializeField] private ControlerManager controlerManager;
 
+    [Header("ゲームマネージャー")]
+    [SerializeField] private GameManager gameManager;
+
     void Start ()
     {      
         // チャージをした時間の初期化
@@ -302,6 +305,12 @@ public class Slingshot : MonoBehaviour {
 
             // 発射直後は平滑化されたセンサの値がセンサの生値に追従しきれていないため、一旦生値に戻す
             smoothedSensorValue = sensorValue;
+        }
+
+        // ゲームの終了の処理
+        if (gameManager.gameState == GameManager.GameState.AfterPlaying)
+        {
+            elasticStretchAudioSource.Stop();
         }
     }
 
