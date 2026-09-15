@@ -269,12 +269,19 @@ public class Slingshot : MonoBehaviour {
             // チャージでの変更点：球も大きくするし、当たり判定を大きくする
             float metalSphereScale = isChargeCompleted ? 2f : 1f;
             metalSphereObject.transform.localScale *= metalSphereScale;
-            triggerSphereCollider.radius *= 3f;
+            if(isChargeCompleted) triggerSphereCollider.radius *= 3f;
             metalSphereRigidbody.AddForce(metalSphereShotForce, ForceMode.Impulse);
 
             // エフェクトを再生
             // チャージでの変更点：何かしら特別なエフェクトを再生
-            metalSphereScript.EnableParticleEffect();
+            if(isChargeCompleted) 
+            {
+                metalSphereScript.EnableChargeShotParticleEffect();
+            }
+            else
+            {
+                metalSphereScript.EnableParticleEffect();
+            }
 
             //The metal sphere is taken (parent = null) in the slingshot, so that the sphere stops moving with the slingshot and the camera.
             metalSphereObject.transform.parent = null;
