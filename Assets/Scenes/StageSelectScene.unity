@@ -418,10 +418,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 744545395}
-  chargeSlider: {fileID: 0}
-  bendToStartText: {fileID: 0}
-  keepBendingText: {fileID: 0}
-  startText: {fileID: 0}
 --- !u!224 &742271455 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3325925106727033851, guid: 06d2cdbe5be7145e2a642e274343c01a, type: 3}
@@ -473,7 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83b77a76e81f643daafba4e975efb78c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Source: {fileID: 1356149928}
+  Source: {fileID: 0}
   jingleAudioSource: {fileID: 384391804}
   selectJingle: {fileID: 8300000, guid: c37d826806d8c4316a1dc87d116b200d, type: 3}
   bgmAudioSource: {fileID: 1228669052}
@@ -641,8 +637,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9b49de1c696f44f3bbc20246a3d6eb11, type: 3}
-  m_Resource: {fileID: 8300000, guid: 9b49de1c696f44f3bbc20246a3d6eb11, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 07aa02bc36c73441883c2c8fa4f53d68, type: 3}
+  m_Resource: {fileID: 8300000, guid: 07aa02bc36c73441883c2c8fa4f53d68, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -743,64 +739,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 744545394}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1356149925
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1356149927}
-  - component: {fileID: 1356149928}
-  m_Layer: 0
-  m_Name: ControlerManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1356149927
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1356149925}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1034.8309, y: -583.266, z: 770.2461}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1356149928
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1356149925}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: febef1b9c2507429096b9e9e721c7f5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  portName: /dev/cu.usbmodem1101
-  baudRate: 115200
-  isConnected: 0
-  receivedCount: 0
-  lastJsonLine: 
-  lastError: 
-  tMs: 0
-  bend: 20000
-  accelX: 0
-  accelY: 0
-  accelZ: 0
-  gyroX: 0
-  gyroY: 0
-  gyroZ: 0
 --- !u!1 &1525699352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1245,5 +1183,4 @@ SceneRoots:
   - {fileID: 1096629440}
   - {fileID: 1823215085}
   - {fileID: 1525699355}
-  - {fileID: 1356149927}
   - {fileID: 744545394}
