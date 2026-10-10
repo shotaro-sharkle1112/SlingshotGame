@@ -826,9 +826,25 @@ PrefabInstance:
       value: Aim Rig
       objectReference: {fileID: 0}
     - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: fireCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: sensorMinValue
+      value: 14000
+      objectReference: {fileID: 0}
+    - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: controlerManager
       value: 
       objectReference: {fileID: 1356149928}
+    - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: sensorChargeThres
+      value: 17000
+      objectReference: {fileID: 0}
+    - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: sensorStretchThres
+      value: 19000
+      objectReference: {fileID: 0}
     - target: {fileID: 7809264129793004550, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.403157
@@ -1347,8 +1363,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9b49de1c696f44f3bbc20246a3d6eb11, type: 3}
-  m_Resource: {fileID: 8300000, guid: 9b49de1c696f44f3bbc20246a3d6eb11, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 07aa02bc36c73441883c2c8fa4f53d68, type: 3}
+  m_Resource: {fileID: 8300000, guid: 07aa02bc36c73441883c2c8fa4f53d68, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

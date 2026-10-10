@@ -1490,9 +1490,25 @@ PrefabInstance:
       value: Aim Rig
       objectReference: {fileID: 0}
     - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: fireCooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: sensorMinValue
+      value: 14000
+      objectReference: {fileID: 0}
+    - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: controlerManager
       value: 
       objectReference: {fileID: 268954360}
+    - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: sensorChargeThres
+      value: 17000
+      objectReference: {fileID: 0}
+    - target: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: sensorStretchThres
+      value: 19000
+      objectReference: {fileID: 0}
     - target: {fileID: 6901287834782519593, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: Source
       value: 
