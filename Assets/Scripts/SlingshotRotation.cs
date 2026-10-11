@@ -60,7 +60,13 @@ public class SlingshotRotation : MonoBehaviour
     float lookDownTimer;                      // 下向き継続時間カウンタ
     public Quaternion CurrentOrientation => q;
 
-    void Awake()
+   void Start()
+   {
+      // セーブデータからジャイロバイアスを記録
+      gyroBias = new Vector3(PlayerPrefs.GetFloat("GyroBias_X", 0.0f), PlayerPrefs.GetFloat("GyroBias_Y", 0.0f), PlayerPrefs.GetFloat("GyroBias_Z", 0.0f));
+   }
+
+   void Awake()
     {
         if (Target == null) Target = transform;
     }
@@ -95,6 +101,13 @@ public class SlingshotRotation : MonoBehaviour
             t += Time.deltaTime;
         }
         if (n > 0) gyroBias /= n;
+
+        // セーブデータにジャイロのバイアスを記録
+        PlayerPrefs.SetFloat("GyroBias_X", gyroBias.x);
+        PlayerPrefs.SetFloat("GyroBias_Y", gyroBias.y);
+        PlayerPrefs.SetFloat("GyroBias_Z", gyroBias.z);
+
+        Debug.Log($"bias:{gyroBias}");
         // ゼロ点取り直し直後は yaw もリセットしたいことが多い
         ResetYaw();
     }
