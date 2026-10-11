@@ -36,26 +36,12 @@ public class TutorialManager : MonoBehaviour
     {
         // チュートリアルが始まる前
         BeforeTutorial,
-        // 正面に向ける
-        LookForward,
-        // キャリブレーション
-        Calibration,
-        // 左に向ける
-        RotateToLeft,
-        //右に向ける
-        RotateToRight,
-        // 上に向ける
-        RotateToUp,
-        // 下に向ける
-        RotateToDown,
-        // 曲げて発射
+        // 正面、右、左のマトを打つ
         Shot,
-        // チャージ
+        // 下に向ける(リセットの体験も行う)
+        RotateToDown,
+        // チャージ(一掃できそうなマトの群衆も生成する)
         Charge,
-        // 向きのリセット
-        ResetDirection,
-        // 全種類の的の点数を当てて確認する
-        Targets,
         // チュートリアル終了
         AfterTutorial
     }
@@ -68,6 +54,9 @@ public class TutorialManager : MonoBehaviour
     // マトを生成し終わったか
     private bool isTargetGenerated;
 
+    // チャージをしたことがあるか
+    private bool isCharged;
+
     // 生成した全ての的をリストに入れる
     private List<GameObject> targets = new List<GameObject>();
 
@@ -79,6 +68,7 @@ public class TutorialManager : MonoBehaviour
         // 変数のリセット
         isWaiting = false;
         isTargetGenerated = false;
+        isCharged = false;
     }
 
     private void Update() {
@@ -89,46 +79,14 @@ public class TutorialManager : MonoBehaviour
             case TutorialState.BeforeTutorial:
                 TryStepNextTutorial();
                 break;
-            case TutorialState.LookForward:
-                if (Vector3.Dot(slingshot.transform.forward, Vector3.forward) > 0.99f) TryStepNextTutorial();
-                break;
-            case TutorialState.Calibration:
-                StartCoroutine(slingshotRotation.CalibGyroBias());
-                TryStepNextTutorial();
-                break;
-            case TutorialState.RotateToLeft:
-                if (Mathf.DeltaAngle(0f, slingshotEuler.y) < -45f) TryStepNextTutorial();
-                break;
-            case TutorialState.RotateToRight:
-                if (Mathf.DeltaAngle(0f, slingshotEuler.y) > 45f) TryStepNextTutorial();
-                break;
-            case TutorialState.RotateToUp:
-                if (Mathf.DeltaAngle(0f, slingshotEuler.x) < -30f) TryStepNextTutorial();
-                break;
-            case TutorialState.RotateToDown:
-                if (Mathf.DeltaAngle(0f, slingshotEuler.x) > 30f) TryStepNextTutorial();
-                break;
             case TutorialState.Shot:
-                if (slingshotScript.slingshotState == Slingshot.SlingshotState.Bending) TryStepNextTutorial();
-                break;
-            case TutorialState.Charge:
-                if (slingshotScript.slingshotState == Slingshot.SlingshotState.Charging) TryStepNextTutorial();
-                break;
-            case TutorialState.ResetDirection:
-                TryStepNextTutorial();
-                break;
-            case TutorialState.Targets:
                 if (!isTargetGenerated)
                 {
                     // インスタンスの生成 
-                    targets.Add(Instantiate(TargetBluePrefab, new Vector3(-25f, 15f, 60f), TargetRedPrefab.transform.rotation));
-                    targets.Add(Instantiate(TargetBluePrefab, new Vector3(-25f, -5f, 60f), TargetRedPrefab.transform.rotation));
-                    targets.Add(Instantiate(TargetOrangePrefab, new Vector3(-10f, 15f, 60f), TargetRedPrefab.transform.rotation));
-                    targets.Add(Instantiate(TargetOrangePrefab, new Vector3(-10f, -5f, 60f), TargetRedPrefab.transform.rotation));
-                    targets.Add(Instantiate(TargetRedPrefab, new Vector3(5f, 15f, 60f), TargetRedPrefab.transform.rotation));
-                    targets.Add(Instantiate(TargetRedPrefab, new Vector3(5f, -5f, 60f), TargetRedPrefab.transform.rotation));
-                    targets.Add(Instantiate(TargetGoldPrefab, new Vector3(20f, 15f, 60f), TargetRedPrefab.transform.rotation));
-                    targets.Add(Instantiate(TargetGoldPrefab, new Vector3(20f, -5f, 60f), TargetRedPrefab.transform.rotation));
+                    targets.Add(Instantiate(TargetBluePrefab, new Vector3(-28f, 0f, 60f), TargetRedPrefab.transform.rotation));
+                    targets.Add(Instantiate(TargetOrangePrefab, new Vector3(0f, 0f, 60f), TargetRedPrefab.transform.rotation));
+                    targets.Add(Instantiate(TargetRedPrefab, new Vector3(28f, 0f, 60f), TargetRedPrefab.transform.rotation));
+                    targets.Add(Instantiate(TargetGoldPrefab, new Vector3(0f, 20f, 60f), TargetRedPrefab.transform.rotation));
 
                     // 全ての的を大きくする
                     foreach (GameObject t in targets)
@@ -147,6 +105,37 @@ public class TutorialManager : MonoBehaviour
 
                 if (isTargetGenerated && targets.Count == 0) TryStepNextTutorial();
                 break;
+            case TutorialState.RotateToDown:
+                if (Mathf.DeltaAngle(0f, slingshotEuler.x) > 30f) TryStepNextTutorial();
+                break;
+            case TutorialState.Charge:
+                // TODO(#67, blocked by #56, #64) : Chargeステップの判定をチャージ弾一発4個撃破にする
+                if (slingshotScript.slingshotState == Slingshot.SlingshotState.Charging) isCharged = true;
+                if (!isTargetGenerated)
+                {
+                    // インスタンスの生成 
+                    targets.Add(Instantiate(TargetBluePrefab, new Vector3(0f, 0f, 60f), TargetRedPrefab.transform.rotation));
+                    targets.Add(Instantiate(TargetOrangePrefab, new Vector3(0f, 0f, 65f), TargetRedPrefab.transform.rotation));
+                    targets.Add(Instantiate(TargetRedPrefab, new Vector3(0f, 0f, 75f), TargetRedPrefab.transform.rotation));
+                    targets.Add(Instantiate(TargetGoldPrefab, new Vector3(0f, 0f, 80f), TargetRedPrefab.transform.rotation));
+
+                    // 奥の的ほど大きくする
+                    targets[0].transform.localScale *= 1.0f;
+                    targets[1].transform.localScale *= 1.5f;
+                    targets[2].transform.localScale *= 2.0f;
+                    targets[3].transform.localScale *= 2.5f;
+
+                    // 生成は一回だけ
+                    isTargetGenerated = true;
+                }
+
+                // 破壊されたオブジェクトは全てnullになるので除外
+                targets.RemoveAll(t => t == null);
+                // もし破壊されずにどこかへ行こうとした場合は除外
+                targets.RemoveAll(t => t.transform.position.magnitude > 100f);
+
+                if (isCharged && isTargetGenerated && targets.Count == 0) TryStepNextTutorial();
+                break;
             case TutorialState.AfterTutorial:
                 StartCoroutine(NextScene(nextSceneName));
                 break;
@@ -162,6 +151,7 @@ public class TutorialManager : MonoBehaviour
         yield return new WaitForSeconds(5);
         tutorialState += 1;
         isWaiting = false;
+        isTargetGenerated = false;
         PlayJingle(tutorialStepAdvanceJingle);
     }
 

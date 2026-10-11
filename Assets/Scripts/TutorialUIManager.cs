@@ -2,6 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class TutorialUIManager : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class TutorialUIManager : MonoBehaviour
     // テキストを変更するためのクラス
     private TextPanel textPanel;
 
+    // videoフレーム
+    [SerializeField] private GameObject videoFrame;
+
+    private VideoPlayer videoPlayer;
+
     [Header("Tutorial Manager")]
     [SerializeField] private TutorialManager tutorialManager;
 
@@ -17,6 +23,13 @@ public class TutorialUIManager : MonoBehaviour
     {
         // テキスト編集APIがあるコンポーネントを取得
         textPanel = panel.GetComponent<TextPanel>();
+
+        // 下に向けてリセットをする映像を流すためのコンポーネントを取得
+        videoPlayer = videoFrame.GetComponent<VideoPlayer>();
+
+        // ビデオを最初非表示に
+        videoFrame.SetActive(false);
+
     }
 
     void Update()
@@ -26,40 +39,23 @@ public class TutorialUIManager : MonoBehaviour
         {
             // チュートリアル開始前
             case TutorialManager.TutorialState.BeforeTutorial:
-                textPanel.SetText("チュートリアルへようこそ！\nまずはパチンコの操作を教えますね");
-                break;
-            case TutorialManager.TutorialState.LookForward:
-                textPanel.SetText("まずはコントローラーを握り、\nじっと動かさずに真正面に向けましょう");
-                break;
-            case TutorialManager.TutorialState.Calibration:
-                textPanel.SetText("キャリブレーション中です\nじっと動かさずに真正面に向けましょう");
-                break;
-            case TutorialManager.TutorialState.RotateToLeft:
-                textPanel.SetText("コントローラーをゆっくり左に回転させて、\nパチンコで左を狙ってみましょう");
-                break;
-            case TutorialManager.TutorialState.RotateToRight:
-                textPanel.SetText("コントローラーをゆっくり右に回転させて、\nパチンコで右を狙ってみましょう");
-                break;
-            case TutorialManager.TutorialState.RotateToUp:
-                textPanel.SetText("コントローラーをゆっくり上に向けて、\nパチンコで上を狙ってみましょう");
-                break;
-            case TutorialManager.TutorialState.RotateToDown:
-                textPanel.SetText("コントローラーをゆっくり下に向けて、\nパチンコで下を狙ってみましょう");
+                textPanel.SetText("チュートリアルへようこそ！\nお前には的当て名人になってもらうぞ");
                 break;
             case TutorialManager.TutorialState.Shot:
-                textPanel.SetText("青色のゴムを引っ張って曲げて、離してみましょう\n弾を打てます");
+                textPanel.SetText("青色のゴムを曲げて放て！\nマトをたおせ");
+                break;
+            case TutorialManager.TutorialState.RotateToDown:
+                videoFrame.SetActive(true);
+                videoPlayer.Play();
+                textPanel.SetText("向きがズレる？\nコントローラを下に倒し、向きをリセットだ");
                 break;
             case TutorialManager.TutorialState.Charge:
-                textPanel.SetText("今度はもっと引っ張って曲げて、\nチャージ音が鳴ってから離してみましょう\n非常に強力なショットになります");
-                break;
-            case TutorialManager.TutorialState.ResetDirection:
-                textPanel.SetText("パチンコとコントローラーの左右の向きがズレてきたら、\nコントローラーを45度下に向けることでリセットできます");
-                break;
-            case TutorialManager.TutorialState.Targets:
-                textPanel.SetText("4種類的があります\n青が100点、オレンジが300点、赤が500点、金が1000点です\n全て打ち倒してみましょう");
+                videoFrame.SetActive(false);
+                videoPlayer.Stop();
+                textPanel.SetText("もっと引っ張ってチャージゲージを貯めろ！\nマトを一掃できるぞ！");
                 break;
             case TutorialManager.TutorialState.AfterTutorial:
-                textPanel.SetText("では本番にいきましょう！");
+                textPanel.SetText("「習うより慣れろ」だ\n本番に行くぞ！");
                 break;
             default:
                 break;
