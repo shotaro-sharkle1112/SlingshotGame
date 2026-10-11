@@ -109,7 +109,7 @@ public class TutorialManager : MonoBehaviour
                 if (Mathf.DeltaAngle(0f, slingshotEuler.x) > 30f) TryStepNextTutorial();
                 break;
             case TutorialState.Charge:
-                // ほんとは球にチャージショットかどうかを持たせて、チャージショットによって倒されていない場合はマトを再生成し直して、尚且つコンボ数が実装できていれば、一発で4つのマトを倒せたらチュートリアル進行にしたいけど、まだ実装できるほど機能が充実していないのでいったん待ち
+                // TODO(#67, blocked by #56, #64) : Chargeステップの判定をチャージ弾一発4個撃破にする
                 if (slingshotScript.slingshotState == Slingshot.SlingshotState.Charging) isCharged = true;
                 if (!isTargetGenerated)
                 {
