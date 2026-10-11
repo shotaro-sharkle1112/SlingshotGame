@@ -3341,6 +3341,18 @@ PrefabInstance:
       propertyPath: Source
       value: 
       objectReference: {fileID: 1356149926}
+    - target: {fileID: 6901287834782519593, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: pitchLimit
+      value: 85
+      objectReference: {fileID: 0}
+    - target: {fileID: 6901287834782519593, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: lookDownDuration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6901287834782519593, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      propertyPath: lookDownThreshold
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 7809264129793004550, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.04
