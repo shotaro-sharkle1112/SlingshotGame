@@ -58,9 +58,20 @@ public class SlingshotRotation : MonoBehaviour
     Vector3 currentEuler;                     // 実際に適用しているオイラー角
     Vector3 dampVel;                          // SmoothDampAngle 内部用
     float lookDownTimer;                      // 下向き継続時間カウンタ
+
+    // 下を向いた状態を継続した時にリセットが一回だけ行われるようにする
+    private bool isReset;
     public Quaternion CurrentOrientation => q;
 
-    void Awake()
+    void Start()
+    {
+        // セーブデータからジャイロバイアスを記録
+        gyroBias = new Vector3(PlayerPrefs.GetFloat("GyroBias_X", 0.0f), PlayerPrefs.GetFloat("GyroBias_Y", 0.0f), PlayerPrefs.GetFloat("GyroBias_Z", 0.0f));
+        // 各変数のリセット
+        isReset = false;
+    }
+
+   void Awake()
     {
         if (Target == null) Target = transform;
     }
@@ -95,6 +106,13 @@ public class SlingshotRotation : MonoBehaviour
             t += Time.deltaTime;
         }
         if (n > 0) gyroBias /= n;
+
+        // セーブデータにジャイロのバイアスを記録
+        PlayerPrefs.SetFloat("GyroBias_X", gyroBias.x);
+        PlayerPrefs.SetFloat("GyroBias_Y", gyroBias.y);
+        PlayerPrefs.SetFloat("GyroBias_Z", gyroBias.z);
+
+        Debug.Log($"bias:{gyroBias}");
         // ゼロ点取り直し直後は yaw もリセットしたいことが多い
         ResetYaw();
     }
@@ -116,7 +134,7 @@ public class SlingshotRotation : MonoBehaviour
         }
         float dt = Mathf.Max(Time.deltaTime, 1e-4f);
 
-        // --- 1) ジャイロで積分（高速応答）
+        // ジャイロで積分
         Vector3 gyro = MapAxes(Source.Gyro, gyroSign) - gyroBias; // deg/s
         float ang = gyro.magnitude * dt;                           // deg
         if (ang > 0f)
@@ -126,7 +144,7 @@ public class SlingshotRotation : MonoBehaviour
             q = q * dq;
         }
 
-        // --- 2) 加速度で傾き補正（遅いがドリフトしない、yawは補正できない）
+        // 加速度で傾き補正（遅いがドリフトしない、yawは補正できない）
         Vector3 a = MapAxes(Source.Accel, accelSign);
         if (a.sqrMagnitude > 1e-6f)
         {
@@ -139,21 +157,25 @@ public class SlingshotRotation : MonoBehaviour
             {
                 float errDeg = Mathf.Asin(Mathf.Clamp(s, -1f, 1f)) * Mathf.Rad2Deg;
                 Quaternion corr = Quaternion.AngleAxis(errDeg * accelBlend, axis / s);
-                q = corr * q; // 前から補正を掛ける（世界座標の微小修正）
+                q = corr * q; // 前から補正を掛ける
             }
 
             // 下向き継続でyawリセット（upMeas.z > しきい値 = device-forwardが下向き）
             if (upMeas.z > lookDownThreshold)
             {
                 lookDownTimer += dt;
-                if (lookDownTimer >= lookDownDuration)
+                if (!isReset && lookDownTimer >= lookDownDuration)
                 {
                     ResetYaw();
                     lookDownTimer = 0f;
+                    // リセットできたのでフラグを立てる
+                    // lookDownThresholdから戻るまでリセットをもう一度行わない
+                    isReset = true;
                 }
             }
             else
             {
+                isReset = false;
                 lookDownTimer = 0f;
             }
         }
@@ -162,7 +184,7 @@ public class SlingshotRotation : MonoBehaviour
             lookDownTimer = 0f;
         }
 
-        // --- 3) 角度制限（ピッチ・ヨーをclamp、qにも反映してドリフト蓄積を防ぐ）
+        // 角度制限
         Vector3 e = q.eulerAngles;
         float pitch = e.x > 180f ? e.x - 360f : e.x;
         float yaw   = e.y > 180f ? e.y - 360f : e.y;
@@ -172,7 +194,7 @@ public class SlingshotRotation : MonoBehaviour
         e.y = yaw;
         q = Quaternion.Euler(e);
 
-        // --- 4) 滑らかに適用（SmoothDampAngle）
+        // 滑らかに適用
         Vector3 targetEuler = q.eulerAngles;
 
         // デッドバンド: 微小な揺れを無視
