@@ -103,7 +103,7 @@ public class Target : MonoBehaviour
         // スコアを表示
         if (scoreTextPrefab != null)
         {
-            score = Instantiate(scoreTextPrefab, 5f * new Vector3(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), 0f) + new Vector3(transform.position.x * ratio, transform.position.y * ratio, 50f - hitCount) + offset, Quaternion.identity);
+            score = Instantiate(scoreTextPrefab, 10f * new Vector3(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), 0f) + new Vector3(transform.position.x * ratio, transform.position.y * ratio, 50f - hitCount) + offset, Quaternion.identity);
             scoreTMPro = score.GetComponent<TextMeshPro>();
             scoreTMPro.text = hitCount >= 2 ? $"{hitCount} x {scoreAmount}" : $"{scoreAmount}";
             scoreTMPro.fontSize = 30f + hitCount * 2f;
@@ -114,7 +114,7 @@ public class Target : MonoBehaviour
         // ヒット数を表示
         if (scoreTextPrefab != null && hitCount >= 2)
         {
-            hitCountText = Instantiate(scoreTextPrefab, 5f * new Vector3(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), 0f) +  new Vector3(transform.position.x * ratio, transform.position.y * ratio, - hitCount)  + offset + new Vector3(5f, 4f, 50f), Quaternion.identity);
+            hitCountText = Instantiate(scoreTextPrefab, 10f * new Vector3(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), 0f) +  new Vector3(transform.position.x * ratio, transform.position.y * ratio, - hitCount)  + offset + new Vector3(5f, 4f, 50f), Quaternion.identity);
             hitCountTextTMPro = hitCountText.GetComponent<TextMeshPro>();
             hitCountTextTMPro.text = $"{hitCount} Combo !!";
             hitCountTextTMPro.color = Color.yellow;
