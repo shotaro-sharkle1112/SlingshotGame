@@ -77,7 +77,12 @@ public class Target : MonoBehaviour
             // 衝突時に重力をオンにして少し吹っ飛ばすことで爽快感を増やす
             rigidbody.useGravity = true;
             rigidbody.AddForce(rigidbody.mass * hitPower * Vector3.forward,ForceMode.Impulse);
+            
+            // 弾のヒット回数をカウント
+            var metalSphereScript = other.gameObject.GetComponent<MetalSphere>();
+            metalSphereScript.AddHitCount();
 
+            // マトの消滅を予約
             StartCoroutine(HitPointCenter());
         }
     }
