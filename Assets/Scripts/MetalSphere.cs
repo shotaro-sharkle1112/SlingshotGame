@@ -1,4 +1,3 @@
-using System.Net.Mail;
 using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]
