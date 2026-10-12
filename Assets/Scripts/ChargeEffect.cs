@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 [RequireComponent(typeof(ParticleSystem))]
 public class ChargeEffect : MonoBehaviour
@@ -8,6 +9,8 @@ public class ChargeEffect : MonoBehaviour
     // チャージ中と、チャージ完了でエフェクトを再生したい
     [SerializeField] private Slingshot slingshot;
 
+    // チャージ完了演出のエフェクト
+    [SerializeField] private ParticleSystem m_particleSystemChargeCompleted;
     // エフェクト用のparticle system
     private ParticleSystem m_particleSystem;
     // 色を変える用のmainモジュール
@@ -15,13 +18,23 @@ public class ChargeEffect : MonoBehaviour
 
     // 一フレーム前のパチンコの状態
     private Slingshot.SlingshotState m_slingshotState;
-    
-    void Start()
+
+   void OnEnable()
+   {
+      if (slingshot != null) slingshot.OnChargeCompleted += Flash;
+   }
+
+   void OnDisable()
+   {
+      if (slingshot != null) slingshot.OnChargeCompleted -= Flash;
+   }
+   void Start()
     {
         m_particleSystem = GetComponent<ParticleSystem>();
         mainModule = m_particleSystem.main;
         // いったん止めておく
         m_particleSystem.Stop();
+        m_particleSystemChargeCompleted.Stop();
 
         m_slingshotState = Slingshot.SlingshotState.Idle;
     }
@@ -30,7 +43,7 @@ public class ChargeEffect : MonoBehaviour
     void Update()
     {
         var chargeRatio = slingshot.chargeRatio;
-        
+
         // チャージの割合でエフェクトの色を変える
         mainModule.startColor = new ParticleSystem.MinMaxGradient(new Color(1.0f, 1.0f - chargeRatio, 0.0f));
         
@@ -41,16 +54,26 @@ public class ChargeEffect : MonoBehaviour
             Debug.Log(chargeRatio);
             if (chargeRatio == 0f)
             {
-                Debug.Log("effect stop");
                 m_particleSystem.Stop();
             }else
             {
-                Debug.Log("effect start");
-                m_particleSystem.Play();
+                //m_particleSystem.Play();
             }
         }
 
         // 新しい状態に書き換え
         m_slingshotState = slingshot.slingshotState;
+    }
+
+    void Flash()
+    {
+        m_particleSystemChargeCompleted.Play();
+        StartCoroutine(StopParticleSystem());
+    }
+
+    IEnumerator StopParticleSystem()
+    {
+        yield return new WaitForSeconds(1f);
+        m_particleSystemChargeCompleted.Stop();
     }
 }

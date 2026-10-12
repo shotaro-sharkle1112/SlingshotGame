@@ -95,6 +95,7 @@ public class Slingshot : MonoBehaviour {
 
     // チャージ完了したかをチェック
     private bool isChargeCompleted => chargeTime > chargeTimeThres;
+    public event System.Action OnChargeCompleted;
     // チャージ完了サウンドを行なったかをチェック
     private bool isChargeCompletedSoundPlayed;
 
@@ -245,6 +246,7 @@ public class Slingshot : MonoBehaviour {
         {
             isChargeCompletedSoundPlayed = true;
             PlayJingle(chargeCompletedSound);
+            OnChargeCompleted?.Invoke();
         } 
 
         // パチンコが伸びた状態から通常状態に戻った時に実行される
