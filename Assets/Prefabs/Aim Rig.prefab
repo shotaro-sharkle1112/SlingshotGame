@@ -58,10 +58,10 @@ MonoBehaviour:
   smoothTime: 0.06
   maxDegPerSec: 300
   deadband: 0.1
-  pitchLimit: 45
+  pitchLimit: 85
   yawLimit: 60
-  lookDownThreshold: 0.7
-  lookDownDuration: 0.5
+  lookDownThreshold: 0.3
+  lookDownDuration: 0.3
   keyResetYaw: 114
   keyGyroBias: 99
 --- !u!1001 &282938456844047723
@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: 85478b26916be481b96552fe9bf69c12, type: 3}
     - target: {fileID: 623047584966747518, guid: 4100495d2e2854c0fa9cb3b48b1042e6, type: 3}
       propertyPath: sensorMinValue
-      value: 10000
+      value: 14000
       objectReference: {fileID: 0}
     - target: {fileID: 623047584966747518, guid: 4100495d2e2854c0fa9cb3b48b1042e6, type: 3}
       propertyPath: chargeShotSound
@@ -106,11 +106,11 @@ PrefabInstance:
       objectReference: {fileID: 1853232240325812, guid: 2fd01713a2c54aa48a5b9404b8652553, type: 3}
     - target: {fileID: 623047584966747518, guid: 4100495d2e2854c0fa9cb3b48b1042e6, type: 3}
       propertyPath: sensorChargeThres
-      value: 14300
+      value: 17000
       objectReference: {fileID: 0}
     - target: {fileID: 623047584966747518, guid: 4100495d2e2854c0fa9cb3b48b1042e6, type: 3}
       propertyPath: sensorStretchThres
-      value: 16000
+      value: 19000
       objectReference: {fileID: 0}
     - target: {fileID: 623047584966747518, guid: 4100495d2e2854c0fa9cb3b48b1042e6, type: 3}
       propertyPath: elasticStretchSound
