@@ -7,11 +7,14 @@ public class MetalSphere : MonoBehaviour
     private ParticleSystem ps;
     private ParticleSystem.MainModule mainps;
     private ParticleSystem.EmissionModule emissionps;
-
-    // metalsphereが一定時間過ぎたら削除
-    private float lifetime;
     [SerializeField] private Color chargeColor;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    // 同時に当たった的の数
+    private int hitCount;
+
+    // チャージショットかどうか
+    public bool isChargeShot;
+
     void Start()
     {
         ps = GetComponent<ParticleSystem>();
@@ -21,7 +24,9 @@ public class MetalSphere : MonoBehaviour
         // 一旦停止させる
         ps.Pause();
 
-        lifetime = 0.0f;
+        // 変数のリセット
+        hitCount = 0;
+        isChargeShot = false;
     }
 
     // Update is called once per frame
@@ -50,6 +55,11 @@ public class MetalSphere : MonoBehaviour
         ps.Play();
     } 
 
+    // 的に衝突した回数の公開API
+    public int GetHitCount() { return hitCount; }
+    public void AddHitCount() { hitCount += 1; }
+
+    // Slingshot.csから呼び出される自己破壊の予約関数
     public IEnumerator destroyAfterSeconds(float seconds)
     {
         yield return new WaitForSeconds(seconds);

@@ -302,6 +302,9 @@ public class Slingshot : MonoBehaviour {
             if(isChargeCompleted) triggerSphereCollider.radius *= 3f;
             metalSphereRigidbody.AddForce(metalSphereShotForce, ForceMode.Impulse);
 
+            // チャージでの変更点：チャージ属性を付与
+            metalSphereScript.isChargeShot = isChargeCompleted;
+
             // エフェクトを再生
             // チャージでの変更点：何かしら特別なエフェクトを再生
             if(isChargeCompleted) 
