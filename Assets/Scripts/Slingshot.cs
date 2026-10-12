@@ -313,6 +313,9 @@ public class Slingshot : MonoBehaviour {
                 metalSphereScript.EnableParticleEffect();
             }
 
+            // metalsphereのDestroyを予約
+            StartCoroutine(metalSphereScript.destroyAfterSeconds(10f));
+
             //The metal sphere is taken (parent = null) in the slingshot, so that the sphere stops moving with the slingshot and the camera.
             metalSphereObject.transform.parent = null;
 

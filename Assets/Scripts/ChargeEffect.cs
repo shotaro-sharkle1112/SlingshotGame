@@ -51,7 +51,6 @@ public class ChargeEffect : MonoBehaviour
         // もしパチンコのチャージの変化があればエフェクトを適宜再生停止する
         if (slingshot.slingshotState != m_slingshotState)
         {
-            Debug.Log(chargeRatio);
             if (chargeRatio == 0f)
             {
                 m_particleSystem.Stop();
