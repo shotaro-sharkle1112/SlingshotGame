@@ -90,9 +90,12 @@ public class Slingshot : MonoBehaviour {
     [SerializeField] private float chargeTimeThres = 3f;
     // チャージをした時間
     private float chargeTime;
+    // チャージ時間の割合
+    public float chargeRatio => Mathf.Min(chargeTime / chargeTimeThres, 1.0f);
 
     // チャージ完了したかをチェック
     private bool isChargeCompleted => chargeTime > chargeTimeThres;
+    public event System.Action OnChargeCompleted;
     // チャージ完了サウンドを行なったかをチェック
     private bool isChargeCompletedSoundPlayed;
 
@@ -243,6 +246,7 @@ public class Slingshot : MonoBehaviour {
         {
             isChargeCompletedSoundPlayed = true;
             PlayJingle(chargeCompletedSound);
+            OnChargeCompleted?.Invoke();
         } 
 
         // パチンコが伸びた状態から通常状態に戻った時に実行される
