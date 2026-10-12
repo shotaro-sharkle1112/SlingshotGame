@@ -105,8 +105,9 @@ public class Target : MonoBehaviour
         {
             score = Instantiate(scoreTextPrefab, transform.position + offset + new Vector3(0f, 2f, 0f), Quaternion.identity);
             scoreTMPro = score.GetComponent<TextMeshPro>();
-            scoreTMPro.text = $"{hitCount}";
+            scoreTMPro.text = $"{hitCount} Combo !!";
             scoreTMPro.color = Color.yellow;
+            scoreTMPro.fontSize = 50f;
         }
 
         // エフェクトを再生
