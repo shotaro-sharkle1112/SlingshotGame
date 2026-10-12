@@ -97,13 +97,16 @@ public class Target : MonoBehaviour
         var mover = GetComponent<TargetMover>();
         if (mover != null) mover.enabled = false;
         
+        // スコアを表示するときに、カメラ目線から見てそのマトの近くに描画しないといけない
+        var targetPosition = transform.position;
+        var ratio = 50f / (targetPosition.magnitude * Mathf.Abs(Vector3.Dot(targetPosition.normalized, Vector3.forward)));
         // スコアを表示
         if (scoreTextPrefab != null)
         {
-            score = Instantiate(scoreTextPrefab, transform.position + offset ,Quaternion.identity);
+            score = Instantiate(scoreTextPrefab, 5f * new Vector3(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), 0f) + new Vector3(transform.position.x * ratio, transform.position.y * ratio, 50f - hitCount) + offset, Quaternion.identity);
             scoreTMPro = score.GetComponent<TextMeshPro>();
             scoreTMPro.text = hitCount >= 2 ? $"{hitCount} x {scoreAmount}" : $"{scoreAmount}";
-            scoreTMPro.fontSize = 30f;
+            scoreTMPro.fontSize = 30f + hitCount * 2f;
             scoreTMPro.outlineColor = Color.cyan;
             scoreTMPro.outlineWidth = 0.2f;
         }
@@ -111,11 +114,11 @@ public class Target : MonoBehaviour
         // ヒット数を表示
         if (scoreTextPrefab != null && hitCount >= 2)
         {
-            hitCountText = Instantiate(scoreTextPrefab, transform.position + offset + new Vector3(5f, 4f, 0f), Quaternion.identity);
+            hitCountText = Instantiate(scoreTextPrefab, 5f * new Vector3(Random.Range(0.5f, 1f), Random.Range(0.5f, 1f), 0f) +  new Vector3(transform.position.x * ratio, transform.position.y * ratio, - hitCount)  + offset + new Vector3(5f, 4f, 50f), Quaternion.identity);
             hitCountTextTMPro = hitCountText.GetComponent<TextMeshPro>();
             hitCountTextTMPro.text = $"{hitCount} Combo !!";
             hitCountTextTMPro.color = Color.yellow;
-            hitCountTextTMPro.fontSize = 40f;
+            hitCountTextTMPro.fontSize = 40f + hitCount * 2f;
             hitCountTextTMPro.outlineColor = Color.black;
             hitCountTextTMPro.outlineWidth = 0.5f;
         }
