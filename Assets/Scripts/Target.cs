@@ -36,6 +36,9 @@ public class Target : MonoBehaviour
     private GameObject score;
     private TextMeshPro scoreTMPro;
 
+    private GameObject hitCountText;
+    private TextMeshPro hitCountTextTMPro;
+
     // 衝突後に透明になる速度
     private float transparentSmoothness = 1.5f;
 
@@ -98,16 +101,20 @@ public class Target : MonoBehaviour
             score = Instantiate(scoreTextPrefab, transform.position + offset ,Quaternion.identity);
             scoreTMPro = score.GetComponent<TextMeshPro>();
             scoreTMPro.text = $"{scoreAmount}";
+            scoreTMPro.outlineColor = Color.cyan;
+            scoreTMPro.outlineWidth = 0.2f;
         }
 
         // ヒット数を表示
         if (scoreTextPrefab != null && hitCount >= 2)
         {
-            score = Instantiate(scoreTextPrefab, transform.position + offset + new Vector3(0f, 2f, 0f), Quaternion.identity);
-            scoreTMPro = score.GetComponent<TextMeshPro>();
-            scoreTMPro.text = $"{hitCount} Combo !!";
-            scoreTMPro.color = Color.yellow;
-            scoreTMPro.fontSize = 50f;
+            hitCountText = Instantiate(scoreTextPrefab, transform.position + offset + new Vector3(5f, 4f, 0f), Quaternion.identity);
+            hitCountTextTMPro = hitCountText.GetComponent<TextMeshPro>();
+            hitCountTextTMPro.text = $"{hitCount} Combo !!";
+            hitCountTextTMPro.color = Color.yellow;
+            hitCountTextTMPro.fontSize = 40f;
+            hitCountTextTMPro.outlineColor = Color.black;
+            hitCountTextTMPro.outlineWidth = 0.5f;
         }
 
         // エフェクトを再生
@@ -120,6 +127,7 @@ public class Target : MonoBehaviour
         yield return new WaitForSeconds(vanishTime);
 
         Destroy(score);
+        Destroy(hitCountText);
         Destroy(gameObject);
     }
 }
