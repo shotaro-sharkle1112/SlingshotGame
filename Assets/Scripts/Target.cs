@@ -74,16 +74,18 @@ public class Target : MonoBehaviour
         if (other.gameObject.tag == "Sphere")
         {
             hit = true;
-            if (ScoreManager.Instance != null)ScoreManager.Instance.RegisterTargetHit(scoreAmount);
+
+            // 弾のヒット回数をカウント
+            var metalSphereScript = other.gameObject.GetComponent<MetalSphere>();
+            metalSphereScript.AddHitCount();
+
+            // その的のスコア x その弾のヒット回数
+            if (ScoreManager.Instance != null) ScoreManager.Instance.RegisterTargetHit(metalSphereScript.GetHitCount() * scoreAmount);
             if (audioSource != null && hitSound != null) audioSource.PlayOneShot(hitSound);
             
             // 衝突時に重力をオンにして少し吹っ飛ばすことで爽快感を増やす
             rigidbody.useGravity = true;
             rigidbody.AddForce(rigidbody.mass * hitPower * Vector3.forward,ForceMode.Impulse);
-            
-            // 弾のヒット回数をカウント
-            var metalSphereScript = other.gameObject.GetComponent<MetalSphere>();
-            metalSphereScript.AddHitCount();
 
             // マトの消滅を予約
             StartCoroutine(HitPointCenter(metalSphereScript.GetHitCount()));
@@ -100,7 +102,8 @@ public class Target : MonoBehaviour
         {
             score = Instantiate(scoreTextPrefab, transform.position + offset ,Quaternion.identity);
             scoreTMPro = score.GetComponent<TextMeshPro>();
-            scoreTMPro.text = $"{scoreAmount}";
+            scoreTMPro.text = hitCount >= 2 ? $"{hitCount} x {scoreAmount}" : $"{scoreAmount}";
+            scoreTMPro.fontSize = 30f;
             scoreTMPro.outlineColor = Color.cyan;
             scoreTMPro.outlineWidth = 0.2f;
         }
