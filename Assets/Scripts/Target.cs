@@ -83,10 +83,10 @@ public class Target : MonoBehaviour
             metalSphereScript.AddHitCount();
 
             // マトの消滅を予約
-            StartCoroutine(HitPointCenter());
+            StartCoroutine(HitPointCenter(metalSphereScript.GetHitCount()));
         }
     }
-    IEnumerator HitPointCenter()
+    IEnumerator HitPointCenter(int hitCount)
     {
         foreach (var c in GetComponents<Collider>()) c.enabled = false;
         var mover = GetComponent<TargetMover>();
@@ -98,6 +98,15 @@ public class Target : MonoBehaviour
             score = Instantiate(scoreTextPrefab, transform.position + offset ,Quaternion.identity);
             scoreTMPro = score.GetComponent<TextMeshPro>();
             scoreTMPro.text = $"{scoreAmount}";
+        }
+
+        // ヒット数を表示
+        if (scoreTextPrefab != null && hitCount >= 2)
+        {
+            score = Instantiate(scoreTextPrefab, transform.position + offset + new Vector3(0f, 2f, 0f), Quaternion.identity);
+            scoreTMPro = score.GetComponent<TextMeshPro>();
+            scoreTMPro.text = $"{hitCount}";
+            scoreTMPro.color = Color.yellow;
         }
 
         // エフェクトを再生
