@@ -88,6 +88,8 @@ public class ControlerManager : MonoBehaviour
         public float z;
     }
 
+    // 接続しているかどうかの公開
+    public bool IsConnected => isConnected;
     void Start()
     {
         OpenSerial();
