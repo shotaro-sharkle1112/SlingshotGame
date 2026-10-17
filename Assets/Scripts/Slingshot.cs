@@ -68,6 +68,7 @@ public class Slingshot : MonoBehaviour {
     [Header("曲げセンサの設定項目")]
     // センサーの取りうる最小の値
     [SerializeField] private int sensorMinValue = 17000;
+
     // チャージを開始するか判定を行う曲げセンサの値、この値より小さいとパチンコのチャージ状態に移行する
     [SerializeField] private int sensorChargeThres = 13000;
     // パチンコが伸びるべきか判定を行う曲げセンサの値, この値より小さいとパチンコの伸びが開始する
@@ -116,6 +117,9 @@ public class Slingshot : MonoBehaviour {
     // ゴムが伸びている音のAudioSource
     [SerializeField] private AudioSource elasticStretchAudioSource;
 
+    [Header("Enable Keyboard")]
+    [SerializeField] private bool isKeyboardEnable = false;
+
     
 
     [Header("コントローラーマネージャー")]
@@ -163,6 +167,23 @@ public class Slingshot : MonoBehaviour {
 
         //曲げセンサの値を取得
         sensorValue = controlerManager.Bend;
+
+        // キーボード入力対応
+        if (isKeyboardEnable)
+        {
+            // ジャンプボタンを押していれば曲げ状態にする
+            if (Input.GetAxis("Jump") == 1f)
+            {
+                sensorValue = sensorChargeThres - 1;
+            } 
+            else
+            {
+                // ジャンプボタンを押していなければ曲げ状態の閾値を超えさせる
+                sensorValue = sensorStretchThres + 1;
+            }
+        }
+        
+
         // 平滑化を行う
         smoothedSensorValue = (int) (emaSmoothness * sensorValue + (1f - emaSmoothness) * smoothedSensorValue);
 
