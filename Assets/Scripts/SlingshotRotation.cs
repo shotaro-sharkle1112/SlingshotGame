@@ -53,6 +53,11 @@ public class SlingshotRotation : MonoBehaviour
     public KeyCode keyResetYaw = KeyCode.R; // ヤー（方位）をゼロに
     public KeyCode keyGyroBias = KeyCode.C; // 静止中に押してバイアス再計測
 
+    [Header("KeyBoard")]
+
+    // キーボード対応か ゲームマネージャーから取得してくる
+    [SerializeField] private bool isKeyboardEnable = false;
+
     [Header("Game Manager")]
     [SerializeField] private GameManager gameManager;
 
@@ -66,8 +71,6 @@ public class SlingshotRotation : MonoBehaviour
     private bool isReset;
     public Quaternion CurrentOrientation => q;
 
-    // キーボード対応か ゲームマネージャーから取得してくる
-    private bool isKeyboardEnable;
 
 
     void Start()
@@ -78,7 +81,10 @@ public class SlingshotRotation : MonoBehaviour
         isReset = false;
 
         // キーボード有効化するかどうかをゲームマネージャーから取得
-        isKeyboardEnable = gameManager.isKeyboardEnable;
+        if (gameManager != null)
+        {
+            isKeyboardEnable = gameManager.isKeyboardEnable;
+        }
     }
 
    void Awake()
