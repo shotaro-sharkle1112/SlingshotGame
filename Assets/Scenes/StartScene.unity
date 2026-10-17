@@ -350,17 +350,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 193295455}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &271872989 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
-  m_PrefabInstance: {fileID: 800049775}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c344eebdc17134210accad3a42b1608c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &328561180
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -805,7 +794,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Source: {fileID: 1356149928}
-  slingshot: {fileID: 271872989}
+  slingshot: {fileID: 800049785}
   chargingTimeThreshold: 2.5
   bendThreshold: 15763
   jingleAudioSource: {fileID: 384391804}
@@ -813,6 +802,7 @@ MonoBehaviour:
   chargeAudioSource: {fileID: 1434294884}
   chargeJingle: {fileID: 8300000, guid: 23183632c58fd4bb9a88e7548fe83730, type: 3}
   bgmAudioSource: {fileID: 1228669052}
+  isKeyboardEnable: 0
 --- !u!1001 &800049775
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -887,10 +877,94 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6901287834782519593, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+    - {fileID: 813094884132466709, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6728673576746572343, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 800049785}
   m_SourcePrefab: {fileID: 100100000, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+--- !u!1 &800049776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 474081614895195608, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+  m_PrefabInstance: {fileID: 800049775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &800049777 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7034806308657283551, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+  m_PrefabInstance: {fileID: 800049775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &800049778 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2407398762192271750, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+  m_PrefabInstance: {fileID: 800049775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &800049779 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 607716475354495063, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+  m_PrefabInstance: {fileID: 800049775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &800049780 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5251033141642177337, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+  m_PrefabInstance: {fileID: 800049775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &800049781 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2183595213231331173, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+  m_PrefabInstance: {fileID: 800049775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &800049782 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6728673576746572343, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+  m_PrefabInstance: {fileID: 800049775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &800049783 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 2683011065367875899, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+  m_PrefabInstance: {fileID: 800049775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &800049784 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 6493736796469989465, guid: 7933fbd7deec740d594239bb624eeecf, type: 3}
+  m_PrefabInstance: {fileID: 800049775}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &800049785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 800049782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 786f3b0bcd22f4eac926113c5aece7d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  metalSphereVelocity: 40
+  metalSpherePrefab: {fileID: 1853232240325812, guid: 2fd01713a2c54aa48a5b9404b8652553, type: 3}
+  rightElastic: {fileID: 800049781}
+  leftElastic: {fileID: 800049780}
+  rightLine: {fileID: 800049778}
+  leftLine: {fileID: 800049777}
+  leather: {fileID: 800049779}
+  leatherLine: {fileID: 800049776}
+  sensorMinValue: 14000
+  sensorChargeThres: 17000
+  sensorStretchThres: 19000
+  emaSmoothness: 0.3
+  fireCooldown: 0.5
+  chargeTimeThres: 1
+  chargingSound: {fileID: 8300000, guid: 85478b26916be481b96552fe9bf69c12, type: 3}
+  chargeCompletedSound: {fileID: 8300000, guid: bbffa7b86881148ec99dd1e04b6568a6, type: 3}
+  chargeShotSound: {fileID: 8300000, guid: 3747cda696590470faefdcb3583f34af, type: 3}
+  elasticStretchSound: {fileID: 8300000, guid: 23183632c58fd4bb9a88e7548fe83730, type: 3}
+  normalShotSound: {fileID: 8300000, guid: 7cd68c1f70f5a49ffaed2d4975783ba7, type: 3}
+  jingleAudioSource: {fileID: 800049784}
+  elasticStretchAudioSource: {fileID: 800049783}
+  controlerManager: {fileID: 1356149928}
+  gameManager: {fileID: 744545395}
 --- !u!1 &1096629437
 GameObject:
   m_ObjectHideFlags: 0
