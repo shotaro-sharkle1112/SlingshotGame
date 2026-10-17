@@ -10,7 +10,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioSource bgmAudioSource;
 
     [Header("Keyboard")]
-    [SerializeField] public bool isKeyboardEnable = false;
+    [Tooltip("キーボード有効化した場合、コントローラの操作は受け付けません。")]
+    [SerializeField] public bool isKeyboardEnable;
 
     // 外部のクラスから確認できるゲーム状態の数値
 
