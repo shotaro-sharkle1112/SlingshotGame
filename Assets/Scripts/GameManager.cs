@@ -9,6 +9,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip finishJingle;
     [SerializeField] private AudioSource bgmAudioSource;
 
+    [Header("Keyboard")]
+    [SerializeField] public bool isKeyboardEnable = false;
+
     // 外部のクラスから確認できるゲーム状態の数値
 
     public enum GameState

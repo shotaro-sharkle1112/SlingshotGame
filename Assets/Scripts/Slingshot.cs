@@ -117,8 +117,8 @@ public class Slingshot : MonoBehaviour {
     // ゴムが伸びている音のAudioSource
     [SerializeField] private AudioSource elasticStretchAudioSource;
 
-    [Header("Enable Keyboard")]
-    [SerializeField] private bool isKeyboardEnable = false;
+    // キーボード対応か ゲームマネージャーから取得してくる
+    private bool isKeyboardEnable;
 
     
 
@@ -154,6 +154,9 @@ public class Slingshot : MonoBehaviour {
 
         // 状態の初期化
         slingshotState = SlingshotState.Idle;
+
+        // キーボード有効化するかどうかをゲームマネージャーから取得
+        isKeyboardEnable = gameManager.isKeyboardEnable;
     }
 
     void Update()
