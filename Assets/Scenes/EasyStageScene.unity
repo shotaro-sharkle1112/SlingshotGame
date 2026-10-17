@@ -1475,6 +1475,7 @@ MonoBehaviour:
   resultAudioSource: {fileID: 384391804}
   finishJingle: {fileID: 8300000, guid: fc7b1283a8e094529ac20fd802acdc7d, type: 3}
   bgmAudioSource: {fileID: 1228669052}
+  isKeyboardEnable: 0
 --- !u!4 &744545394
 Transform:
   m_ObjectHideFlags: 0
@@ -3212,6 +3213,10 @@ PrefabInstance:
       propertyPath: Source
       value: 
       objectReference: {fileID: 1356149926}
+    - target: {fileID: 4256516254798182784, guid: 403cf04de7a4648c6a09d1059d622bf0, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 744545393}
     - target: {fileID: 5495503931358375362, guid: 403cf04de7a4648c6a09d1059d622bf0, type: 3}
       propertyPath: m_Name
       value: Slingshot
@@ -3224,6 +3229,10 @@ PrefabInstance:
       propertyPath: controlerManager
       value: 
       objectReference: {fileID: 1356149926}
+    - target: {fileID: 8042535301951985852, guid: 403cf04de7a4648c6a09d1059d622bf0, type: 3}
+      propertyPath: isKeyboardEnable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8812923704256626896, guid: 403cf04de7a4648c6a09d1059d622bf0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
