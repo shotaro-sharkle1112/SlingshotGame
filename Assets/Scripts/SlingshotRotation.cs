@@ -237,7 +237,7 @@ public class SlingshotRotation : MonoBehaviour
             var horizontalInput = Input.GetAxis("Horizontal");
 
             var angles = q.eulerAngles;
-            q.eulerAngles = angles + 0.2f * new Vector3(-verticalInput, horizontalInput, 0f);
+            q.eulerAngles = angles + Time.deltaTime * 30f * new Vector3(-verticalInput, horizontalInput, 0f);
 
             // 角度制限
             Vector3 e = q.eulerAngles;
