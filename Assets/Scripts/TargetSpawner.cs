@@ -77,7 +77,8 @@ public class TargetSpawner : MonoBehaviour
         if (entry.prefab == null) return;
 
         GameObject go = Instantiate(entry.prefab, entry.position, entry.prefab.transform.rotation);
-        go.transform.localScale = entry.prefab.transform.localScale * entry.scale;
+        // 倍率を設定　target.cs側でその大きさにしてくれる
+        go.GetComponent<Target>().settingScale = entry.scale;
 
         TargetMover mover = go.GetComponent<TargetMover>();
         if (mover == null) mover = go.AddComponent<TargetMover>();

@@ -44,16 +44,40 @@ public class Target : MonoBehaviour
 
     private Color finishColor = new Color(0f, 0f ,0f ,0f);
 
-    void Awake()
+    // マトが出現するときに小さい状態から拡大していくアニメーションの数値
+    private float appearAnimationElapesd;
+    // マトの大きさを保持しておく変数
+    private Vector3 sizeScale;
+
+    // 最終的にアニメーションがたどり着く倍率
+    public float settingScale = 1f;
+
+   void Awake()
     {
         audioSource = GetComponent<AudioSource>();
         ps = GetComponent<ParticleSystem>();
         mr = GetComponent<MeshRenderer>();
         mat = mr.material;
         rigidbody = GetComponent<Rigidbody>();
+
+        appearAnimationElapesd = 0.01f;
+        sizeScale = transform.localScale;
+        transform.localScale *= appearAnimationElapesd;
+        
     }
 
     private void Update() {
+
+        if (appearAnimationElapesd <= settingScale)
+        {
+            transform.localScale = sizeScale * appearAnimationElapesd;
+            appearAnimationElapesd += Time.deltaTime * 3f;
+            Debug.Log(appearAnimationElapesd);
+        }
+        else
+        {
+            transform.localScale = sizeScale * settingScale;
+        }
         // 衝突前ならば早期リターン
         if (!hit) return;
 
