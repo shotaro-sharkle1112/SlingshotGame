@@ -60,6 +60,10 @@ public class TutorialManager : MonoBehaviour
     // 生成した全ての的をリストに入れる
     private List<GameObject> targets = new List<GameObject>();
 
+    // チャージのチュートリアルで、全ての的をチャージショットで射抜いたか
+    private bool chargeStepClear;
+
+
     void Start()
     {
         // チュートリアルが始まる前
@@ -69,6 +73,7 @@ public class TutorialManager : MonoBehaviour
         isWaiting = false;
         isTargetGenerated = false;
         isCharged = false;
+        chargeStepClear = false;
     }
 
     private void Update() {
@@ -98,10 +103,13 @@ public class TutorialManager : MonoBehaviour
                     isTargetGenerated = true;
                 }
 
-                // 破壊されたオブジェクトは全てnullになるので除外
+
+                // 破壊されたオブジェクトは除外
                 targets.RemoveAll(t => t == null);
                 // もし破壊されずにどこかへ行こうとした場合は除外
                 targets.RemoveAll(t => t.transform.position.magnitude > 100f);
+
+
 
                 if (isTargetGenerated && targets.Count == 0) TryStepNextTutorial();
                 break;
@@ -129,12 +137,45 @@ public class TutorialManager : MonoBehaviour
                     isTargetGenerated = true;
                 }
 
-                // 破壊されたオブジェクトは全てnullになるので除外
-                targets.RemoveAll(t => t == null);
-                // もし破壊されずにどこかへ行こうとした場合は除外
-                targets.RemoveAll(t => t.transform.position.magnitude > 100f);
+                // シーン上にある全ての弾を取得する
+                var metalSpheres = GameObject.FindGameObjectsWithTag("Sphere");
+                foreach (GameObject metalsphere in metalSpheres)
+                {
+                    var metalSphereScript = metalsphere.GetComponent<MetalSphere>();
+                    chargeStepClear |= metalSphereScript.GetHitCount() == 4 && metalSphereScript.isChargeShot;
+                }
 
-                if (isCharged && isTargetGenerated && targets.Count == 0) TryStepNextTutorial();
+                if (chargeStepClear)
+                {
+                    TryStepNextTutorial();
+                }
+                else
+                {
+                    // 破壊、もしくはどこかへ飛んでいってしまったオブジェクトを再生成する
+                    var idx = targets.FindIndex(t => t == null || t.transform.position.magnitude > 100f);
+                    
+                    if (idx == 0)
+                    {
+                        targets[idx] = Instantiate(TargetBluePrefab, new Vector3(0f, 0f, 60f), TargetRedPrefab.transform.rotation);
+                        targets[0].transform.localScale *= 1.0f;
+                    }
+                    else if (idx == 1)
+                    {
+                        targets[idx] = Instantiate(TargetOrangePrefab, new Vector3(0f, 0f, 65f), TargetRedPrefab.transform.rotation);
+                        targets[1].transform.localScale *= 1.5f;
+                    }
+                    else if (idx == 2)
+                    {
+                        targets[idx] = Instantiate(TargetRedPrefab, new Vector3(0f, 0f, 75f), TargetRedPrefab.transform.rotation);
+                        targets[2].transform.localScale *= 2.0f;
+                    }
+                    else if (idx == 3)
+                    {
+                        targets[idx] = Instantiate(TargetGoldPrefab, new Vector3(0f, 0f, 80f), TargetRedPrefab.transform.rotation);
+                        targets[3].transform.localScale *= 2.5f;
+                    }
+                }
+                
                 break;
             case TutorialState.AfterTutorial:
                 StartCoroutine(NextScene(nextSceneName));
