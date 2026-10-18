@@ -10,6 +10,10 @@ public class TargetSpawner : MonoBehaviour
     public SpawnTimeline timeline;
     public bool loop = false;
     public bool autoStart = true;
+
+    // デバッグ時に特定の時間のスポーン内容だけを確認したい時に設定する値
+    // 本来は0秒から
+    [SerializeField] private float debugStartTime = 0f;
     private List<SpawnEntry> sortedEntries;
     private int nextIndex;
     private float elapsed;
@@ -44,7 +48,7 @@ public class TargetSpawner : MonoBehaviour
     public void StartTimeline()
     {
         started = true;
-        elapsed = 0f;
+        elapsed = debugStartTime;
         nextIndex = 0;
     }
 

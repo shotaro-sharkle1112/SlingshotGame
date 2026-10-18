@@ -1475,7 +1475,7 @@ MonoBehaviour:
   resultAudioSource: {fileID: 384391804}
   finishJingle: {fileID: 8300000, guid: fc7b1283a8e094529ac20fd802acdc7d, type: 3}
   bgmAudioSource: {fileID: 1228669052}
-  isKeyboardEnable: 0
+  isKeyboardEnable: 1
 --- !u!4 &744545394
 Transform:
   m_ObjectHideFlags: 0
@@ -3057,6 +3057,7 @@ MonoBehaviour:
   timeline: {fileID: 11400000, guid: fb2b924f83e414df4a00276ff9fcba97, type: 2}
   loop: 1
   autoStart: 1
+  debugStartTime: 11.05
 --- !u!1 &2063230408
 GameObject:
   m_ObjectHideFlags: 0
