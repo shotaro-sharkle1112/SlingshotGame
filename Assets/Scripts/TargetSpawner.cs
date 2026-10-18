@@ -10,6 +10,10 @@ public class TargetSpawner : MonoBehaviour
     public SpawnTimeline timeline;
     public bool loop = false;
     public bool autoStart = true;
+
+    // デバッグ時に特定の時間のスポーン内容だけを確認したい時に設定する値
+    // 本来は0秒から
+    [SerializeField] private float debugStartTime = 0f;
     private List<SpawnEntry> sortedEntries;
     private int nextIndex;
     private float elapsed;
@@ -44,8 +48,9 @@ public class TargetSpawner : MonoBehaviour
     public void StartTimeline()
     {
         started = true;
-        elapsed = 0f;
-        nextIndex = 0;
+        elapsed = debugStartTime;
+        nextIndex = sortedEntries.FindIndex(t => t.time >= elapsed);
+        if (nextIndex == -1) nextIndex = 0;
     }
 
     // Update is called once per frame
@@ -72,10 +77,16 @@ public class TargetSpawner : MonoBehaviour
         if (entry.prefab == null) return;
 
         GameObject go = Instantiate(entry.prefab, entry.position, entry.prefab.transform.rotation);
-        go.transform.localScale = entry.prefab.transform.localScale * entry.scale;
+        // 倍率を設定　target.cs側でその大きさにしてくれる
+        go.GetComponent<Target>().settingScale = entry.scale;
 
         TargetMover mover = go.GetComponent<TargetMover>();
         if (mover == null) mover = go.AddComponent<TargetMover>();
         mover.Init(entry);
     }
+
+   void OnValidate()
+   {
+      if (debugStartTime < 0f) debugStartTime = 0f;
+   }
 }
