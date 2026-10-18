@@ -83,4 +83,9 @@ public class TargetSpawner : MonoBehaviour
         if (mover == null) mover = go.AddComponent<TargetMover>();
         mover.Init(entry);
     }
+
+   void OnValidate()
+   {
+      if (debugStartTime < 0f) debugStartTime = 0f;
+   }
 }
