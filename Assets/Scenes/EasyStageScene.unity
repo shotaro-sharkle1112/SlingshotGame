@@ -1475,7 +1475,7 @@ MonoBehaviour:
   resultAudioSource: {fileID: 384391804}
   finishJingle: {fileID: 8300000, guid: fc7b1283a8e094529ac20fd802acdc7d, type: 3}
   bgmAudioSource: {fileID: 1228669052}
-  isKeyboardEnable: 1
+  isKeyboardEnable: 0
 --- !u!4 &744545394
 Transform:
   m_ObjectHideFlags: 0
