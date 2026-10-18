@@ -260,6 +260,10 @@ PrefabInstance:
       propertyPath: Source
       value: 
       objectReference: {fileID: 268954360}
+    - target: {fileID: 4256516254798182784, guid: 403cf04de7a4648c6a09d1059d622bf0, type: 3}
+      propertyPath: isKeyboardEnable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5495503931358375362, guid: 403cf04de7a4648c6a09d1059d622bf0, type: 3}
       propertyPath: m_Name
       value: Slingshot
@@ -268,6 +272,10 @@ PrefabInstance:
       propertyPath: controlerManager
       value: 
       objectReference: {fileID: 268954360}
+    - target: {fileID: 8042535301951985852, guid: 403cf04de7a4648c6a09d1059d622bf0, type: 3}
+      propertyPath: isKeyboardEnable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8812923704256626896, guid: 403cf04de7a4648c6a09d1059d622bf0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

@@ -9,7 +9,7 @@ public class StartSceneGameManager : MonoBehaviour
     [SerializeField] private ControlerManager Source;
 
     [Header("Master Slingshot")]
-    [SerializeField] private Slingshot slingshot;
+    [SerializeField] private StartSceneSlingshot slingshot;
 
     [Header("Start Threshold")]
     // 曲げ続けて、何秒でシーンスタートするか
@@ -25,6 +25,10 @@ public class StartSceneGameManager : MonoBehaviour
     [SerializeField] private AudioSource chargeAudioSource;
     [SerializeField] private AudioClip chargeJingle;
     [SerializeField] private AudioSource bgmAudioSource;
+
+    [Header("Keyboard")]
+    [Tooltip("キーボード有効化した場合、コントローラの操作は受け付けません。")]
+    [SerializeField] public bool isKeyboardEnable;
 
     // チャージしている時間
     private float chargingTime = 0f;
@@ -59,8 +63,9 @@ public class StartSceneGameManager : MonoBehaviour
         // もし曲げているのであればチャージ時間を計測
         if (!isCharged)
         {
-            if (slingshot.slingshotState == Slingshot.SlingshotState.Bending 
-            || slingshot.slingshotState == Slingshot.SlingshotState.Charging )
+            if (slingshot.slingshotState == StartSceneSlingshot.SlingshotState.Bending 
+            || slingshot.slingshotState == StartSceneSlingshot.SlingshotState.Charging 
+            || (isKeyboardEnable && Input.GetAxis("Jump") == 1f))
             {
                 chargingTime = Mathf.Min(chargingTimeThreshold, chargingTime + Time.deltaTime);
             }
@@ -86,7 +91,7 @@ public class StartSceneGameManager : MonoBehaviour
         // チャージが貯まったらスタート演出
         if (chargingRatio >= 0.999f) isCharged = true;
 
-        if ( !isStart && isCharged && slingshot.slingshotState == Slingshot.SlingshotState.Idle)
+        if ( !isStart && isCharged && (slingshot.slingshotState == StartSceneSlingshot.SlingshotState.Idle || Input.GetAxis("Jump") == 0f))
         {
             isStart = true;
 

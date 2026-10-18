@@ -3,7 +3,22 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+
+[RequireComponent(typeof(AudioSource))]
 public class StartSceneSlingshot : MonoBehaviour {
+
+    // Slingshotの状態
+    public enum SlingshotState
+    {
+        // 何もしていない状態
+        Idle,
+        // 曲げている状態
+        Bending,
+        // チャージ中の状態
+        Charging
+    }
+
+    public SlingshotState slingshotState {get; private set;}
 
     // 弾の発射速度
     [SerializeField] public float metalSphereVelocity;
@@ -12,6 +27,9 @@ public class StartSceneSlingshot : MonoBehaviour {
     private Rigidbody metalSphereRigidbody;
     // metalSphereにはオブジェクトの方とスクリプトのクラスを指す方の二者がいるので注意
     private MetalSphere metalSphereScript;
+    // metalsphereの当たり判定(チャージ中は大きくする)
+    // 的に当たったかの判定と、実際のrigidbodyの計算に使う当たり判定は違うことに注意
+    private SphereCollider triggerSphereCollider;
 
     [Header("パチンコが飛ばす弾 Prefab")]
     public GameObject metalSpherePrefab;
@@ -41,16 +59,23 @@ public class StartSceneSlingshot : MonoBehaviour {
     //もしパチンコを引っ張った場合はマイナスの方向に行くのでsensorMinValueの方向にいく
     // 小(15000くらい) < sensorValue < 大(22000~23000) ===>> 大(-7) > z > 小(-2)　のマッピングになる
     private int sensorValue = 20000;
+    // 平滑化されたセンサの値
+    private int smoothedSensorValue = 20000;
+
     // センサの値が小さくなるほどパチンコが伸びるように設定しているので、パチンコの伸びてから戻るまでの最小値を記録し続ける値。伸びが戻ったら大きな値に戻す
     private int sensorStretchMinValue = 25000;
     
     [Header("曲げセンサの設定項目")]
     // センサーの取りうる最小の値
     [SerializeField] private int sensorMinValue = 17000;
+
     // チャージを開始するか判定を行う曲げセンサの値、この値より小さいとパチンコのチャージ状態に移行する
     [SerializeField] private int sensorChargeThres = 13000;
     // パチンコが伸びるべきか判定を行う曲げセンサの値, この値より小さいとパチンコの伸びが開始する
     [SerializeField] private int sensorStretchThres = 20300;
+    // 平滑化を行うためのEMA(指数移動平均)のsmoothness、0~1の値を取る
+    // smoothed = emaSmoothness * raw + (1.0 - emaSmoothness) * smoothed
+    [SerializeField] private float emaSmoothness = 0.3f;
 
     //縮んだ状態でボールを発射する仕組みにすると、通常の状態でボールを無限に発射され続けてしまうので、曲げセンサの状態変化を記録するboolを用意する
     private bool isStretched = false;
@@ -66,11 +91,34 @@ public class StartSceneSlingshot : MonoBehaviour {
     [SerializeField] private float chargeTimeThres = 3f;
     // チャージをした時間
     private float chargeTime;
+    // チャージ時間の割合
+    public float chargeRatio => Mathf.Min(chargeTime / chargeTimeThres, 1.0f);
 
     // チャージ完了したかをチェック
     private bool isChargeCompleted => chargeTime > chargeTimeThres;
+    public event System.Action OnChargeCompleted;
     // チャージ完了サウンドを行なったかをチェック
     private bool isChargeCompletedSoundPlayed;
+
+    [Header("Sounds")]
+    
+    // チャージ中のサウンド
+    [SerializeField] private AudioClip chargingSound;
+    // チャージ完了をユーザーに示すためのサウンド
+    [SerializeField] private AudioClip chargeCompletedSound;
+    // チャージ完了後の発射のサウンド
+    [SerializeField] private AudioClip chargeShotSound;
+    // 通常時の引き絞るサウンド
+    [SerializeField] private AudioClip elasticStretchSound;
+    // チャージしていない時の発射のサウンド
+    [SerializeField] private AudioClip normalShotSound;
+    // ジングル用のAudioSource
+    [SerializeField] private AudioSource jingleAudioSource;
+    // ゴムが伸びている音のAudioSource
+    [SerializeField] private AudioSource elasticStretchAudioSource;
+
+    // キーボード対応か ゲームマネージャーから取得してくる
+    private bool isKeyboardEnable;
 
     
 
@@ -78,6 +126,9 @@ public class StartSceneSlingshot : MonoBehaviour {
 
     // コントローラのセンサ値を受け取るためのマネージャー
     [SerializeField] private ControlerManager controlerManager;
+
+    [Header("ゲームマネージャー")]
+    [SerializeField] private StartSceneGameManager gameManager;
 
     void Start ()
     {      
@@ -100,6 +151,12 @@ public class StartSceneSlingshot : MonoBehaviour {
         {
             pulled = -7;
         }
+
+        // 状態の初期化
+        slingshotState = SlingshotState.Idle;
+
+        // キーボード有効化するかどうかをゲームマネージャーから取得
+        isKeyboardEnable = gameManager.isKeyboardEnable;
     }
 
     void Update()
@@ -114,14 +171,40 @@ public class StartSceneSlingshot : MonoBehaviour {
         //曲げセンサの値を取得
         sensorValue = controlerManager.Bend;
 
-        //曲げセンサの値が一定の範囲外に出たらパチンコの伸び開始
-        if (sensorValue <= sensorStretchThres)
+        // キーボード入力対応
+        if (isKeyboardEnable)
         {
+            // ジャンプボタンを押していれば曲げ状態にする
+            if (Input.GetAxis("Jump") == 1f)
+            {
+                sensorValue = sensorChargeThres - 1;
+            } 
+            else
+            {
+                // ジャンプボタンを押していなければ曲げ状態の閾値を超えさせる
+                sensorValue = sensorStretchThres + 1;
+            }
+        }
+        
+
+        // 平滑化を行う
+        smoothedSensorValue = (int) (emaSmoothness * sensorValue + (1f - emaSmoothness) * smoothedSensorValue);
+
+        //曲げセンサの値が一定の範囲外に出たらパチンコの伸び開始
+        if (smoothedSensorValue <= sensorStretchThres)
+        {
+            // 状態を変更
+            slingshotState = SlingshotState.Bending;
+
             //伸び始めたことをbool値で記録
             //これによって弾発射部分のコードのif文内が実行される
             isStretched = true;
+
+            // パチンコが伸びている間、ゴムの伸びているサウンドを鳴らす
+            if (!elasticStretchAudioSource.isPlaying) elasticStretchAudioSource.Play();
+
             // 伸び始めたら、一番伸びている状態(sensorValueが最小)の状態を記録、更新しておく
-            if (sensorStretchMinValue > sensorValue) sensorStretchMinValue = sensorValue;
+            if (sensorStretchMinValue > smoothedSensorValue) sensorStretchMinValue = smoothedSensorValue;
 
             // センサ値の曲げしろを0~1にマッピング
             float norm = Mathf.InverseLerp(sensorStretchThres, sensorMinValue, sensorStretchMinValue);
@@ -134,8 +217,11 @@ public class StartSceneSlingshot : MonoBehaviour {
             {
                 //if the isMetalSphereGenerated(increment) is equal to one, it means that there is no metal sphere in the slingshot, then the sphere is created to be thrown next.
                 metalSphereObject = Instantiate(metalSpherePrefab, new Vector3(metalSpherePrefab.transform.position.x, metalSpherePrefab.transform.position.y, -3), Quaternion.identity);
+                // 各種コンポーネントの取得
                 metalSphereRigidbody = metalSphereObject.GetComponent<Rigidbody>();
                 metalSphereScript = metalSphereObject.GetComponent<MetalSphere>();
+                SphereCollider[] cols = metalSphereObject.GetComponents<SphereCollider>();
+                triggerSphereCollider = System.Array.Find<SphereCollider>(cols, c => c.isTrigger);
                 //The metal sphere is parented to the slingshot, so that it can move with the slingshot.
                 metalSphereObject.transform.parent = this.transform;
                 isMetalSphereGenerated = true;                           
@@ -166,16 +252,25 @@ public class StartSceneSlingshot : MonoBehaviour {
             leather.transform.localPosition = new Vector3(-1.42f, 2.286f, zOffset + 1.2f);
             leatherLine.transform.localPosition = new Vector3(-1.42f, 2.286f, zOffset + 1.2f);
         }
+        else
+        {
+            // 曲げ状態ではないので曲げ中の効果音の停止
+            elasticStretchAudioSource.Stop();
+        }
 
         // チャージの判定
-        if (sensorValue < sensorChargeThres)
+        if (smoothedSensorValue < sensorChargeThres)
         {
+            // 状態を変更
+            slingshotState = SlingshotState.Charging;
             chargeTime = Mathf.Min(chargeTimeThres + 0.1f, chargeTime + Time.deltaTime);
         }
 
         if (isChargeCompleted && !isChargeCompletedSoundPlayed)
         {
             isChargeCompletedSoundPlayed = true;
+            PlayJingle(chargeCompletedSound);
+            OnChargeCompleted?.Invoke();
         } 
 
         // パチンコが伸びた状態から通常状態に戻った時に実行される
@@ -225,18 +320,45 @@ public class StartSceneSlingshot : MonoBehaviour {
             }
 
             // metalsphereを発射
-            // チャージでの変更点：当たり判定を大きく
+            // チャージでの変更点：球も大きくするし、当たり判定を大きくする
             float metalSphereScale = isChargeCompleted ? 2f : 1f;
             metalSphereObject.transform.localScale *= metalSphereScale;
+            if(isChargeCompleted) triggerSphereCollider.radius *= 3f;
             metalSphereRigidbody.AddForce(metalSphereShotForce, ForceMode.Impulse);
+
+            // チャージでの変更点：チャージ属性を付与
+            metalSphereScript.isChargeShot = isChargeCompleted;
 
             // エフェクトを再生
             // チャージでの変更点：何かしら特別なエフェクトを再生
-            metalSphereScript.EnableParticleEffect();
+            if(isChargeCompleted) 
+            {
+                metalSphereScript.EnableChargeShotParticleEffect();
+            }
+            else
+            {
+                metalSphereScript.EnableParticleEffect();
+            }
+
+            // metalsphereのDestroyを予約
+            StartCoroutine(metalSphereScript.destroyAfterSeconds(10f));
 
             //The metal sphere is taken (parent = null) in the slingshot, so that the sphere stops moving with the slingshot and the camera.
             metalSphereObject.transform.parent = null;
 
+            // 発射音の再生
+            // チャージでの変更点：チャージ完了での発射のサウンドにかえる
+            if (isChargeCompleted)
+            {
+                PlayJingle(chargeShotSound);
+            }
+            else
+            {
+                PlayJingle(normalShotSound);
+            }
+
+            // ゴムの伸びる音はもういらないので止める
+            if (elasticStretchAudioSource.isPlaying) elasticStretchAudioSource.Stop();
 
             // 各種値をリセット
             z = -2;
@@ -254,9 +376,21 @@ public class StartSceneSlingshot : MonoBehaviour {
 
             // チャージ完了通知サウンドのboolをリセット
             isChargeCompletedSoundPlayed = false;
+
+            // 発射直後は平滑化されたセンサの値がセンサの生値に追従しきれていないため、一旦生値に戻す
+            smoothedSensorValue = sensorValue;
+
+            // 状態を変更
+            slingshotState = SlingshotState.Idle;
         }
     }
 
+    // ジングルを鳴らすための関数
+    private void PlayJingle(AudioClip audioClip)
+    {
+        if (jingleAudioSource == null || audioClip == null) return;
+        jingleAudioSource.PlayOneShot(audioClip);
+    }
 
    void OnValidate()
    {

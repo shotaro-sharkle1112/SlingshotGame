@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private AudioClip finishJingle;
     [SerializeField] private AudioSource bgmAudioSource;
 
+    [Header("Keyboard")]
+    [Tooltip("キーボード有効化した場合、コントローラの操作は受け付けません。")]
+    [SerializeField] public bool isKeyboardEnable;
+
     // 外部のクラスから確認できるゲーム状態の数値
 
     public enum GameState
