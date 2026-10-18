@@ -49,7 +49,8 @@ public class TargetSpawner : MonoBehaviour
     {
         started = true;
         elapsed = debugStartTime;
-        nextIndex = 0;
+        nextIndex = sortedEntries.FindIndex(t => t.time >= elapsed);
+        if (nextIndex == -1) nextIndex = 0;
     }
 
     // Update is called once per frame
